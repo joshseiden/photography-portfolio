@@ -130,8 +130,12 @@
       color: var(--text-secondary);
       line-height: 1.8;
       max-width: 540px;
-      margin-bottom: 40px;
+      margin-bottom: 0;
     }
+
+    .project-statement + .project-statement {
+    }
+
 
     /* ── Image grid ── */
     .image-grid {
@@ -241,10 +245,6 @@
 
       .image-row { grid-template-columns: 1fr; }
     }
-
-        .project-statement + .project-statement {
-         margin-top: 8px;
-        }
 
     @media (min-width: 681px) {
       .mobile-header { display: none; }
