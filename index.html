@@ -251,7 +251,77 @@
       .mobile-header { display: none; }
       .project-tabs { display: none; }
     }
-  </style>
+    .mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 100;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 32px;
+}
+
+.mobile-overlay.open {
+  display: flex;
+}
+
+.mobile-overlay-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+}
+
+.mobile-overlay-close span {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--text-secondary);
+  position: absolute;
+}
+
+.mobile-overlay-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.mobile-overlay-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.mobile-overlay-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-overlay-nav a {
+  font-family: 'EB Garamond', serif;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.mobile-overlay-nav a:hover {
+  color: var(--text-secondary);
+}
+
+</style>
 </head>
 <body>
 
@@ -275,10 +345,22 @@
   <!-- Mobile header -->
   <header class="mobile-header">
     <a href="#" class="mobile-name">Joshua Seiden</a>
-    <button class="mobile-menu-btn" aria-label="Menu">
+    <button class="mobile-menu-btn" id="menu-btn" aria-label="Menu">
       <span></span><span></span>
     </button>
   </header>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <button class="mobile-overlay-close" id="overlay-close" aria-label="Close">
+      <span></span><span></span>
+    </button>
+    <nav class="mobile-overlay-nav">
+      <a href="#">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
 
   <!-- Main content -->
   <main class="content">
@@ -424,6 +506,15 @@
     mobileTabs.forEach(b => {
       b.addEventListener('click', () => showProject(b.dataset.project));
     });
+    const menuBtn = document.getElementById('menu-btn');
+const overlay = document.getElementById('mobile-overlay');
+const overlayClose = document.getElementById('overlay-close');
+
+menuBtn.addEventListener('click', () => overlay.classList.add('open'));
+overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+overlay.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => overlay.classList.remove('open'));
+});
   </script>
 
 </body>
