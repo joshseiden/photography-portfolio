@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Joshua Seiden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --text-primary: #2a2825;
+      --text-secondary: #9a9590;
+      --text-muted: #c5c0bb;
+      --border: #e0ddd8;
+      --sidebar-width: 160px;
+      --content-padding: 48px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      border-right: 0.5px solid var(--border);
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      z-index: 10;
+    }
+
+    .site-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 44px;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: block;
+    }
+
+    nav { display: flex; flex-direction: column; gap: 2px; }
+
+    nav a {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color 0.15s;
+    }
+
+    nav a:hover, nav a.active { color: var(--text-primary); }
+
+    /* ── Main content ── */
+    .content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: var(--content-padding);
+      max-width: 760px;
+    }
+
+    /* ── Form ── */
+    .contact-form {
+      max-width: 480px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 10px 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--text-secondary);
+    }
+
+    .form-group textarea {
+      height: 160px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      background: none;
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 10px 28px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .form-submit:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* ── Success message ── */
+    .success-message {
+      display: none;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-top: 32px;
+    }
+
+    .footer {
+      margin-top: 80px;
+      padding-bottom: 48px;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .sidebar { display: none; }
+
+      .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+        border-bottom: 0.5px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 10;
+      }
+
+      .mobile-name {
+        font-family: 'EB Garamond', serif;
+        font-size: 16px;
+        font-style: italic;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .mobile-menu-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px;
+      }
+
+      .mobile-menu-btn span {
+        display: block;
+        width: 20px;
+        height: 1px;
+        background: var(--text-secondary);
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 28px 24px;
+      }
+    }
+
+    @media (min-width: 681px) {
+      .mobile-header { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar (desktop) -->
+  <aside class="sidebar">
+    <a href="index.html" class="site-name">Joshua<br>Seiden</a>
+    <nav>
+      <a href="index.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="mobile-header">
+    <a href="index.html" class="mobile-name">Joshua Seiden</a>
+    <button class="mobile-menu-btn" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="content">
+
+    <form class="contact-form" name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send</button>
+    </form>
+
+    <footer class="footer">
+      © Joshua Seiden, 2025. All rights reserved.
+      This site is a showcase for Josh Seiden's photography.
+      For the other side of Josh's work, visit <a href="https://joshuaseiden.com" style="color: var(--text-muted);">joshuaseiden.com</a>.
+    </footer>
+
+  </main>
+
+</body>
+
+</html>
