@@ -285,14 +285,16 @@
 </head>
 
 <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const overlay = document.getElementById('mobile-overlay');
-    const overlayClose = document.getElementById('overlay-close');
-
-    menuBtn.addEventListener('click', () => overlay.classList.add('open'));
-    overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => overlay.classList.remove('open'));
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.getElementById('menu-btn');
+      const overlay = document.getElementById('mobile-overlay');
+      const overlayClose = document.getElementById('overlay-close');
+  
+      menuBtn.addEventListener('click', () => overlay.classList.add('open'));
+      overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+      overlay.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => overlay.classList.remove('open'));
+      });
     });
   </script>
 

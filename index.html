@@ -485,36 +485,38 @@
   </main>
 
   <script>
-    const projects = document.querySelectorAll('.project');
-    const sidebarLinks = document.querySelectorAll('.project-list a[data-project]');
-    const mobileTabs = document.querySelectorAll('.project-tabs button');
+    document.addEventListener('DOMContentLoaded', function() {
+      const projects = document.querySelectorAll('.project');
+      const sidebarLinks = document.querySelectorAll('.project-list a[data-project]');
+      const mobileTabs = document.querySelectorAll('.project-tabs button');
 
-    function showProject(id) {
-      projects.forEach(p => p.classList.toggle('active', p.id === id));
-      sidebarLinks.forEach(a => a.classList.toggle('active', a.dataset.project === id));
-      mobileTabs.forEach(b => b.classList.toggle('active', b.dataset.project === id));
-      window.scrollTo(0, 0);
-    }
+      function showProject(id) {
+        projects.forEach(p => p.classList.toggle('active', p.id === id));
+        sidebarLinks.forEach(a => a.classList.toggle('active', a.dataset.project === id));
+        mobileTabs.forEach(b => b.classList.toggle('active', b.dataset.project === id));
+        window.scrollTo(0, 0);
+      }
 
-    sidebarLinks.forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        showProject(a.dataset.project);
+      sidebarLinks.forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          showProject(a.dataset.project);
+        });
       });
-    });
 
-    mobileTabs.forEach(b => {
-      b.addEventListener('click', () => showProject(b.dataset.project));
-    });
-    const menuBtn = document.getElementById('menu-btn');
-const overlay = document.getElementById('mobile-overlay');
-const overlayClose = document.getElementById('overlay-close');
+      mobileTabs.forEach(b => {
+        b.addEventListener('click', () => showProject(b.dataset.project));
+      });
+      const menuBtn = document.getElementById('menu-btn');
+      const overlay = document.getElementById('mobile-overlay');
+      const overlayClose = document.getElementById('overlay-close');
 
-menuBtn.addEventListener('click', () => overlay.classList.add('open'));
-overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
-overlay.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => overlay.classList.remove('open'));
-});
+      menuBtn.addEventListener('click', () => overlay.classList.add('open'));
+      overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+      overlay.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => overlay.classList.remove('open'));
+     });
+    });
   </script>
 
 </body>
