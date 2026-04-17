@@ -159,7 +159,7 @@
 <section class="alert-section">
   <h2 class="section-title alert-title">⚠ Closing Soon</h2>
   
-<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+<div class="card" data-closes="2026-04-19" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
   
   <div class="nbhd-label">Upper East Side</div>
   <div class="card-header">
@@ -180,7 +180,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#DCE6F1; border-left: 5px solid #5B8DB8;">Chelsea</h2>
   
-<div class="card" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+<div class="card" data-closes="2026-04-11" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
   
   
   <div class="card-header">
@@ -197,7 +197,7 @@
   <a class="website-link" href="https://yanceyrichardson.com" target="_blank">Visit website ↗</a>
 </div>
 
-<div class="card" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+<div class="card" data-closes="2026-03-21" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
   
   
   <div class="card-header">
@@ -234,7 +234,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#FCE4D6; border-left: 5px solid #C0663A;">Midtown</h2>
   
-<div class="card" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+<div class="card" data-closes="2026-03-28" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
   
   
   <div class="card-header">
@@ -251,7 +251,7 @@
   <a class="website-link" href="https://howardgreenberg.com" target="_blank">Visit website ↗</a>
 </div>
 
-<div class="card" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+<div class="card" data-closes="2026-07-25" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
   
   
   <div class="card-header">
@@ -271,7 +271,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#FFF2CC; border-left: 5px solid #B7950B;">Upper East Side</h2>
   
-<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+<div class="card" data-closes="2026-05-03" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
   
   
   <div class="card-header">
@@ -288,7 +288,7 @@
   <a class="website-link" href="https://metmuseum.org" target="_blank">Visit website ↗</a>
 </div>
 
-<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+<div class="card" data-closes="2026-04-19" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
   
   
   <div class="card-header">
@@ -308,7 +308,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#E2EFDA; border-left: 5px solid #5A8A50;">Lower East Side</h2>
   
-<div class="card" style="border-left: 4px solid #5A8A50; background: #E2EFDA;">
+<div class="card" data-closes="2026-05-04" style="border-left: 4px solid #5A8A50; background: #E2EFDA;">
   
   
   <div class="card-header">
@@ -328,7 +328,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#D9EAD3; border-left: 5px solid #4A7A5A;">West Village</h2>
   
-<div class="card" style="border-left: 4px solid #4A7A5A; background: #D9EAD3;">
+<div class="card" data-closes="2026-08-23" style="border-left: 4px solid #4A7A5A; background: #D9EAD3;">
   
   
   <div class="card-header">
@@ -348,7 +348,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#E8DAEF; border-left: 5px solid #7D3C98;">Upper West Side</h2>
   
-<div class="card" style="border-left: 4px solid #7D3C98; background: #E8DAEF;">
+<div class="card" data-closes="2026-03-29" style="border-left: 4px solid #7D3C98; background: #E8DAEF;">
   
   
   <div class="card-header">
@@ -368,7 +368,7 @@
 <section class="nbhd-section">
   <h2 class="nbhd-title" style="background:#FADBD8; border-left: 5px solid #A93226;">Prospect Heights, Brooklyn</h2>
   
-<div class="card" style="border-left: 4px solid #A93226; background: #FADBD8;">
+<div class="card" data-closes="2026-05-17" style="border-left: 4px solid #A93226; background: #FADBD8;">
   
   
   <div class="card-header">
@@ -665,5 +665,28 @@
 </section>
   <footer>Updated April 17, 2026 · Open NYC_Photography_Galleries.xlsx for full details</footer>
 </main>
+<script>
+// Hide any card whose show has already closed, based on today's date.
+// This keeps the brief accurate even if it hasn't been regenerated yet.
+(function() {
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  document.querySelectorAll('.card[data-closes]').forEach(function(card) {
+    var closes = new Date(card.dataset.closes + 'T00:00:00');
+    if (closes < today) {
+      card.style.display = 'none';
+    }
+  });
+  // If the Closing Soon section is now empty, hide it entirely
+  var alertSection = document.querySelector('.alert-section');
+  if (alertSection) {
+    var visible = alertSection.querySelectorAll('.card[data-closes]:not([style*="display: none"])');
+    var visibleNoAttr = alertSection.querySelectorAll('.card:not([data-closes])');
+    if (visible.length === 0 && visibleNoAttr.length === 0) {
+      alertSection.style.display = 'none';
+    }
+  }
+})();
+</script>
 </body>
 </html>
