@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>NYC Photo Galleries · April 17, 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: #F5F5F7;
+      color: #1D1D1F;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #1F4E79;
+      color: white;
+      padding: 20px 16px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+    header .subtitle { font-size: 13px; opacity: 0.75; margin-top: 2px; }
+
+    main { padding: 12px 12px 40px; max-width: 540px; margin: 0 auto; }
+
+    /* Section titles */
+    .section-title {
+      font-size: 15px; font-weight: 700; color: #1D1D1F;
+      margin: 20px 0 10px;
+    }
+    .alert-title { color: #C00000; }
+    .also-sub { font-size: 13px; color: #666; margin: -6px 0 10px; }
+
+    .nbhd-section { margin-bottom: 8px; }
+    .nbhd-title {
+      font-size: 14px; font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px 8px 0 0;
+      color: #1D1D1F;
+      letter-spacing: 0.2px;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .nbhd-section .card:first-of-type { border-radius: 0 0 10px 10px; }
+    .card.compact { opacity: 0.82; }
+
+    .card-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 5px; flex-wrap: wrap;
+    }
+    .venue-name { font-weight: 700; font-size: 15px; color: #1D1D1F; }
+
+    .type-tag {
+      font-size: 10px; font-weight: 600;
+      padding: 2px 7px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .type-tag.museum { background: #1F4E79; color: white; }
+    .type-tag.gallery { background: #E0E0E0; color: #444; }
+
+    .show-name { font-size: 15px; color: #1D1D1F; font-style: italic; margin-bottom: 2px; }
+    .artists { font-size: 13px; color: #555; margin-bottom: 6px; }
+    .no-show { font-size: 13px; color: #888; font-style: italic; margin-bottom: 6px; }
+
+    .closing-line { margin-bottom: 8px; font-size: 13px; display: flex; align-items: center; gap: 6px; color: #555; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .badge.urgent  { background: #FFE0E0; color: #C00000; }
+    .badge.soon    { background: #FFF0D0; color: #9C5700; }
+    .badge.ok      { background: #E8F4E8; color: #2E7D32; }
+    .badge.ongoing { background: #E8EAF6; color: #3949AB; }
+    .badge.closed  { background: #F0F0F0; color: #888; }
+
+    .meta { margin-top: 4px; }
+    .addr-link {
+      display: block;
+      font-size: 13px; color: #1F4E79;
+      text-decoration: none; margin-bottom: 2px;
+    }
+    .addr-link:hover { text-decoration: underline; }
+    .hours { font-size: 13px; color: #555; }
+
+    .website-link {
+      display: inline-block; margin-top: 8px;
+      font-size: 12px; color: #1F4E79;
+      text-decoration: none; font-weight: 600;
+    }
+
+    .nbhd-label {
+      font-size: 11px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .alert-section .card { margin-bottom: 10px; }
+    .alert-section { margin-bottom: 6px; }
+
+    /* Show images */
+    .card-image {
+      margin: -14px -14px 12px -18px;
+      border-radius: 6px 6px 0 0;
+      overflow: hidden;
+      height: 180px;
+      background: #e0e0e0;
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Substack suggestions */
+    .suggestions-section { margin-bottom: 8px; }
+    .suggestions-title { color: #3949AB; }
+    .suggestion-card {
+      background: #ECEEF9;
+      border-left: 4px solid #3949AB;
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .suggestion-closes { font-size: 13px; color: #555; margin-bottom: 4px; }
+    .suggestion-meta { font-size: 11px; color: #888; margin-top: 6px; }
+
+    footer {
+      text-align: center; font-size: 12px; color: #999;
+      margin-top: 32px; padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>NYC Photo Galleries</h1>
+  <div class="subtitle">Week of April 17, 2026</div>
+</header>
+<main>
+  
+  
+<section class="alert-section">
+  <h2 class="section-title alert-title">⚠ Closing Soon</h2>
+  
+<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  <div class="nbhd-label">Upper East Side</div>
+  <div class="card-header">
+    <span class="venue-name">Museum of the City of NY</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Robert Rauschenberg&#x27;s New York</div>
+  <div class="artists">Robert Rauschenberg</div>
+  <div class="closing-line"><span class="badge urgent">Closes in 2d</span> Closes April 19</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=1220+Fifth+Ave+at+103rd+St,+NY+10029">1220 Fifth Ave at 103rd St, NY 10029</a>
+    <div class="hours">Mon–Fri 10am–5pm; Sat–Sun 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://mcny.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+  
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#DCE6F1; border-left: 5px solid #5B8DB8;">Chelsea</h2>
+  
+<div class="card" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Yancey Richardson Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="show-name">Pello Irazu and Kevin Umaña</div>
+  <div class="artists">Pello Irazu, Kevin Umaña</div>
+  <div class="closing-line"><span class="badge closed">Closed 6d ago</span> Closes April 11</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=525+West+22nd+St,+NY+10011">525 West 22nd St, NY 10011</a>
+    <div class="hours">Tue–Sat 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://yanceyrichardson.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Robert Mann Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="show-name">Fragmentary Glimpses: Stieglitz &amp; Vestal in New York</div>
+  <div class="artists">Alfred Stieglitz, David Vestal</div>
+  <div class="closing-line"><span class="badge closed">Closed 27d ago</span> Closes March 21</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=508+West+26th+St,+Suite+9F,+NY+10001">508 West 26th St, Suite 9F, NY 10001</a>
+    <div class="hours">Tue–Fri 10am–4pm; Sat 12–5pm</div>
+  </div>
+  <a class="website-link" href="https://robertmann.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Soho Photo Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="show-name">Member Exhibitions</div>
+  <div class="artists">Various</div>
+  <div class="closing-line"><span class="badge ongoing">Ongoing</span></div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=539+West+23rd+St,+NY+10011">539 West 23rd St, NY 10011</a>
+    <div class="hours">Wed 12–6pm; Thu 12–8pm; Fri–Sun 12–6pm</div>
+  </div>
+  <a class="website-link" href="https://sohophoto.com" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#FCE4D6; border-left: 5px solid #C0663A;">Midtown</h2>
+  
+<div class="card" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Howard Greenberg Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="show-name">Brassaï&#x27;s Secret Paris</div>
+  <div class="artists">Brassaï</div>
+  <div class="closing-line"><span class="badge closed">Closed 20d ago</span> Closes March 28</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=41+East+57th+St,+Suite+801,+NY+10022">41 East 57th St, Suite 801, NY 10022</a>
+    <div class="hours">Tue–Fri 10am–6pm; Sat 11am–5pm</div>
+  </div>
+  <a class="website-link" href="https://howardgreenberg.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">MoMA</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Ideas of Africa: Portraiture and Political Imagination</div>
+  <div class="artists">Keïta, Sidibé, Sory, Fosso &amp; others</div>
+  <div class="closing-line"><span class="badge ok">Closes 99d</span> Closes July 25</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=11+West+53rd+St,+NY+10019">11 West 53rd St, NY 10019</a>
+    <div class="hours">Daily 10:30am–5:30pm (Sat until 7pm)</div>
+  </div>
+  <a class="website-link" href="https://moma.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#FFF2CC; border-left: 5px solid #B7950B;">Upper East Side</h2>
+  
+<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Metropolitan Museum of Art</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">View Finding: Selections from The Walther Collection</div>
+  <div class="artists">Various</div>
+  <div class="closing-line"><span class="badge ok">Closes 16d</span> Closes May 3</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=1000+Fifth+Ave+at+82nd+St,+NY+10028">1000 Fifth Ave at 82nd St, NY 10028</a>
+    <div class="hours">Sun–Thu 10am–5pm; Fri–Sat 10am–9pm</div>
+  </div>
+  <a class="website-link" href="https://metmuseum.org" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Museum of the City of NY</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Robert Rauschenberg&#x27;s New York</div>
+  <div class="artists">Robert Rauschenberg</div>
+  <div class="closing-line"><span class="badge urgent">Closes in 2d</span> Closes April 19</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=1220+Fifth+Ave+at+103rd+St,+NY+10029">1220 Fifth Ave at 103rd St, NY 10029</a>
+    <div class="hours">Mon–Fri 10am–5pm; Sat–Sun 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://mcny.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#E2EFDA; border-left: 5px solid #5A8A50;">Lower East Side</h2>
+  
+<div class="card" style="border-left: 4px solid #5A8A50; background: #E2EFDA;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Intl. Center of Photography</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Eugene Atget: Making of a Reputation; HARD COPY NEW YORK</div>
+  <div class="artists">Multiple artists</div>
+  <div class="closing-line"><span class="badge ok">Closes 17d</span> Closes May 4</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=84+Ludlow+St,+NY+10002">84 Ludlow St, NY 10002</a>
+    <div class="hours">Daily 10:30am–6:30pm (Thu until 8pm)</div>
+  </div>
+  <a class="website-link" href="https://icp.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#D9EAD3; border-left: 5px solid #4A7A5A;">West Village</h2>
+  
+<div class="card" style="border-left: 4px solid #4A7A5A; background: #D9EAD3;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Whitney Museum</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Whitney Biennial 2026</div>
+  <div class="artists">56 artists &amp; collectives</div>
+  <div class="closing-line"><span class="badge ok">Closes 128d</span> Closes August 23</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=99+Gansevoort+St,+NY+10014">99 Gansevoort St, NY 10014</a>
+    <div class="hours">Mon, Wed–Sun 10:30am–6pm; Fri until 10pm</div>
+  </div>
+  <a class="website-link" href="https://whitney.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#E8DAEF; border-left: 5px solid #7D3C98;">Upper West Side</h2>
+  
+<div class="card" style="border-left: 4px solid #7D3C98; background: #E8DAEF;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">New-York Historical Society</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Stirring the Melting Pot: Photographs from the NYHS Collections</div>
+  <div class="artists">Various</div>
+  <div class="closing-line"><span class="badge closed">Closed 19d ago</span> Closes March 29</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=170+Central+Park+West,+NY+10024">170 Central Park West, NY 10024</a>
+    <div class="hours">Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm</div>
+  </div>
+  <a class="website-link" href="https://nyhistory.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+<section class="nbhd-section">
+  <h2 class="nbhd-title" style="background:#FADBD8; border-left: 5px solid #A93226;">Prospect Heights, Brooklyn</h2>
+  
+<div class="card" style="border-left: 4px solid #A93226; background: #FADBD8;">
+  
+  
+  <div class="card-header">
+    <span class="venue-name">Brooklyn Museum</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="show-name">Seydou Keïta: A Tactile Lens</div>
+  <div class="artists">Seydou Keïta</div>
+  <div class="closing-line"><span class="badge ok">Closes 30d</span> Closes May 17</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=200+Eastern+Pkwy,+Brooklyn,+NY+11238">200 Eastern Pkwy, Brooklyn, NY 11238</a>
+    <div class="hours">Wed–Sun 11am–6pm</div>
+  </div>
+  <a class="website-link" href="https://brooklynmuseum.org" target="_blank">Visit website ↗</a>
+</div>
+</section>
+  
+<section class="also-section">
+  <h2 class="section-title" style="margin-top:2rem;">Also worth checking</h2>
+  <p class="also-sub">No current show listed — check their websites for what's on</p>
+  
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Bruce Silverstein Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=529+West+20th+St,+4th+Floor,+NY+10011">529 West 20th St, 4th Floor, NY 10011</a>
+    <div class="hours">Tue–Sat 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://brucesilverstein.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Yossi Milo Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=245+Tenth+Ave,+NY+10001">245 Tenth Ave, NY 10001</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://yossimilo.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Benrubi Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=521+West+26th+St,+2nd+Floor,+NY+10011">521 West 26th St, 2nd Floor, NY 10011</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://benrubigallery.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Pace Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=540+West+25th+St,+NY+10001">540 West 25th St, NY 10001</a>
+    <div class="hours">Tue–Sat 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://pacegallery.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Sikkema Malloy Jenkins</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=530+West+22nd+St,+NY+10011">530 West 22nd St, NY 10011</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://smjny.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Gagosian Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=555+West+24th+St,+NY+10011">555 West 24th St, NY 10011</a>
+    <div class="hours">Tue–Sat 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://gagosian.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Hasted Kraeutler Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=537+West+24th+St,+NY+10011">537 West 24th St, NY 10011</a>
+    <div class="hours">Tue–Sat 11am–6pm</div>
+  </div>
+  <a class="website-link" href="https://hastedkraeutler.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Hauser &amp; Wirth</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=542+West+22nd+St,+NY+10011">542 West 22nd St, NY 10011</a>
+    <div class="hours">Tue–Sat 10am–6pm</div>
+  </div>
+  <a class="website-link" href="https://hauserwirth.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5B8DB8; background: #DCE6F1;">
+  
+  <div class="card-header">
+    <span class="venue-name">Agora Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=530+West+25th+St,+NY+10001">530 West 25th St, NY 10001</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://agora-gallery.com" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+  
+  <div class="card-header">
+    <span class="venue-name">Edwynn Houk Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=693+Fifth+Ave,+6th+Floor,+NY+10022">693 Fifth Ave, 6th Floor, NY 10022</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://houkgallery.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #C0663A; background: #FCE4D6;">
+  
+  <div class="card-header">
+    <span class="venue-name">The Morgan Library &amp; Museum</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=225+Madison+Ave,+NY+10016">225 Madison Ave, NY 10016</a>
+    <div class="hours">Tue–Thu, Sat 10:30am–5pm; Fri until 7pm</div>
+  </div>
+  <a class="website-link" href="https://themorgan.org" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  <div class="card-header">
+    <span class="venue-name">Danziger Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=952+5th+Ave,+NY+10075">952 5th Ave, NY 10075</a>
+    <div class="hours">By appointment</div>
+  </div>
+  <a class="website-link" href="https://danzigergallery.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  <div class="card-header">
+    <span class="venue-name">Gitterman Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=3+East+66th+St,+1B,+NY+10065">3 East 66th St, 1B, NY 10065</a>
+    <div class="hours">Mon–Sat 11am–6pm</div>
+  </div>
+  <a class="website-link" href="https://gittermangallery.com" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #B7950B; background: #FFF2CC;">
+  
+  <div class="card-header">
+    <span class="venue-name">Guggenheim Museum</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=1071+Fifth+Ave+at+86th+St,+NY+10128">1071 Fifth Ave at 86th St, NY 10128</a>
+    <div class="hours">Daily 10:30am–5:30pm</div>
+  </div>
+  <a class="website-link" href="https://guggenheim.org" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #5A8A50; background: #E2EFDA;">
+  
+  <div class="card-header">
+    <span class="venue-name">BAXTER ST at Camera Club NY</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=154+Ludlow+St,+NY+10002">154 Ludlow St, NY 10002</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://baxterst.org" target="_blank">Visit website ↗</a>
+</div>
+
+<div class="card compact" style="border-left: 4px solid #5A8A50; background: #E2EFDA;">
+  
+  <div class="card-header">
+    <span class="venue-name">New Museum</span>
+    <span class="type-tag museum">Museum</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=235+Bowery,+NY+10002">235 Bowery, NY 10002</a>
+    <div class="hours">Tue–Sun 11am–6pm (Thu until 9pm)</div>
+  </div>
+  <a class="website-link" href="https://newmuseum.org" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #9B3060; background: #EAD1DC;">
+  
+  <div class="card-header">
+    <span class="venue-name">Staley-Wise Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=100+Crosby+St,+Suite+305,+NY+10012">100 Crosby St, Suite 305, NY 10012</a>
+    <div class="hours">Tue–Sat 11am–5pm</div>
+  </div>
+  <a class="website-link" href="https://staleywise.com" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #4A7A5A; background: #D9EAD3;">
+  
+  <div class="card-header">
+    <span class="venue-name">White Columns</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=91+Horatio+St,+NY+10014">91 Horatio St, NY 10014</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://whitecolumns.org" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #3A6A90; background: #CFE2F3;">
+  
+  <div class="card-header">
+    <span class="venue-name">Laurence Miller Gallery</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=9+East+8th+St,+NY+10003">9 East 8th St, NY 10003</a>
+    <div class="hours">By appointment</div>
+  </div>
+  <a class="website-link" href="https://laurencemillergallery.com" target="_blank">Visit website ↗</a>
+</div>
+<div class="card compact" style="border-left: 4px solid #5E4B8B; background: #D9D2E9;">
+  
+  <div class="card-header">
+    <span class="venue-name">Janet Borden, Inc.</span>
+    <span class="type-tag gallery">Gallery</span>
+  </div>
+  <div class="no-show">No current show listed — check website</div>
+  <div class="meta">
+    <a class="addr-link" href="https://maps.apple.com/?address=91+Water+St,+Brooklyn,+NY+11201">91 Water St, Brooklyn, NY 11201</a>
+    <div class="hours">Check website</div>
+  </div>
+  <a class="website-link" href="https://janetbordeninc.com" target="_blank">Visit website ↗</a>
+</div>
+</section>
+  <footer>Updated April 17, 2026 · Open NYC_Photography_Galleries.xlsx for full details</footer>
+</main>
+</body>
+</html>
