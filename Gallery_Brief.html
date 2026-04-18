@@ -4,27 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>NYC Photo Galleries · April 17, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-family: "Montserrat", sans-serif;
       background: #E8E8E8;
       color: #1D1D1F;
       font-size: 15px;
+      font-weight: 400;
       line-height: 1.5;
     }
 
     header {
       background: #423E28;
       color: white;
-      padding: 20px 16px 16px;
+      padding: 18px 16px 14px;
       position: sticky;
       top: 0;
       z-index: 10;
     }
-    header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
-    header .subtitle { font-size: 13px; opacity: 0.70; margin-top: 2px; }
+    header h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+    }
+    header .subtitle {
+      font-family: "Montserrat", sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.65;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
 
     main { padding: 12px 12px 40px; max-width: 540px; margin: 0 auto; }
 
@@ -36,8 +53,11 @@
       padding: 10px 14px;
       display: flex; align-items: baseline; gap: 12px;
     }
-    .alert-title { font-size: 15px; font-weight: 700; }
-    .alert-sub   { font-size: 12px; opacity: 0.80; }
+    .alert-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 1px;
+    }
+    .alert-sub { font-family: "Montserrat", sans-serif; font-size: 11px; font-weight: 500; opacity: 0.85; }
 
     /* ── Neighborhood sections ── */
     .nbhd-section { margin-bottom: 12px; }
@@ -45,19 +65,28 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 14px;
     }
-    .nbhd-name  { font-size: 15px; font-weight: 700; }
-    .nbhd-count { font-size: 12px; opacity: 0.70; font-weight: 500; }
+    .nbhd-name  {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 1px;
+    }
+    .nbhd-count {
+      font-family: "Montserrat", sans-serif;
+      font-size: 11px; font-weight: 500; opacity: 0.70;
+    }
 
     /* ── Also section ── */
     .also-section { margin-top: 16px; }
     .also-header {
-      font-size: 11px; font-weight: 700; color: #888;
-      text-transform: uppercase; letter-spacing: 0.8px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 20px; font-weight: 400; letter-spacing: 1px; color: #999;
       padding: 0 2px 8px;
       border-bottom: 1px solid #CCC;
       margin-bottom: 10px;
     }
-    .also-sub { font-size: 13px; color: #999; margin-bottom: 10px; }
+    .also-sub {
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px; font-weight: 400; color: #999; margin-bottom: 10px;
+    }
     .also-section .card { opacity: 0.78; }
 
     /* ── Cards ── */
@@ -74,26 +103,29 @@
       display: flex; align-items: center; gap: 8px;
       margin-bottom: 5px; flex-wrap: wrap;
     }
-    .venue-name { font-weight: 700; font-size: 15px; color: #1D1D1F; }
+    .venue-name { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 14px; color: #1D1D1F; }
 
     .type-tag {
-      font-size: 10px; font-weight: 600;
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px; font-weight: 700;
       padding: 2px 7px; border-radius: 2px;
-      text-transform: uppercase; letter-spacing: 0.5px;
+      text-transform: uppercase; letter-spacing: 0.8px;
     }
     .type-tag.museum { background: #423E28; color: white; }
     .type-tag.gallery { background: #E8E8E8; color: #555; }
 
-    .show-name { font-size: 15px; color: #1D1D1F; font-style: italic; margin-bottom: 2px; }
-    .artists   { font-size: 13px; color: #555; margin-bottom: 6px; }
-    .no-show   { font-size: 13px; color: #999; font-style: italic; margin-bottom: 6px; }
+    .show-name { font-size: 14px; font-weight: 500; font-style: italic; color: #1D1D1F; margin-bottom: 2px; }
+    .artists   { font-size: 12px; font-weight: 400; color: #555; margin-bottom: 6px; }
+    .no-show   { font-size: 12px; font-weight: 400; color: #999; font-style: italic; margin-bottom: 6px; }
 
-    .closing-line { margin-bottom: 8px; font-size: 13px; display: flex; align-items: center; gap: 6px; color: #555; }
+    .closing-line { margin-bottom: 8px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; color: #555; }
 
     /* ── Badges ── */
     .badge {
       display: inline-block;
-      font-size: 11px; font-weight: 700;
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.3px;
       padding: 2px 8px; border-radius: 2px;
     }
     .badge.urgent  { background: #FFE0E0; color: #C00000; }
@@ -105,22 +137,23 @@
     .meta { margin-top: 4px; }
     .addr-link {
       display: block;
-      font-size: 13px; color: #50723C;
+      font-size: 12px; font-weight: 500; color: #50723C;
       text-decoration: none; margin-bottom: 2px;
     }
     .addr-link:hover { text-decoration: underline; }
-    .hours { font-size: 13px; color: #666; }
+    .hours { font-size: 12px; font-weight: 400; color: #666; }
 
     .website-link {
       display: inline-block; margin-top: 8px;
-      font-size: 12px; color: #50723C;
-      text-decoration: none; font-weight: 600;
+      font-size: 11px; font-weight: 600; color: #50723C;
+      text-decoration: none; letter-spacing: 0.3px;
       border-bottom: 1px solid #86DEB7;
     }
 
     .nbhd-label {
-      font-size: 11px; font-weight: 600; color: #999;
-      text-transform: uppercase; letter-spacing: 0.5px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px; font-weight: 600; color: #999;
+      text-transform: uppercase; letter-spacing: 0.7px;
       margin-bottom: 4px;
     }
 
@@ -142,7 +175,11 @@
 
     /* ── Substack suggestions ── */
     .suggestions-section { margin-bottom: 12px; }
-    .suggestions-title { color: #50723C; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .suggestions-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 1px;
+      color: #50723C; margin-bottom: 6px;
+    }
     .suggestion-card {
       background: #F0FAF5;
       border-left: 4px solid #63B995;
@@ -154,7 +191,9 @@
     .suggestion-meta   { font-size: 11px; color: #888; margin-top: 6px; }
 
     footer {
-      text-align: center; font-size: 12px; color: #aaa;
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      font-size: 11px; font-weight: 400; color: #aaa;
       margin-top: 32px; padding-bottom: 20px;
     }
   </style>
