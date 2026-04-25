@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NYC Galleries · April 2026</title>
+<title>NYC Photo Shows · April 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root {
-  --ink:        #0e0e10;
-  --paper:      #f6f4f0;
-  --paper-dark: #ece8e1;
-  --rule:       #cec9c0;
-  --accent:     #c02818;
+  --ink:         #1a1a1e;
+  --paper:       #f6f4f0;
+  --paper-dark:  #ece8e1;
+  --rule:        #d8d3ca;
+  --accent:      #c02818;
   --accent-soft: #f9ecea;
-  --muted:      #80796f;
-  --saved:      #1c5c38;
-  --saved-soft: #e6f2ec;
-  --seen:       #9a9490;
-  --mode-walk:  #1a3a5c;
+  --muted:       #8a8278;
+  --saved:       #1c5c38;
+  --saved-soft:  #e6f2ec;
+  --seen:        #9a9490;
+  --mode-walk:   #1a3a5c;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -42,10 +42,10 @@ html, body {
   position: relative;
 }
 
+/* ─── HEADER (paper background) ─── */
 .site-header {
   flex-shrink: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--paper);
   padding: 16px 16px 0;
   z-index: 100;
 }
@@ -61,7 +61,7 @@ html, body {
   font-size: 44px;
   letter-spacing: 0.04em;
   line-height: 0.88;
-  color: #fff;
+  color: var(--ink);
 }
 
 .site-header .tagline {
@@ -69,15 +69,17 @@ html, body {
   font-style: italic;
   font-weight: 300;
   font-size: 12px;
-  color: #666;
-  margin-top: 6px;
+  color: var(--muted);
+  margin-top: 7px;
+  letter-spacing: 0.01em;
 }
 
+/* ─── MODE TOGGLE ─── */
 .mode-toggle {
   display: flex;
-  border: 1px solid #2e2e2e;
+  border: 1px solid var(--rule);
   flex-shrink: 0;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .mode-btn {
@@ -88,20 +90,20 @@ html, body {
   border: none;
   cursor: pointer;
   background: transparent;
-  color: #555;
+  color: #b0aba2;
   transition: all 0.2s ease;
 }
-
-.mode-btn + .mode-btn { border-left: 1px solid #2e2e2e; }
-.mode-btn.active[data-mode="plan"] { background: var(--paper); color: var(--ink); }
+.mode-btn + .mode-btn { border-left: 1px solid var(--rule); }
+.mode-btn.active[data-mode="plan"] { background: var(--ink);      color: var(--paper); }
 .mode-btn.active[data-mode="walk"] { background: var(--mode-walk); color: #fff; }
 
+/* ─── MODE BAR ─── */
 .mode-bar {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 8px 0 10px;
-  border-top: 1px solid #1e1e1e;
+  border-top: 1px solid var(--rule);
   margin-top: 12px;
 }
 
@@ -110,23 +112,43 @@ html, body {
   font-style: italic;
   font-weight: 400;
   font-size: 12px;
-  color: #999;
+  color: var(--muted);
 }
 .mode-bar .mode-hint {
   font-family: 'Spectral', serif;
   font-style: italic;
   font-weight: 300;
   font-size: 12px;
-  color: #555;
+  color: #b8b2a8;
 }
+.closing-legend {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--accent);
+}
+.pulse-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
 .mode-bar .saved-count {
   margin-left: auto;
   font-family: 'Spectral', serif;
   font-size: 11px;
   font-weight: 500;
-  color: #6dbf8a;
+  color: #5aaa78;
 }
 
+/* ─── FILTER BAR ─── */
 .filter-bar {
   display: flex;
   gap: 5px;
@@ -153,10 +175,11 @@ html, body {
   transition: all 0.15s;
   line-height: 1.4;
 }
-.filter-chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-chip.active              { background: var(--ink);    color: var(--paper); border-color: var(--ink); }
 .filter-chip.closing-chip.active { background: var(--accent); border-color: var(--accent); }
-.filter-chip.saved-chip.active { background: var(--saved); border-color: var(--saved); }
+.filter-chip.saved-chip.active   { background: var(--saved);  border-color: var(--saved); }
 
+/* ─── SCROLLABLE BODY ─── */
 .scroll-body {
   flex: 1;
   overflow-y: auto;
@@ -164,6 +187,7 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
+/* ─── NEIGHBORHOOD HEADER ─── */
 .neighborhood-header {
   display: flex;
   align-items: stretch;
@@ -174,210 +198,207 @@ html, body {
   top: 0;
   z-index: 50;
 }
-
 .neighborhood-swatch { width: 5px; flex-shrink: 0; }
-
 .neighborhood-inner {
   flex: 1;
-  padding: 10px 14px;
+  padding: 9px 14px;
   display: flex;
   align-items: baseline;
   gap: 10px;
 }
-
 .neighborhood-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: 0.06em;
   flex: 1;
   color: var(--ink);
 }
-
 .neighborhood-count {
   font-family: 'Spectral', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
   align-self: center;
 }
 
+/* ─── SHOW CARD (image-forward, 3:2) ─── */
 .show-card {
-  display: flex;
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper);
-  cursor: pointer;
   position: relative;
+  width: 100%;
+  aspect-ratio: 3/2;
   overflow: hidden;
-  transition: background 0.15s;
-  min-height: 88px;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+  cursor: pointer;
+  background: var(--paper-dark);
 }
-.show-card:active { background: var(--paper-dark); }
 
-.show-card.closing-soon { background: #fdf7f6; }
-.show-card.closing-soon::before {
+.show-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.show-card:active img { transform: scale(1.03); }
+.show-card.is-seen img { filter: grayscale(0.7) brightness(0.65); }
+
+/* gradient overlay — always present, makes text readable even without image */
+.card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 28%,
+    rgba(8,8,8,0.55) 62%,
+    rgba(8,8,8,0.94) 100%
+  );
+}
+
+/* closing-soon: left red stripe */
+.show-card.closing-soon::after {
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  width: 3px;
+  width: 4px;
   background: var(--accent);
+  z-index: 3;
 }
 
-.show-card.is-saved { background: #f4fbf7; }
+/* saved: top green stripe */
 .show-card.is-saved::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
+  left: 0; top: 0; right: 0;
+  height: 3px;
   background: var(--saved);
+  z-index: 3;
 }
 
-.show-card.closing-soon.is-saved::before {
-  background: linear-gradient(to bottom, var(--accent) 50%, var(--saved) 50%);
-}
-
-.card-thumb {
-  width: 88px; height: 88px;
-  flex-shrink: 0;
-  background: var(--paper-dark);
-  overflow: hidden;
-  position: relative;
-  align-self: center;
-}
-.card-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
+/* seen: checkmark circle top-left */
 .seen-overlay {
   display: none;
   position: absolute;
-  inset: 0;
-  background: rgba(246,244,240,0.78);
-  align-items: center;
-  justify-content: center;
+  top: 12px; left: 12px;
+  z-index: 4;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  align-items: center; justify-content: center;
+  font-size: 14px; color: rgba(255,255,255,0.8);
+  backdrop-filter: blur(4px);
 }
 .show-card.is-seen .seen-overlay { display: flex; }
-.seen-check { font-size: 20px; color: var(--seen); }
 
-.card-body {
-  flex: 1;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 0;
+/* text overlaid at card bottom */
+.card-text {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 13px 14px 14px;
+  z-index: 2;
 }
 
 .urgent-badge {
   display: inline-block;
-  background: var(--accent);
-  color: white;
+  background: var(--accent); color: #fff;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 1px 7px;
-  margin-bottom: 2px;
+  font-size: 11px; letter-spacing: 0.1em;
+  padding: 2px 7px;
+  margin-bottom: 4px;
 }
 
 .ongoing-badge {
   display: inline-block;
-  background: #e6f4ec;
-  color: #1c5c38;
+  background: rgba(28,92,56,0.75); color: #9eeabc;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  padding: 1px 7px;
-  margin-bottom: 2px;
+  font-size: 11px; letter-spacing: 0.1em;
+  padding: 2px 7px;
+  margin-bottom: 4px;
 }
 
-.artist-name {
+.card-artist {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
+  font-size: 26px;
   letter-spacing: 0.04em;
   line-height: 1;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--ink);
 }
-.show-card.is-seen .artist-name { color: var(--seen); }
+.show-card.is-seen .card-artist { opacity: 0.5; }
 
-.show-title {
+.card-show-title {
   font-family: 'Spectral', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 1px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.gallery-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  opacity: 0.65;
-  margin-top: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.show-card.is-seen .gallery-name { color: var(--seen); opacity: 1; }
-
-.card-bottom {
+.card-meta {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
-.address {
-  font-family: 'Spectral', serif;
-  font-weight: 300;
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.4;
+.card-gallery {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
 }
 
-.closing-tag { text-align: right; flex-shrink: 0; margin-left: 8px; }
-
-.closing-label {
+.card-close-wrap { text-align: right; flex-shrink: 0; margin-left: 8px; }
+.card-close-label {
   display: block;
   font-family: 'Spectral', serif;
   font-style: italic;
   font-weight: 300;
   font-size: 10px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.45);
+  line-height: 1;
+  margin-bottom: 1px;
 }
-
-.closing-date {
+.card-close-date {
   display: block;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 17px;
   letter-spacing: 0.04em;
   line-height: 1;
+  color: rgba(255,255,255,0.68);
 }
+.show-card.closing-soon .card-close-label,
+.show-card.closing-soon .card-close-date { color: #ff8070; }
 
-.closing-soon .closing-label { color: var(--accent); }
-.closing-soon .closing-date { color: var(--accent); }
-
+/* save button — glassy circle top-right */
 .save-btn {
   position: absolute;
-  right: 10px; top: 10px;
-  width: 27px; height: 27px;
-  border: 1.5px solid var(--rule);
-  background: var(--paper);
+  right: 12px; top: 12px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.38);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  backdrop-filter: blur(6px);
   transition: all 0.2s;
-  z-index: 10;
+  z-index: 4;
 }
 .save-btn.saved { background: var(--saved); border-color: var(--saved); color: #fff; }
 
+/* ─── WALK MODE ─── */
 #walkMode {
   display: none;
   flex-direction: column;
@@ -407,94 +428,74 @@ html, body {
 
 .walk-sheet-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.1em;
-  color: #777;
+  font-size: 16px; letter-spacing: 0.1em; color: #666;
 }
-
 .walk-sheet-count {
   font-family: 'Spectral', serif;
-  font-style: italic;
-  font-size: 12px;
-  color: #6dbf8a;
+  font-style: italic; font-size: 12px; color: #5aaa78;
 }
 
 .walk-card {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-bottom: 1px solid #1a1a1a;
-  gap: 12px;
-  cursor: pointer;
+  gap: 12px; cursor: pointer;
   transition: background 0.15s;
 }
 .walk-card:active { background: #1a1a1a; }
 .walk-card.is-seen { opacity: 0.4; }
 
-.walk-card-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.walk-thumb {
+  width: 44px; height: 44px;
+  flex-shrink: 0; overflow: hidden;
+  background: #222;
+}
+.walk-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.walk-card.is-seen .walk-thumb img { filter: grayscale(1) brightness(0.5); }
+
 .walk-card-info { flex: 1; min-width: 0; }
 
 .walk-artist {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--paper);
-  line-height: 1.1;
+  font-size: 17px; letter-spacing: 0.04em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--paper); line-height: 1.1;
 }
-.walk-card.is-seen .walk-artist { color: #555; }
+.walk-card.is-seen .walk-artist { color: #444; }
 
-.walk-gallery {
+.walk-meta {
   font-family: 'Spectral', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 11px;
-  color: #555;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-style: italic; font-weight: 300;
+  font-size: 11px; color: #555;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   margin-top: 1px;
 }
 
 .seen-btn {
   flex-shrink: 0;
   border: 1.5px solid #2a2a2a;
-  background: transparent;
-  color: #555;
+  background: transparent; color: #555;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  padding: 4px 9px;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  line-height: 1.4;
+  font-size: 13px; letter-spacing: 0.08em;
+  padding: 4px 9px; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap; line-height: 1.4;
 }
 .seen-btn.is-seen { border-color: #2a2a2a; color: #333; text-decoration: line-through; }
 
 .walk-no-saves {
-  padding: 24px 20px;
-  text-align: center;
-  color: #444;
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 1.8;
+  padding: 24px 20px; text-align: center;
+  font-family: 'Spectral', serif; font-style: italic;
+  font-weight: 300; font-size: 13px; color: #444; line-height: 1.8;
 }
 .walk-no-saves strong {
   display: block;
-  font-family: 'Bebas Neue', sans-serif;
-  font-style: normal;
-  font-size: 20px;
-  letter-spacing: 0.06em;
-  color: #666;
-  margin-bottom: 6px;
-  font-weight: normal;
+  font-family: 'Bebas Neue', sans-serif; font-style: normal;
+  font-size: 18px; letter-spacing: 0.06em;
+  color: #666; margin-bottom: 6px; font-weight: normal;
 }
 
+/* ─── MAP POPUP ─── */
 .leaflet-popup-content-wrapper {
   background: var(--ink) !important;
   color: var(--paper) !important;
@@ -503,34 +504,39 @@ html, body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.45) !important;
 }
 .leaflet-popup-tip { background: var(--ink) !important; }
-.leaflet-popup-content { margin: 0 !important; width: 220px !important; }
+.leaflet-popup-content { margin: 0 !important; width: 230px !important; }
 
-.pin-popup { padding: 12px 14px; }
+.pin-popup { padding: 0; overflow: hidden; }
+.pin-popup-img {
+  width: 100%; height: 90px;
+  object-fit: cover; display: block;
+  opacity: 0.85;
+}
+.pin-popup-body { padding: 10px 12px 12px; }
 .pin-popup-artist {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-  color: #fff;
+  font-size: 18px; letter-spacing: 0.04em;
+  line-height: 1.1; color: #fff;
+}
+.pin-popup-show {
+  font-family: 'Spectral', serif;
+  font-style: italic; font-weight: 300;
+  font-size: 12px; color: #888; margin-top: 2px;
 }
 .pin-popup-gallery {
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 11px;
-  color: #888;
-  margin-top: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: 0.07em;
+  color: #555; margin-top: 4px;
 }
 .pin-popup-closing {
   font-family: 'Spectral', serif;
-  font-size: 11px;
-  color: #666;
-  margin-top: 8px;
-  padding-top: 8px;
+  font-size: 11px; color: #555;
+  margin-top: 8px; padding-top: 8px;
   border-top: 1px solid #1e1e1e;
 }
 .pin-popup-closing.urgent { color: #d97070; }
 
+/* ─── DETAIL PAGE ─── */
 #detailPage {
   display: none;
   position: fixed;
@@ -551,168 +557,123 @@ html, body {
 }
 
 .detail-back {
-  position: sticky;
-  top: 0;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  z-index: 10;
-  border: none;
-  width: 100%;
+  position: sticky; top: 0;
+  background: var(--ink); color: var(--paper);
+  padding: 13px 16px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer; z-index: 10;
+  border: none; width: 100%;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 15px;
-  letter-spacing: 0.1em;
+  font-size: 15px; letter-spacing: 0.1em;
 }
 
 .detail-hero {
-  width: 100%;
-  aspect-ratio: 4/3;
-  background: var(--paper-dark);
-  overflow: hidden;
+  width: 100%; aspect-ratio: 4/3;
+  background: var(--paper-dark); overflow: hidden;
 }
 .detail-hero img { width: 100%; height: 100%; object-fit: cover; }
 
 .detail-content { padding: 22px 16px 48px; }
 
 .detail-hood-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: 'Spectral', serif;
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'Spectral', serif; font-weight: 400;
+  font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
 }
 .detail-hood-tag .swatch { width: 8px; height: 8px; border-radius: 50%; }
 
 .detail-artist {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 38px;
-  letter-spacing: 0.03em;
-  line-height: 0.95;
-  color: var(--ink);
+  font-size: 38px; letter-spacing: 0.03em;
+  line-height: 0.95; color: var(--ink);
 }
 
 .detail-show-title {
   font-family: 'Spectral', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 19px;
-  color: var(--muted);
-  margin-top: 6px;
-  line-height: 1.3;
+  font-style: italic; font-weight: 400;
+  font-size: 19px; color: var(--muted);
+  margin-top: 6px; line-height: 1.3;
 }
 
 .detail-divider { height: 1px; background: var(--rule); margin: 18px 0; }
 
 .detail-meta-label {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-  margin-bottom: 3px;
+  font-size: 13px; letter-spacing: 0.12em;
+  color: var(--muted); margin-bottom: 3px;
 }
-
 .detail-meta-value {
-  font-family: 'Spectral', serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  margin-bottom: 14px;
+  font-family: 'Spectral', serif; font-size: 14px;
+  font-weight: 400; line-height: 1.5; margin-bottom: 14px;
   color: var(--ink);
 }
 .detail-meta-value.gallery {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 15px;
-  letter-spacing: 0.08em;
-  font-weight: normal;
+  font-size: 15px; letter-spacing: 0.08em; font-weight: normal;
 }
 .detail-meta-value a {
-  color: var(--ink);
-  text-decoration: none;
+  color: var(--ink); text-decoration: none;
   border-bottom: 1px solid var(--rule);
 }
 
 .detail-closing-block {
   padding: 12px 14px;
   border: 1px solid var(--rule);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 18px;
 }
-.detail-closing-block.urgent {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-}
-.detail-closing-block.ongoing {
-  border-color: #a8d5b8;
-  background: #e6f4ec;
-}
+.detail-closing-block.urgent  { border-color: var(--accent); background: var(--accent-soft); }
+.detail-closing-block.ongoing { border-color: #a8d5b8; background: #e6f4ec; }
 
 .closing-info .label {
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 11px;
-  color: var(--muted);
+  font-family: 'Spectral', serif; font-style: italic;
+  font-weight: 300; font-size: 11px; color: var(--muted);
 }
-.detail-closing-block.urgent .closing-info .label { color: var(--accent); }
+.detail-closing-block.urgent  .closing-info .label { color: var(--accent); }
 .detail-closing-block.ongoing .closing-info .label { color: #1c5c38; }
 
 .closing-info .date {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  letter-spacing: 0.04em;
-  margin-top: 2px;
-  line-height: 1;
+  font-size: 26px; letter-spacing: 0.04em;
+  margin-top: 2px; line-height: 1;
 }
-.detail-closing-block.urgent .closing-info .date { color: var(--accent); }
+.detail-closing-block.urgent  .closing-info .date { color: var(--accent); }
 .detail-closing-block.ongoing .closing-info .date { color: #1c5c38; }
 
 .days-left {
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  font-size: 12px;
-  color: var(--muted);
-  text-align: right;
+  font-family: 'Spectral', serif; font-style: italic;
+  font-size: 12px; color: var(--muted); text-align: right;
 }
 .detail-closing-block.urgent .days-left { color: var(--accent); }
 
 .detail-actions { display: flex; gap: 10px; margin-top: 22px; }
-
 .detail-save-btn, .detail-seen-btn {
-  flex: 1;
-  padding: 13px;
+  flex: 1; padding: 13px;
   border: 1.5px solid var(--rule);
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  background: transparent;
-  color: var(--ink);
-  transition: all 0.2s;
+  font-size: 15px; letter-spacing: 0.1em;
+  cursor: pointer; background: transparent;
+  color: var(--ink); transition: all 0.2s;
 }
-.detail-save-btn.saved { background: var(--saved); border-color: var(--saved); color: white; }
-.detail-seen-btn.seen { background: var(--paper-dark); border-color: var(--rule); color: var(--seen); text-decoration: line-through; }
+.detail-save-btn.saved { background: var(--saved); border-color: var(--saved); color: #fff; }
+.detail-seen-btn.seen  { background: var(--paper-dark); border-color: var(--rule); color: var(--seen); text-decoration: line-through; }
 
 .you-are-here {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: #3a8fdd;
-  border: 3px solid white;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #3a8fdd; border: 3px solid white;
   box-shadow: 0 0 0 3px rgba(58,143,221,0.3);
 }
 .map-pin { cursor: pointer; }
 
 @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+.empty-state {
+  padding: 40px 20px; text-align: center;
+  font-family: 'Spectral', serif; font-style: italic;
+  font-weight: 300; color: var(--muted);
+  font-size: 14px; line-height: 1.8;
+}
 </style>
 </head>
 <body>
@@ -721,18 +682,18 @@ html, body {
   <header class="site-header">
     <div class="header-top">
       <div>
-        <h1>NYC<br>Galleries</h1>
+        <h1>NYC<br>Photo Shows</h1>
         <p class="tagline">Current exhibitions — April 2026</p>
       </div>
       <div class="mode-toggle">
         <button class="mode-btn active" data-mode="plan" onclick="setMode('plan')">Plan</button>
-        <button class="mode-btn" data-mode="walk" onclick="setMode('walk')">Walk</button>
+        <button class="mode-btn"        data-mode="walk" onclick="setMode('walk')">Walk</button>
       </div>
     </div>
     <div class="mode-bar" id="modeBar">
       <span class="mode-label">Planning</span>
       <span class="mode-hint">— add shows to your visit</span>
-      <span class="saved-count" id="savedCount"></span>
+      <span class="closing-legend"><span class="pulse-dot"></span>closing within 7 days</span>
     </div>
   </header>
 
@@ -743,7 +704,7 @@ html, body {
 
   <div id="walkMode">
     <div id="walkMap"></div>
-    <div class="walk-sheet" id="walkSheet">
+    <div class="walk-sheet">
       <div class="walk-sheet-handle">
         <span class="walk-sheet-title">Your Visit</span>
         <span class="walk-sheet-count" id="walkSheetCount"></span>
@@ -765,7 +726,7 @@ html, body {
 </div>
 
 <script>
-const TODAY = new Date('2026-04-24');
+const TODAY = new Date('2026-04-25');
 const NEIGHBORHOODS = {
   "Chelsea": {
     "color": "#344e8a"
@@ -806,7 +767,7 @@ const SHOWS = [
     "hours": "Tue–Sat 10am–6pm",
     "website": "yanceyrichardson.com",
     "closing": "2026-05-22",
-    "daysLeft": 28,
+    "daysLeft": 27,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://s3.amazonaws.com/files.collageplatform.com.prod/application/55f7ef8984184eba568b4568/9bfc97cfd4a417dcf7a906ffcc4f1585.png",
@@ -823,7 +784,7 @@ const SHOWS = [
     "hours": "Tue–Sat 10am–6pm",
     "website": "brucesilverstein.com",
     "closing": "2026-06-20",
-    "daysLeft": 57,
+    "daysLeft": 56,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/231/dmo-00080-sp.jpg",
@@ -840,7 +801,7 @@ const SHOWS = [
     "hours": "Tue–Fri 10am–4pm; Sat 12–5pm",
     "website": "robertmann.com",
     "closing": "2026-05-16",
-    "daysLeft": 22,
+    "daysLeft": 21,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": null,
@@ -857,7 +818,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "yossimilo.com",
     "closing": "2026-04-25",
-    "daysLeft": 1,
+    "daysLeft": 0,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/196/into-the-blue-again-2026-east-gallery-6.jpg",
@@ -874,7 +835,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "benrubigallery.com",
     "closing": "2026-05-23",
-    "daysLeft": 29,
+    "daysLeft": 28,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "http://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/69a8650f28491125abec805a/1775145319184/cradled+%281%29.JPG?format=1500w",
@@ -908,7 +869,7 @@ const SHOWS = [
     "hours": "Tue–Sat 10am–6pm",
     "website": "pacegallery.com",
     "closing": "2026-04-26",
-    "daysLeft": 2,
+    "daysLeft": 1,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": null,
@@ -925,7 +886,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "smjny.com",
     "closing": "2026-05-02",
-    "daysLeft": 8,
+    "daysLeft": 7,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/69b42ddb0cbe6a4eb9e6b2a9/1773417958684/Witness+no+1.jpg?format=1500w",
@@ -959,7 +920,7 @@ const SHOWS = [
     "hours": "Tue–Sat 10am–6pm",
     "website": "hauserwirth.com",
     "closing": "2026-04-18",
-    "daysLeft": -6,
+    "daysLeft": -7,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://media.hauserwirth.com/asset/96e139ae-cd2c-4e38-be15-13c502584174/thumbnail/webimage-MARSK143540-Photo-Joshua_White-jwpictures-com-4Q6A2319",
@@ -976,7 +937,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "agora-gallery.com",
     "closing": "2026-05-21",
-    "daysLeft": 27,
+    "daysLeft": 26,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://agora-gallery.com/wp-content/uploads/2025/06/aae69109-1eb4-470e-a9b8-119aa36864e3-l-550x413.jpg",
@@ -993,7 +954,7 @@ const SHOWS = [
     "hours": "Tue–Fri 10am–6pm; Sat 11am–5pm",
     "website": "howardgreenberg.com",
     "closing": "2026-05-09",
-    "daysLeft": 15,
+    "daysLeft": 14,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/197/pf156497.jpg",
@@ -1010,7 +971,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "houkgallery.com",
     "closing": "2026-06-06",
-    "daysLeft": 43,
+    "daysLeft": 42,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/141/3505-asb-1902-image.jpg",
@@ -1027,7 +988,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–5:30pm (Sat until 7pm)",
     "website": "moma.org",
     "closing": "2026-07-25",
-    "daysLeft": 92,
+    "daysLeft": 91,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.moma.org/d/assets/W1siZiIsIjIwMjQvMDkvMTYvOTViMnltd3RycF8wMV9TYW5sZV9Tb3J5X1RyYXZlbGxlcl9MZV9Wb3lhZ2V1cl9fMTk3MF84NS5qcGciXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgOTAgLXJlc2l6ZSAyMDAweDIwMDBcdTAwM2UiXV0/01_Sanle-Sory_Traveller-%28Le-Voyageur%29_1970-85.jpg?sha=583923b83ea69615",
@@ -1044,7 +1005,7 @@ const SHOWS = [
     "hours": "Tue–Thu, Sat 10:30am–5pm; Fri until 7pm",
     "website": "themorgan.org",
     "closing": "2026-05-03",
-    "daysLeft": 9,
+    "daysLeft": 8,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": null,
@@ -1061,7 +1022,7 @@ const SHOWS = [
     "hours": "Mon–Sat 11am–6pm",
     "website": "gittermangallery.com",
     "closing": "2026-06-06",
-    "daysLeft": 43,
+    "daysLeft": 42,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://www.gittermangallery.com/images/26685_h500w500gt.5.jpg",
@@ -1078,7 +1039,7 @@ const SHOWS = [
     "hours": "Sun–Thu 10am–5pm; Fri–Sat 10am–9pm",
     "website": "metmuseum.org",
     "closing": "2026-05-03",
-    "daysLeft": 9,
+    "daysLeft": 8,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": null,
@@ -1095,7 +1056,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–5:30pm",
     "website": "guggenheim.org",
     "closing": "2026-05-03",
-    "daysLeft": 9,
+    "daysLeft": 8,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.guggenheim.org/wp-content/uploads/2026/03/Carol-Bove-exh_ph044_HorizontalCropped-scaled.jpg",
@@ -1112,7 +1073,7 @@ const SHOWS = [
     "hours": "Mon–Fri 10am–5pm; Sat–Sun 10am–6pm",
     "website": "mcny.org",
     "closing": "2026-04-19",
-    "daysLeft": -5,
+    "daysLeft": -6,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": null,
@@ -1129,7 +1090,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–6:30pm (Thu until 8pm)",
     "website": "icp.org",
     "closing": "2026-05-04",
-    "daysLeft": 10,
+    "daysLeft": 9,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.icp.org/sites/default/files/styles/page_top_banner_styles/public/2025-10/101525_Bascom_9N4A0526.jpeg.webp?itok=pPrsu_83",
@@ -1146,7 +1107,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "baxterst.org",
     "closing": "2026-06-03",
-    "daysLeft": 40,
+    "daysLeft": 39,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": null,
@@ -1180,7 +1141,7 @@ const SHOWS = [
     "hours": "Tue–Sat 11am–5pm",
     "website": "staleywise.com",
     "closing": "2026-05-02",
-    "daysLeft": 8,
+    "daysLeft": 7,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://s3.amazonaws.com/files.collageplatform.com.prod/application/5be3258ca5aa2c1c768b4567/6cada4471738bd49aaa07dd8a0a364f9.png",
@@ -1197,7 +1158,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "whitecolumns.org",
     "closing": "2026-05-09",
-    "daysLeft": 15,
+    "daysLeft": 14,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://whitecolumns.org/wp-content/uploads/exhibitions//MaryHeilmann_Cover-768x1014.jpeg",
@@ -1214,7 +1175,7 @@ const SHOWS = [
     "hours": "Mon, Wed–Sun 10:30am–6pm; Fri until 10pm",
     "website": "whitney.org",
     "closing": "2026-08-23",
-    "daysLeft": 121,
+    "daysLeft": 120,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://whitneymedia.org/assets/image/833410/WMAA99949_BFA_53520_7759682_lpr.jpg",
@@ -1231,7 +1192,7 @@ const SHOWS = [
     "hours": "Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm",
     "website": "nyhistory.org",
     "closing": "2026-04-26",
-    "daysLeft": 2,
+    "daysLeft": 1,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": null,
@@ -1248,7 +1209,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "janetbordeninc.com",
     "closing": "2026-06-14",
-    "daysLeft": 51,
+    "daysLeft": 50,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": null,
@@ -1265,7 +1226,7 @@ const SHOWS = [
     "hours": "Wed–Sun 11am–6pm",
     "website": "brooklynmuseum.org",
     "closing": "2026-05-17",
-    "daysLeft": 23,
+    "daysLeft": 22,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": null,
@@ -1274,11 +1235,11 @@ const SHOWS = [
   }
 ];
 
-let currentMode = 'plan';
+let currentMode  = 'plan';
 let activeFilter = 'all';
 let savedIds = new Set(JSON.parse(localStorage.getItem('gallery-savedIds') || '[]'));
 let seenIds  = new Set(JSON.parse(localStorage.getItem('gallery-seenIds')  || '[]'));
-let walkMap = null;
+let walkMap  = null;
 let walkMarkers = {};
 
 function saveState() {
@@ -1328,12 +1289,18 @@ function setMode(mode) {
   if (mode === 'plan') {
     document.getElementById('planMode').style.display = 'flex';
     document.getElementById('walkMode').classList.remove('active');
-    modeBar.innerHTML = '<span class="mode-label">Planning</span><span class="mode-hint">— add shows to your visit</span><span class="saved-count" id="savedCount"></span>';
+    modeBar.innerHTML =
+      '<span class="mode-label">Planning</span>' +
+      '<span class="mode-hint">— add shows to your visit</span>' +
+      '<span class="closing-legend"><span class="pulse-dot"></span>closing within 7 days</span>';
     renderList();
   } else {
     document.getElementById('planMode').style.display = 'none';
     document.getElementById('walkMode').classList.add('active');
-    modeBar.innerHTML = '<span class="mode-label" style="color:#6dbf8a">Walking</span><span class="mode-hint" style="color:#444">— mark shows as seen</span><span class="saved-count" id="savedCount"></span>';
+    modeBar.innerHTML =
+      '<span class="mode-label" style="color:#5aaa78">Walking</span>' +
+      '<span class="mode-hint" style="color:#b0b0b0">— mark shows as seen</span>' +
+      '<span class="saved-count" id="savedCount"></span>';
     renderWalkMode();
   }
   updateSavedCount();
@@ -1363,12 +1330,12 @@ function getFilteredShows() {
 }
 
 function renderList() {
-  const page = document.getElementById('listingPage');
+  const page  = document.getElementById('listingPage');
   const shows = getFilteredShows();
   page.innerHTML = '';
 
   if (shows.length === 0) {
-    page.innerHTML = '<div style="padding:40px 20px;text-align:center;font-family:Spectral,serif;font-style:italic;font-weight:300;color:var(--muted);font-size:14px;line-height:1.8;">No shows match this filter.</div>';
+    page.innerHTML = '<div class="empty-state">No shows match this filter.</div>';
     return;
   }
 
@@ -1383,7 +1350,7 @@ function renderList() {
     const nb = NEIGHBORHOODS[hood] || {color:'#444'};
     const hoodShows = groups[hood];
     const sec = document.createElement('section');
-    sec.style.cssText = `opacity:0;transform:translateY(14px);animation:fadeIn 0.4s ease ${i * 0.07}s forwards`;
+    sec.style.cssText = `opacity:0;transform:translateY(12px);animation:fadeIn 0.38s ease ${i * 0.06}s forwards`;
     sec.innerHTML =
       `<div class="neighborhood-header">` +
         `<div class="neighborhood-swatch" style="background:${nb.color}"></div>` +
@@ -1398,44 +1365,41 @@ function renderList() {
 }
 
 function renderCard(s) {
-  const days  = s.isOngoing ? null : daysUntil(s.closing);
+  const days   = s.isOngoing ? null : daysUntil(s.closing);
   const urgent = !s.isOngoing && days !== null && days <= 7;
-  const saved = savedIds.has(s.id);
-  const seen  = seenIds.has(s.id);
+  const saved  = savedIds.has(s.id);
+  const seen   = seenIds.has(s.id);
 
   const topBadge = urgent
     ? '<div class="urgent-badge">Closing Soon</div>'
     : s.isOngoing ? '<div class="ongoing-badge">Ongoing</div>' : '';
 
-  const closingTag = s.isOngoing || !s.closing ? '' :
-    `<div class="closing-tag">` +
-      `<span class="closing-label">closes</span>` +
-      `<span class="closing-date">${fmtDate(s.closing)}</span>` +
-    `</div>`;
-
-  const thumbHtml = s.thumb
-    ? `<div class="card-thumb">` +
-        `<img src="${s.thumb}" alt="${s.artist}" loading="lazy"` +
-          ` onload="if(this.naturalWidth&&this.naturalHeight&&this.naturalWidth/this.naturalHeight>3)this.parentElement.style.display='none'"` +
-          ` onerror="this.parentElement.style.display='none'">` +
-        `<div class="seen-overlay"><span class="seen-check">✓</span></div>` +
-      `</div>`
+  const imgHtml = s.thumb
+    ? `<img src="${s.thumb}" alt="${s.artist}" loading="lazy" onerror="this.style.display='none'">`
     : '';
+
+  let closeHtml = '';
+  if (!s.isOngoing && s.closing) {
+    closeHtml =
+      `<div class="card-close-wrap">` +
+        `<span class="card-close-label">closes</span>` +
+        `<span class="card-close-date">${fmtDate(s.closing)}</span>` +
+      `</div>`;
+  }
 
   return (
     `<div class="show-card ${urgent?'closing-soon':''} ${saved?'is-saved':''} ${seen?'is-seen':''}"` +
-        ` id="card-${s.id}" onclick="openDetail('${s.id}')">` +
-      thumbHtml +
-      `<div class="card-body">` +
-        `<div>` +
-          topBadge +
-          `<div class="artist-name">${s.artist}</div>` +
-          `<div class="show-title">${s.title}</div>` +
-          `<div class="gallery-name">${s.gallery}</div>` +
-        `</div>` +
-        `<div class="card-bottom">` +
-          `<div class="address">${s.address}</div>` +
-          closingTag +
+        ` onclick="openDetail('${s.id}')">` +
+      imgHtml +
+      `<div class="card-overlay"></div>` +
+      `<div class="seen-overlay">✓</div>` +
+      `<div class="card-text">` +
+        topBadge +
+        `<div class="card-artist">${s.artist}</div>` +
+        `<div class="card-show-title">${s.title}</div>` +
+        `<div class="card-meta">` +
+          `<div class="card-gallery">${s.gallery}</div>` +
+          closeHtml +
         `</div>` +
       `</div>` +
       `<button class="save-btn ${saved?'saved':''}"` +
@@ -1469,25 +1433,27 @@ function renderWalkList() {
   const countEl   = document.getElementById('walkSheetCount');
 
   if (savedIds.size === 0) {
-    container.innerHTML = '<div class="walk-no-saves"><strong>No shows saved</strong>Switch to Plan mode and tap ◇ on shows you want to visit.</div>';
-    countEl.textContent = '';
+    container.innerHTML = '<div class="walk-no-saves"><strong>No shows saved</strong>Switch to Plan mode and tap ◇ to add shows to your visit.</div>';
+    if (countEl) countEl.textContent = '';
     return;
   }
 
   const saved  = SHOWS.filter(s => savedIds.has(s.id));
   const unseen = saved.filter(s => !seenIds.has(s.id));
   const seen   = saved.filter(s =>  seenIds.has(s.id));
-  countEl.textContent = `${unseen.length} remaining`;
+  if (countEl) countEl.textContent = `${unseen.length} remaining`;
 
   container.innerHTML = [...unseen, ...seen].map(s => {
-    const nb = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
     const isSeen = seenIds.has(s.id);
+    const thumbHtml = s.thumb
+      ? `<img src="${s.thumb}" alt="${s.artist}" loading="lazy">`
+      : '';
     return (
       `<div class="walk-card ${isSeen?'is-seen':''}" onclick="openDetail('${s.id}')">` +
-        `<div class="walk-card-dot" style="background:${nb.color};${isSeen?'opacity:0.3':''}"></div>` +
+        `<div class="walk-thumb">${thumbHtml}</div>` +
         `<div class="walk-card-info">` +
           `<div class="walk-artist">${s.artist}</div>` +
-          `<div class="walk-gallery">${s.gallery} · ${s.neighborhood}</div>` +
+          `<div class="walk-meta">${s.gallery} · ${s.neighborhood}</div>` +
         `</div>` +
         `<button class="seen-btn ${isSeen?'is-seen':''}"` +
                 ` onclick="event.stopPropagation();toggleSeen('${s.id}')">` +
@@ -1510,7 +1476,7 @@ function initOrUpdateWalkMap() {
       navigator.geolocation.getCurrentPosition(pos => {
         const youIcon = L.divIcon({html:'<div class="you-are-here"></div>', iconSize:[16,16], iconAnchor:[8,8], className:''});
         L.marker([pos.coords.latitude, pos.coords.longitude], {icon:youIcon}).addTo(walkMap)
-          .bindPopup('<div class="pin-popup"><div class="pin-popup-artist">You are here</div></div>');
+          .bindPopup('<div class="pin-popup"><div class="pin-popup-body"><div class="pin-popup-artist">You are here</div></div></div>');
       });
     }
   }
@@ -1518,7 +1484,8 @@ function initOrUpdateWalkMap() {
 }
 
 function makePinIcon(color, faded) {
-  const svg = `<svg width="28" height="36" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" style="opacity:${faded?0.3:1}">` +
+  const svg =
+    `<svg width="28" height="36" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" style="opacity:${faded?0.3:1}">` +
     `<path d="M14 0C6.268 0 0 6.268 0 14c0 9.333 14 22 14 22S28 23.333 28 14C28 6.268 21.732 0 14 0z" fill="${color}"/>` +
     `<circle cx="14" cy="14" r="6" fill="white" opacity="0.9"/>` +
     `</svg>`;
@@ -1541,13 +1508,21 @@ function updateWalkMarkers() {
       ? 'Ongoing'
       : `Closes ${fmtDate(s.closing)}${urgent ? ' — ' + days + (days===1?' day':' days') + ' left' : ''}`;
 
+    const imgHtml = s.thumb
+      ? `<img class="pin-popup-img" src="${s.thumb}" alt="${s.artist}">`
+      : '';
+
     const marker = L.marker([s.lat, s.lng], {icon:makePinIcon(color, isSeen)})
       .addTo(walkMap)
       .bindPopup(
         `<div class="pin-popup">` +
-          `<div class="pin-popup-artist">${s.artist}</div>` +
-          `<div class="pin-popup-gallery">${s.title} · ${s.gallery}</div>` +
-          `<div class="pin-popup-closing ${urgent?'urgent':''}">${closingLine}</div>` +
+          imgHtml +
+          `<div class="pin-popup-body">` +
+            `<div class="pin-popup-artist">${s.artist}</div>` +
+            `<div class="pin-popup-show">${s.title}</div>` +
+            `<div class="pin-popup-gallery">${s.gallery}</div>` +
+            `<div class="pin-popup-closing ${urgent?'urgent':''}">${closingLine}</div>` +
+          `</div>` +
         `</div>`
       );
     marker.on('click', () => marker.openPopup());
@@ -1562,8 +1537,8 @@ function updateWalkMarkers() {
 function openDetail(id) {
   const s = SHOWS.find(x => x.id === id);
   if (!s) return;
-  const nb    = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
-  const days  = s.isOngoing ? null : daysUntil(s.closing);
+  const nb     = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
+  const days   = s.isOngoing ? null : daysUntil(s.closing);
   const urgent = !s.isOngoing && days !== null && days <= 7;
   const isSaved = savedIds.has(s.id);
   const isSeen  = seenIds.has(s.id);
@@ -1599,7 +1574,7 @@ function openDetail(id) {
 
   let websiteHtml = '';
   if (s.website) {
-    const url = s.website.startsWith('http') ? s.website : 'https://' + s.website;
+    const url   = s.website.startsWith('http') ? s.website : 'https://' + s.website;
     const label = s.website.replace(/^https?:\/\//, '');
     websiteHtml = `<div class="detail-meta-label">Website</div><div class="detail-meta-value"><a href="${url}" target="_blank">${label}</a></div>`;
   }
