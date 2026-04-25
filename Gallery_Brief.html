@@ -1,1012 +1,1643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>NYC Photo Galleries · April 18, 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NYC Galleries · April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --ink:        #0e0e10;
+  --paper:      #f6f4f0;
+  --paper-dark: #ece8e1;
+  --rule:       #cec9c0;
+  --accent:     #c02818;
+  --accent-soft: #f9ecea;
+  --muted:      #80796f;
+  --saved:      #1c5c38;
+  --saved-soft: #e6f2ec;
+  --seen:       #9a9490;
+  --mode-walk:  #1a3a5c;
+}
 
-    body {
-      font-family: "Montserrat", sans-serif;
-      background: #E8E8E8;
-      color: #1D1D1F;
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
-    }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 
-    header {
-      background: #423E28;
-      color: white;
-      padding: 18px 16px 14px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    header h1 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: 1.5px;
-    }
-    header .subtitle {
-      font-family: "Montserrat", sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      opacity: 0.65;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-top: 3px;
-    }
+html, body {
+  height: 100%;
+  font-family: 'Spectral', serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
 
-    main { padding: 12px 12px 40px; max-width: 540px; margin: 0 auto; }
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
 
-    /* ── Closing Soon ── */
-    .alert-section { margin-bottom: 12px; }
-    .alert-header {
-      background: #C00000;
-      color: white;
-      padding: 10px 14px;
-      display: flex; align-items: baseline; gap: 12px;
-    }
-    .alert-title {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 22px; font-weight: 400; letter-spacing: 1px;
-    }
-    .alert-sub { font-family: "Montserrat", sans-serif; font-size: 11px; font-weight: 500; opacity: 0.85; }
+.site-header {
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px 16px 0;
+  z-index: 100;
+}
 
-    /* ── Neighborhood sections ── */
-    .nbhd-section { margin-bottom: 12px; }
-    .nbhd-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px;
-    }
-    .nbhd-name  {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 22px; font-weight: 400; letter-spacing: 1px;
-    }
-    .nbhd-count {
-      font-family: "Montserrat", sans-serif;
-      font-size: 11px; font-weight: 500; opacity: 0.70;
-    }
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 
-    /* ── Also section ── */
-    .also-section { margin-top: 16px; }
-    .also-header {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 20px; font-weight: 400; letter-spacing: 1px; color: #999;
-      padding: 0 2px 8px;
-      border-bottom: 1px solid #CCC;
-      margin-bottom: 10px;
-    }
-    .also-sub {
-      font-family: "Montserrat", sans-serif;
-      font-size: 12px; font-weight: 400; color: #999; margin-bottom: 10px;
-    }
-    .also-section .card { opacity: 0.78; }
+.site-header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  letter-spacing: 0.04em;
+  line-height: 0.88;
+  color: #fff;
+}
 
-    /* ── Cards ── */
-    .card {
-      background: white;
-      border-radius: 0;
-      padding: 14px 14px 12px;
-      margin-bottom: 2px;
-      box-shadow: none;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .card.compact { }
-    .card-body {
-      flex: 1;
-      min-width: 0;
-    }
+.site-header .tagline {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
 
-    .card-header {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 5px; flex-wrap: wrap;
-    }
-    .venue-name { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 14px; color: #1D1D1F; }
+.mode-toggle {
+  display: flex;
+  border: 1px solid #2e2e2e;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
 
-    .type-tag {
-      font-family: "Montserrat", sans-serif;
-      font-size: 9px; font-weight: 700;
-      padding: 2px 7px; border-radius: 2px;
-      text-transform: uppercase; letter-spacing: 0.8px;
-    }
-    .type-tag.museum { background: #423E28; color: white; }
-    .type-tag.gallery { background: #E8E8E8; color: #555; }
+.mode-btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #555;
+  transition: all 0.2s ease;
+}
 
-    .show-name { font-size: 14px; font-weight: 500; font-style: italic; color: #1D1D1F; margin-bottom: 2px; }
-    .artists   { font-size: 12px; font-weight: 400; color: #555; margin-bottom: 6px; }
-    .no-show   { font-size: 12px; font-weight: 400; color: #999; font-style: italic; margin-bottom: 6px; }
+.mode-btn + .mode-btn { border-left: 1px solid #2e2e2e; }
+.mode-btn.active[data-mode="plan"] { background: var(--paper); color: var(--ink); }
+.mode-btn.active[data-mode="walk"] { background: var(--mode-walk); color: #fff; }
 
-    .closing-line { margin-bottom: 8px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; color: #555; }
+.mode-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0 10px;
+  border-top: 1px solid #1e1e1e;
+  margin-top: 12px;
+}
 
-    /* ── Badges ── */
-    .badge {
-      display: inline-block;
-      font-family: "Montserrat", sans-serif;
-      font-size: 10px; font-weight: 700;
-      letter-spacing: 0.3px;
-      padding: 2px 8px; border-radius: 2px;
-    }
-    .badge.urgent  { background: #FFE0E0; color: #C00000; }
-    .badge.soon    { background: #FFF0D0; color: #9C5700; }
-    .badge.ok      { background: #DCEEDD; color: #2E7D32; }
-    .badge.ongoing { background: #DCEEDD; color: #50723C; }
-    .badge.closed  { background: #F0F0F0; color: #888; }
+.mode-bar .mode-label {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12px;
+  color: #999;
+}
+.mode-bar .mode-hint {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 12px;
+  color: #555;
+}
+.mode-bar .saved-count {
+  margin-left: auto;
+  font-family: 'Spectral', serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6dbf8a;
+}
 
-    .meta { margin-top: 4px; }
-    .addr-link {
-      display: block;
-      font-size: 12px; font-weight: 500; color: #50723C;
-      text-decoration: none; margin-bottom: 2px;
-    }
-    .addr-link:hover { text-decoration: underline; }
-    .hours { font-size: 12px; font-weight: 400; color: #666; }
+.filter-bar {
+  display: flex;
+  gap: 5px;
+  padding: 8px 14px;
+  overflow-x: auto;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
 
-    .website-link {
-      display: inline-block; margin-top: 8px;
-      font-size: 11px; font-weight: 600; color: #50723C;
-      text-decoration: none; letter-spacing: 0.3px;
-      border-bottom: 1px solid #86DEB7;
-    }
+.filter-chip {
+  flex-shrink: 0;
+  padding: 4px 11px;
+  border: 1px solid var(--rule);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 1px;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.filter-chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-chip.closing-chip.active { background: var(--accent); border-color: var(--accent); }
+.filter-chip.saved-chip.active { background: var(--saved); border-color: var(--saved); }
 
-    .nbhd-label {
-      font-family: "Montserrat", sans-serif;
-      font-size: 10px; font-weight: 600; color: #999;
-      text-transform: uppercase; letter-spacing: 0.7px;
-      margin-bottom: 4px;
-    }
+.scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 
-    /* ── Show images ── */
-    .card-image {
-      flex-shrink: 0;
-      width: 88px;
-      height: 88px;
-      background: white;
-      border: 1px solid #E8E8E8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
+.neighborhood-header {
+  display: flex;
+  align-items: stretch;
+  background: var(--paper-dark);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
 
-    /* ── Substack suggestions ── */
-    .suggestions-section { margin-bottom: 12px; }
-    .suggestions-title {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 22px; font-weight: 400; letter-spacing: 1px;
-      color: #50723C; margin-bottom: 6px;
-    }
-    .suggestion-card {
-      background: #F0FAF5;
-      border-left: 4px solid #63B995;
-      border-radius: 0;
-      padding: 14px 14px 12px;
-      margin-bottom: 2px;
-    }
-    .suggestion-closes { font-size: 13px; color: #555; margin-bottom: 4px; }
-    .suggestion-meta   { font-size: 11px; color: #888; margin-top: 6px; }
+.neighborhood-swatch { width: 5px; flex-shrink: 0; }
 
-    footer {
-      text-align: center;
-      font-family: "Montserrat", sans-serif;
-      font-size: 11px; font-weight: 400; color: #aaa;
-      margin-top: 32px; padding-bottom: 20px;
-    }
-  </style>
+.neighborhood-inner {
+  flex: 1;
+  padding: 10px 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.neighborhood-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  flex: 1;
+  color: var(--ink);
+}
+
+.neighborhood-count {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--muted);
+  align-self: center;
+}
+
+.show-card {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.15s;
+  min-height: 88px;
+}
+.show-card:active { background: var(--paper-dark); }
+
+.show-card.closing-soon { background: #fdf7f6; }
+.show-card.closing-soon::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.show-card.is-saved { background: #f4fbf7; }
+.show-card.is-saved::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--saved);
+}
+
+.show-card.closing-soon.is-saved::before {
+  background: linear-gradient(to bottom, var(--accent) 50%, var(--saved) 50%);
+}
+
+.card-thumb {
+  width: 88px; height: 88px;
+  flex-shrink: 0;
+  background: var(--paper-dark);
+  overflow: hidden;
+  position: relative;
+  align-self: center;
+}
+.card-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.seen-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(246,244,240,0.78);
+  align-items: center;
+  justify-content: center;
+}
+.show-card.is-seen .seen-overlay { display: flex; }
+.seen-check { font-size: 20px; color: var(--seen); }
+
+.card-body {
+  flex: 1;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.urgent-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 1px 7px;
+  margin-bottom: 2px;
+}
+
+.ongoing-badge {
+  display: inline-block;
+  background: #e6f4ec;
+  color: #1c5c38;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 1px 7px;
+  margin-bottom: 2px;
+}
+
+.artist-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+.show-card.is-seen .artist-name { color: var(--seen); }
+
+.show-title {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gallery-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  opacity: 0.65;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.show-card.is-seen .gallery-name { color: var(--seen); opacity: 1; }
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 6px;
+}
+
+.address {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.closing-tag { text-align: right; flex-shrink: 0; margin-left: 8px; }
+
+.closing-label {
+  display: block;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.closing-date {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.closing-soon .closing-label { color: var(--accent); }
+.closing-soon .closing-date { color: var(--accent); }
+
+.save-btn {
+  position: absolute;
+  right: 10px; top: 10px;
+  width: 27px; height: 27px;
+  border: 1.5px solid var(--rule);
+  background: var(--paper);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.save-btn.saved { background: var(--saved); border-color: var(--saved); color: #fff; }
+
+#walkMode {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+#walkMode.active { display: flex; }
+
+#walkMap { flex: 1; z-index: 1; }
+
+.walk-sheet {
+  background: var(--ink);
+  color: var(--paper);
+  flex-shrink: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.walk-sheet-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.walk-sheet-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: #777;
+}
+
+.walk-sheet-count {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #6dbf8a;
+}
+
+.walk-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #1a1a1a;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.walk-card:active { background: #1a1a1a; }
+.walk-card.is-seen { opacity: 0.4; }
+
+.walk-card-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.walk-card-info { flex: 1; min-width: 0; }
+
+.walk-artist {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--paper);
+  line-height: 1.1;
+}
+.walk-card.is-seen .walk-artist { color: #555; }
+
+.walk-gallery {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11px;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.seen-btn {
+  flex-shrink: 0;
+  border: 1.5px solid #2a2a2a;
+  background: transparent;
+  color: #555;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  padding: 4px 9px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.seen-btn.is-seen { border-color: #2a2a2a; color: #333; text-decoration: line-through; }
+
+.walk-no-saves {
+  padding: 24px 20px;
+  text-align: center;
+  color: #444;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.walk-no-saves strong {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: #666;
+  margin-bottom: 6px;
+  font-weight: normal;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  border-radius: 2px !important;
+  padding: 0 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.45) !important;
+}
+.leaflet-popup-tip { background: var(--ink) !important; }
+.leaflet-popup-content { margin: 0 !important; width: 220px !important; }
+
+.pin-popup { padding: 12px 14px; }
+.pin-popup-artist {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: #fff;
+}
+.pin-popup-gallery {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11px;
+  color: #888;
+  margin-top: 2px;
+}
+.pin-popup-closing {
+  font-family: 'Spectral', serif;
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #1e1e1e;
+}
+.pin-popup-closing.urgent { color: #d97070; }
+
+#detailPage {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  z-index: 999;
+  overflow-y: auto;
+  max-width: 480px;
+  margin: 0 auto;
+}
+#detailPage.active {
+  display: block;
+  animation: slideUp 0.28s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.detail-back {
+  position: sticky;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border: none;
+  width: 100%;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+}
+
+.detail-hero {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--paper-dark);
+  overflow: hidden;
+}
+.detail-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+.detail-content { padding: 22px 16px 48px; }
+
+.detail-hood-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Spectral', serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.detail-hood-tag .swatch { width: 8px; height: 8px; border-radius: 50%; }
+
+.detail-artist {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+.detail-show-title {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.detail-divider { height: 1px; background: var(--rule); margin: 18px 0; }
+
+.detail-meta-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.detail-meta-value {
+  font-family: 'Spectral', serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.detail-meta-value.gallery {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  font-weight: normal;
+}
+.detail-meta-value a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.detail-closing-block {
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.detail-closing-block.urgent {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.detail-closing-block.ongoing {
+  border-color: #a8d5b8;
+  background: #e6f4ec;
+}
+
+.closing-info .label {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--muted);
+}
+.detail-closing-block.urgent .closing-info .label { color: var(--accent); }
+.detail-closing-block.ongoing .closing-info .label { color: #1c5c38; }
+
+.closing-info .date {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  line-height: 1;
+}
+.detail-closing-block.urgent .closing-info .date { color: var(--accent); }
+.detail-closing-block.ongoing .closing-info .date { color: #1c5c38; }
+
+.days-left {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+}
+.detail-closing-block.urgent .days-left { color: var(--accent); }
+
+.detail-actions { display: flex; gap: 10px; margin-top: 22px; }
+
+.detail-save-btn, .detail-seen-btn {
+  flex: 1;
+  padding: 13px;
+  border: 1.5px solid var(--rule);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  transition: all 0.2s;
+}
+.detail-save-btn.saved { background: var(--saved); border-color: var(--saved); color: white; }
+.detail-seen-btn.seen { background: var(--paper-dark); border-color: var(--rule); color: var(--seen); text-decoration: line-through; }
+
+.you-are-here {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #3a8fdd;
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px rgba(58,143,221,0.3);
+}
+.map-pin { cursor: pointer; }
+
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+</style>
 </head>
 <body>
-<header>
-  <h1>NYC Photo Galleries</h1>
-  <div class="subtitle">Week of April 18, 2026</div>
-</header>
-<main>
-  
-  
-<section class="alert-section">
-  <div class="alert-header">
-    <span class="alert-title">⚠ Closing Soon</span>
-    <span class="alert-sub">See these before they close</span>
-  </div>
-  
-<div class="card" data-closes="2026-04-18" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Chelsea</div>
-    <div class="card-header">
-      <span class="venue-name">Hauser &amp; Wirth</span>
-      <span class="type-tag gallery">Gallery</span>
+<div id="app">
+
+  <header class="site-header">
+    <div class="header-top">
+      <div>
+        <h1>NYC<br>Galleries</h1>
+        <p class="tagline">Current exhibitions — April 2026</p>
+      </div>
+      <div class="mode-toggle">
+        <button class="mode-btn active" data-mode="plan" onclick="setMode('plan')">Plan</button>
+        <button class="mode-btn" data-mode="walk" onclick="setMode('walk')">Walk</button>
+      </div>
     </div>
-    <div class="show-name">Louise Bourgeois: Gathering Wool; Felix Gonzalez-Torres; Qiu Xiaofei</div>
-    <div class="artists">Louise Bourgeois, Felix Gonzalez-Torres, Qiu Xiaofei</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 0d</span> Closes April 18</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=542+West+22nd+St,+NY+10011">542 West 22nd St, NY 10011</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
+    <div class="mode-bar" id="modeBar">
+      <span class="mode-label">Planning</span>
+      <span class="mode-hint">— add shows to your visit</span>
+      <span class="saved-count" id="savedCount"></span>
     </div>
-    <a class="website-link" href="https://hauserwirth.com" target="_blank">Visit website ↗</a>
+  </header>
+
+  <div id="planMode" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="scroll-body" id="listingPage"></div>
   </div>
-  <div class="card-image"><img src="https://media.hauserwirth.com/asset/96e139ae-cd2c-4e38-be15-13c502584174/thumbnail/webimage-MARSK143540-Photo-Joshua_White-jwpictures-com-4Q6A2319" alt="Louise Bourgeois: Gathering Wool; Felix Gonzalez-Torres; Qiu Xiaofei" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+
+  <div id="walkMode">
+    <div id="walkMap"></div>
+    <div class="walk-sheet" id="walkSheet">
+      <div class="walk-sheet-handle">
+        <span class="walk-sheet-title">Your Visit</span>
+        <span class="walk-sheet-count" id="walkSheetCount"></span>
+      </div>
+      <div id="walkList"></div>
+    </div>
+  </div>
+
 </div>
 
-<div class="card" data-closes="2026-04-19" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Upper East Side</div>
-    <div class="card-header">
-      <span class="venue-name">Museum of the City of NY</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Robert Rauschenberg&#x27;s New York</div>
-    <div class="artists">Robert Rauschenberg</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 1d</span> Closes April 19</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=1220+Fifth+Ave+at+103rd+St,+NY+10029">1220 Fifth Ave at 103rd St, NY 10029</a>
-      <div class="hours">Mon–Fri 10am–5pm; Sat–Sun 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://mcny.org" target="_blank">Visit website ↗</a>
-  </div>
-  
+<div id="detailPage">
+  <button class="detail-back" onclick="closeDetail()">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M9 2.5L4 7L9 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to listings
+  </button>
+  <div id="detailContent"></div>
 </div>
 
-<div class="card" data-closes="2026-04-25" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Chelsea</div>
-    <div class="card-header">
-      <span class="venue-name">Yossi Milo Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Linus Borgo: Into the Blue Again</div>
-    <div class="artists">Linus Borgo</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 7d</span> Closes April 25</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=245+Tenth+Ave,+NY+10001">245 Tenth Ave, NY 10001</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://yossimilo.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/196/into-the-blue-again-2026-east-gallery-6.jpg" alt="Linus Borgo: Into the Blue Again" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-04-26" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Chelsea</div>
-    <div class="card-header">
-      <span class="venue-name">Pace Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">The Photography Show presented by AIPAD</div>
-    <div class="artists">Multiple artists</div>
-    <div class="closing-line"><span class="badge soon">Closes in 8d</span> Closes April 26</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=540+West+25th+St,+NY+10001">540 West 25th St, NY 10001</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://pacegallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-04-26" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Upper West Side</div>
-    <div class="card-header">
-      <span class="venue-name">New-York Historical Society</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">The Photography Show presented by AIPAD</div>
-    <div class="artists">Multiple artists</div>
-    <div class="closing-line"><span class="badge soon">Closes in 8d</span> Closes April 26</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=170+Central+Park+West,+NY+10024">170 Central Park West, NY 10024</a>
-      <div class="hours">Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm</div>
-    </div>
-    <a class="website-link" href="https://nyhistory.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-05-02" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">Chelsea</div>
-    <div class="card-header">
-      <span class="venue-name">Sikkema Malloy Jenkins</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Wardell Milan: More Action! More Excitement!; KING COBRA: Heathens</div>
-    <div class="artists">Wardell Milan, KING COBRA</div>
-    <div class="closing-line"><span class="badge soon">Closes in 14d</span> Closes May 2</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=530+West+22nd+St,+NY+10011">530 West 22nd St, NY 10011</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://smjny.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/69b42ddb0cbe6a4eb9e6b2a9/1773417958684/Witness+no+1.jpg?format=1500w" alt="Wardell Milan: More Action! More Excitement!; KING COBRA: Heathens" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-05-02" style="border-left: 4px solid #C00000;">
-  <div class="card-body">
-    <div class="nbhd-label">SoHo</div>
-    <div class="card-header">
-      <span class="venue-name">Staley-Wise Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Helmut Newton x Steven Klein: On the Dark Side</div>
-    <div class="artists">Helmut Newton, Steven Klein</div>
-    <div class="closing-line"><span class="badge soon">Closes in 14d</span> Closes May 2</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=100+Crosby+St,+Suite+305,+NY+10012">100 Crosby St, Suite 305, NY 10012</a>
-      <div class="hours">Tue–Sat 11am–5pm</div>
-    </div>
-    <a class="website-link" href="https://staleywise.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://s3.amazonaws.com/files.collageplatform.com.prod/application/5be3258ca5aa2c1c768b4567/6cada4471738bd49aaa07dd8a0a364f9.png" alt="Helmut Newton x Steven Klein: On the Dark Side" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-</section>
-  
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#ADEEE3; color:#1D1D1F;">
-    <span class="nbhd-name">Chelsea</span>
-    <span class="nbhd-count">11 shows</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-22" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Yancey Richardson Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Forest of Stars</div>
-    <div class="artists">Sheida Soleimani</div>
-    <div class="closing-line"><span class="badge ok">Closes 34d</span> Closes May 22</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=525+West+22nd+St,+NY+10011">525 West 22nd St, NY 10011</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://yanceyrichardson.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://s3.amazonaws.com/files.collageplatform.com.prod/application/55f7ef8984184eba568b4568/9bfc97cfd4a417dcf7a906ffcc4f1585.png" alt="Forest of Stars" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-06-20" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Bruce Silverstein Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">CHESTER HIGGINS: SHARED MEMORIES</div>
-    <div class="artists">Chester Higgins</div>
-    <div class="closing-line"><span class="badge ok">Closes 63d</span> Closes June 20</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=529+West+20th+St,+4th+Floor,+NY+10011">529 West 20th St, 4th Floor, NY 10011</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://brucesilverstein.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/231/dmo-00080-sp.jpg" alt="CHESTER HIGGINS: SHARED MEMORIES" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-05-16" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Robert Mann Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Gold Standards: The Art of the Orotone</div>
-    <div class="artists"></div>
-    <div class="closing-line"><span class="badge ok">Closes 28d</span> Closes May 16</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=508+West+26th+St,+Suite+9F,+NY+10001">508 West 26th St, Suite 9F, NY 10001</a>
-      <div class="hours">Tue–Fri 10am–4pm; Sat 12–5pm</div>
-    </div>
-    <a class="website-link" href="https://robertmann.com" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-04-25" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Yossi Milo Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Linus Borgo: Into the Blue Again</div>
-    <div class="artists">Linus Borgo</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 7d</span> Closes April 25</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=245+Tenth+Ave,+NY+10001">245 Tenth Ave, NY 10001</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://yossimilo.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/196/into-the-blue-again-2026-east-gallery-6.jpg" alt="Linus Borgo: Into the Blue Again" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-05-23" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Benrubi Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Stella De Mont: This Life Wants You</div>
-    <div class="artists">Stella De Mont</div>
-    <div class="closing-line"><span class="badge ok">Closes 35d</span> Closes May 23</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=521+West+26th+St,+2nd+Floor,+NY+10011">521 West 26th St, 2nd Floor, NY 10011</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://benrubigallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="http://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/69a8650f28491125abec805a/1775145319184/cradled+%281%29.JPG?format=1500w" alt="Stella De Mont: This Life Wants You" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Soho Photo Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Member Exhibitions</div>
-    <div class="artists">Various</div>
-    <div class="closing-line"><span class="badge ongoing">Ongoing</span></div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=539+West+23rd+St,+NY+10011">539 West 23rd St, NY 10011</a>
-      <div class="hours">Wed 12–6pm; Thu 12–8pm; Fri–Sun 12–6pm</div>
-    </div>
-    <a class="website-link" href="https://sohophoto.com" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-04-26" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Pace Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">The Photography Show presented by AIPAD</div>
-    <div class="artists">Multiple artists</div>
-    <div class="closing-line"><span class="badge soon">Closes in 8d</span> Closes April 26</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=540+West+25th+St,+NY+10001">540 West 25th St, NY 10001</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://pacegallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-05-02" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Sikkema Malloy Jenkins</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Wardell Milan: More Action! More Excitement!; KING COBRA: Heathens</div>
-    <div class="artists">Wardell Milan, KING COBRA</div>
-    <div class="closing-line"><span class="badge soon">Closes in 14d</span> Closes May 2</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=530+West+22nd+St,+NY+10011">530 West 22nd St, NY 10011</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://smjny.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/69b42ddb0cbe6a4eb9e6b2a9/1773417958684/Witness+no+1.jpg?format=1500w" alt="Wardell Milan: More Action! More Excitement!; KING COBRA: Heathens" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Gagosian Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Jasper Johns: Between the Clock and the Bed</div>
-    <div class="artists">Jasper Johns</div>
-    
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=555+West+24th+St,+NY+10011">555 West 24th St, NY 10011</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://gagosian.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://gagosian.com/media/images/exhibitions/2026/jasper-johns-between-the-clock-and-the-bed/MLgG3EHk7QTx_1200x1200.jpg" alt="Jasper Johns: Between the Clock and the Bed" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-04-18" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Hauser &amp; Wirth</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Louise Bourgeois: Gathering Wool; Felix Gonzalez-Torres; Qiu Xiaofei</div>
-    <div class="artists">Louise Bourgeois, Felix Gonzalez-Torres, Qiu Xiaofei</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 0d</span> Closes April 18</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=542+West+22nd+St,+NY+10011">542 West 22nd St, NY 10011</a>
-      <div class="hours">Tue–Sat 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://hauserwirth.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://media.hauserwirth.com/asset/96e139ae-cd2c-4e38-be15-13c502584174/thumbnail/webimage-MARSK143540-Photo-Joshua_White-jwpictures-com-4Q6A2319" alt="Louise Bourgeois: Gathering Wool; Felix Gonzalez-Torres; Qiu Xiaofei" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-05-21" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Agora Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Florals for Spring, Groundbreaking!</div>
-    <div class="artists"></div>
-    <div class="closing-line"><span class="badge ok">Closes 33d</span> Closes May 21</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=530+West+25th+St,+NY+10001">530 West 25th St, NY 10001</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://agora-gallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://agora-gallery.com/wp-content/uploads/2025/06/aae69109-1eb4-470e-a9b8-119aa36864e3-l-550x413.jpg" alt="Florals for Spring, Groundbreaking!" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#86DEB7; color:#1D1D1F;">
-    <span class="nbhd-name">Midtown</span>
-    <span class="nbhd-count">3 shows</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-09" style="border-left: 4px solid #86DEB7;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Howard Greenberg Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Sabiha Çimen and Mary Ellen Mark: The Girls</div>
-    <div class="artists">Sabiha Çimen, Mary Ellen Mark</div>
-    <div class="closing-line"><span class="badge ok">Closes 21d</span> Closes May 9</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=41+East+57th+St,+Suite+801,+NY+10022">41 East 57th St, Suite 801, NY 10022</a>
-      <div class="hours">Tue–Fri 10am–6pm; Sat 11am–5pm</div>
-    </div>
-    <a class="website-link" href="https://howardgreenberg.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/197/pf156497.jpg" alt="Sabiha Çimen and Mary Ellen Mark: The Girls" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-06-06" style="border-left: 4px solid #86DEB7;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Edwynn Houk Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Sebastiaan Bremer: Super Modern Things</div>
-    <div class="artists">Sebastiaan Bremer</div>
-    <div class="closing-line"><span class="badge ok">Closes 49d</span> Closes June 6</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=693+Fifth+Ave,+6th+Floor,+NY+10022">693 Fifth Ave, 6th Floor, NY 10022</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://houkgallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/141/3505-asb-1902-image.jpg" alt="Sebastiaan Bremer: Super Modern Things" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-07-25" style="border-left: 4px solid #86DEB7;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">MoMA</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Ideas of Africa: Portraiture and Political Imagination</div>
-    <div class="artists">Keïta, Sidibé, Sory, Fosso &amp; others</div>
-    <div class="closing-line"><span class="badge ok">Closes 98d</span> Closes July 25</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=11+West+53rd+St,+NY+10019">11 West 53rd St, NY 10019</a>
-      <div class="hours">Daily 10:30am–5:30pm (Sat until 7pm)</div>
-    </div>
-    <a class="website-link" href="https://moma.org" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://www.moma.org/d/assets/W1siZiIsIjIwMjQvMDkvMTYvOTViMnltd3RycF8wMV9TYW5sZV9Tb3J5X1RyYXZlbGxlcl9MZV9Wb3lhZ2V1cl9fMTk3MF84NS5qcGciXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgOTAgLXJlc2l6ZSAyMDAweDIwMDBcdTAwM2UiXV0/01_Sanle-Sory_Traveller-%28Le-Voyageur%29_1970-85.jpg?sha=583923b83ea69615" alt="Ideas of Africa: Portraiture and Political Imagination" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#63B995; color:#1D1D1F;">
-    <span class="nbhd-name">Upper East Side</span>
-    <span class="nbhd-count">4 shows</span>
-  </div>
-  
-<div class="card" data-closes="2026-06-06" style="border-left: 4px solid #63B995;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Gitterman Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Ruth Thorne-Thomsen</div>
-    <div class="artists">Ruth Thorne-Thomsen</div>
-    <div class="closing-line"><span class="badge ok">Closes 49d</span> Closes June 6</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=3+East+66th+St,+1B,+NY+10065">3 East 66th St, 1B, NY 10065</a>
-      <div class="hours">Mon–Sat 11am–6pm</div>
-    </div>
-    <a class="website-link" href="https://gittermangallery.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://www.gittermangallery.com/images/26685_h500w500gt.5.jpg" alt="Ruth Thorne-Thomsen" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-05-03" style="border-left: 4px solid #63B995;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Metropolitan Museum of Art</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">View Finding: Selections from The Walther Collection</div>
-    <div class="artists">Various</div>
-    <div class="closing-line"><span class="badge ok">Closes 15d</span> Closes May 3</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=1000+Fifth+Ave+at+82nd+St,+NY+10028">1000 Fifth Ave at 82nd St, NY 10028</a>
-      <div class="hours">Sun–Thu 10am–5pm; Fri–Sat 10am–9pm</div>
-    </div>
-    <a class="website-link" href="https://metmuseum.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" data-closes="2026-05-03" style="border-left: 4px solid #63B995;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Guggenheim Museum</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Carol Bove; Gabriele Münter; Robert Rauschenberg</div>
-    <div class="artists">Carol Bove, Gabriele Münter, Robert Rauschenberg</div>
-    <div class="closing-line"><span class="badge ok">Closes 15d</span> Closes May 3</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=1071+Fifth+Ave+at+86th+St,+NY+10128">1071 Fifth Ave at 86th St, NY 10128</a>
-      <div class="hours">Daily 10:30am–5:30pm</div>
-    </div>
-    <a class="website-link" href="https://guggenheim.org" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://www.guggenheim.org/wp-content/uploads/2026/03/Carol-Bove-exh_ph044_HorizontalCropped-scaled.jpg" alt="Carol Bove; Gabriele Münter; Robert Rauschenberg" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-04-19" style="border-left: 4px solid #63B995;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Museum of the City of NY</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Robert Rauschenberg&#x27;s New York</div>
-    <div class="artists">Robert Rauschenberg</div>
-    <div class="closing-line"><span class="badge urgent">Closes in 1d</span> Closes April 19</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=1220+Fifth+Ave+at+103rd+St,+NY+10029">1220 Fifth Ave at 103rd St, NY 10029</a>
-      <div class="hours">Mon–Fri 10am–5pm; Sat–Sun 10am–6pm</div>
-    </div>
-    <a class="website-link" href="https://mcny.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#50723C; color:#FFFFFF;">
-    <span class="nbhd-name">Lower East Side</span>
-    <span class="nbhd-count">3 shows</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-04" style="border-left: 4px solid #50723C;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Intl. Center of Photography</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Eugene Atget: Making of a Reputation; HARD COPY NEW YORK</div>
-    <div class="artists">Multiple artists</div>
-    <div class="closing-line"><span class="badge ok">Closes 16d</span> Closes May 4</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=84+Ludlow+St,+NY+10002">84 Ludlow St, NY 10002</a>
-      <div class="hours">Daily 10:30am–6:30pm (Thu until 8pm)</div>
-    </div>
-    <a class="website-link" href="https://icp.org" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://www.icp.org/sites/default/files/styles/page_top_banner_styles/public/2025-10/101525_Bascom_9N4A0526.jpeg.webp?itok=pPrsu_83" alt="Eugene Atget: Making of a Reputation; HARD COPY NEW YORK" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-06-03" style="border-left: 4px solid #50723C;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">BAXTER ST at Camera Club NY</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">On Broken Ground; Glue Traps</div>
-    <div class="artists">Hannah Smith Allen</div>
-    <div class="closing-line"><span class="badge ok">Closes 46d</span> Closes June 3</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=154+Ludlow+St,+NY+10002">154 Ludlow St, NY 10002</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://baxterst.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-
-<div class="card" style="border-left: 4px solid #50723C;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">New Museum</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">New Humans: Memories of the Future</div>
-    <div class="artists">Multiple artists</div>
-    
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=235+Bowery,+NY+10002">235 Bowery, NY 10002</a>
-      <div class="hours">Tue–Sun 11am–6pm (Thu until 9pm)</div>
-    </div>
-    <a class="website-link" href="https://newmuseum.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#423E28; color:#FFFFFF;">
-    <span class="nbhd-name">SoHo</span>
-    <span class="nbhd-count">1 show</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-02" style="border-left: 4px solid #423E28;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Staley-Wise Gallery</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Helmut Newton x Steven Klein: On the Dark Side</div>
-    <div class="artists">Helmut Newton, Steven Klein</div>
-    <div class="closing-line"><span class="badge soon">Closes in 14d</span> Closes May 2</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=100+Crosby+St,+Suite+305,+NY+10012">100 Crosby St, Suite 305, NY 10012</a>
-      <div class="hours">Tue–Sat 11am–5pm</div>
-    </div>
-    <a class="website-link" href="https://staleywise.com" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://s3.amazonaws.com/files.collageplatform.com.prod/application/5be3258ca5aa2c1c768b4567/6cada4471738bd49aaa07dd8a0a364f9.png" alt="Helmut Newton x Steven Klein: On the Dark Side" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#ADEEE3; color:#1D1D1F;">
-    <span class="nbhd-name">West Village</span>
-    <span class="nbhd-count">2 shows</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-09" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">White Columns</span>
-      <span class="type-tag gallery">Gallery</span>
-    </div>
-    <div class="show-name">Art (by) Dealers; Anthony Torrano: Concrete Spirit</div>
-    <div class="artists">Anthony Torrano, Various</div>
-    <div class="closing-line"><span class="badge ok">Closes 21d</span> Closes May 9</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=91+Horatio+St,+NY+10014">91 Horatio St, NY 10014</a>
-      <div class="hours">Check website</div>
-    </div>
-    <a class="website-link" href="https://whitecolumns.org" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://whitecolumns.org/wp-content/uploads/exhibitions//MaryHeilmann_Cover-768x1014.jpeg" alt="Art (by) Dealers; Anthony Torrano: Concrete Spirit" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-
-<div class="card" data-closes="2026-08-23" style="border-left: 4px solid #ADEEE3;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Whitney Museum</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Whitney Biennial 2026</div>
-    <div class="artists">56 artists &amp; collectives</div>
-    <div class="closing-line"><span class="badge ok">Closes 127d</span> Closes August 23</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=99+Gansevoort+St,+NY+10014">99 Gansevoort St, NY 10014</a>
-      <div class="hours">Mon, Wed–Sun 10:30am–6pm; Fri until 10pm</div>
-    </div>
-    <a class="website-link" href="https://whitney.org" target="_blank">Visit website ↗</a>
-  </div>
-  <div class="card-image"><img src="https://whitneymedia.org/assets/image/833410/WMAA99949_BFA_53520_7759682_lpr.jpg" alt="Whitney Biennial 2026" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#63B995; color:#1D1D1F;">
-    <span class="nbhd-name">Upper West Side</span>
-    <span class="nbhd-count">1 show</span>
-  </div>
-  
-<div class="card" data-closes="2026-04-26" style="border-left: 4px solid #63B995;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">New-York Historical Society</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">The Photography Show presented by AIPAD</div>
-    <div class="artists">Multiple artists</div>
-    <div class="closing-line"><span class="badge soon">Closes in 8d</span> Closes April 26</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=170+Central+Park+West,+NY+10024">170 Central Park West, NY 10024</a>
-      <div class="hours">Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm</div>
-    </div>
-    <a class="website-link" href="https://nyhistory.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-</section>
-<section class="nbhd-section">
-  <div class="nbhd-header" style="background:#423E28; color:#FFFFFF;">
-    <span class="nbhd-name">Prospect Heights, Brooklyn</span>
-    <span class="nbhd-count">1 show</span>
-  </div>
-  
-<div class="card" data-closes="2026-05-17" style="border-left: 4px solid #423E28;">
-  <div class="card-body">
-    
-    <div class="card-header">
-      <span class="venue-name">Brooklyn Museum</span>
-      <span class="type-tag museum">Museum</span>
-    </div>
-    <div class="show-name">Seydou Keïta: A Tactile Lens</div>
-    <div class="artists">Seydou Keïta</div>
-    <div class="closing-line"><span class="badge ok">Closes 29d</span> Closes May 17</div>
-    <div class="meta">
-      <a class="addr-link" href="https://maps.apple.com/?address=200+Eastern+Pkwy,+Brooklyn,+NY+11238">200 Eastern Pkwy, Brooklyn, NY 11238</a>
-      <div class="hours">Wed–Sun 11am–6pm</div>
-    </div>
-    <a class="website-link" href="https://brooklynmuseum.org" target="_blank">Visit website ↗</a>
-  </div>
-  
-</div>
-</section>
-  
-<section class="also-section">
-  <div class="also-header">Also worth checking</div>
-  <p class="also-sub">No current show listed — check their websites for what's on</p>
-  
-<div class="card compact" style="border-left: 4px solid #ADEEE3;">
-  <div class="nbhd-label">Chelsea</div>
-  <div class="card-header">
-    <span class="venue-name">Hasted Kraeutler Gallery</span>
-    <span class="type-tag gallery">Gallery</span>
-  </div>
-  <div class="no-show">No current show listed — check website</div>
-  <div class="meta">
-    <a class="addr-link" href="https://maps.apple.com/?address=537+West+24th+St,+NY+10011">537 West 24th St, NY 10011</a>
-    <div class="hours">Tue–Sat 11am–6pm</div>
-  </div>
-  <a class="website-link" href="https://hastedkraeutler.com" target="_blank">Visit website ↗</a>
-</div>
-<div class="card compact" style="border-left: 4px solid #86DEB7;">
-  <div class="nbhd-label">Midtown</div>
-  <div class="card-header">
-    <span class="venue-name">The Morgan Library &amp; Museum</span>
-    <span class="type-tag museum">Museum</span>
-  </div>
-  <div class="no-show">No current show listed — check website</div>
-  <div class="meta">
-    <a class="addr-link" href="https://maps.apple.com/?address=225+Madison+Ave,+NY+10016">225 Madison Ave, NY 10016</a>
-    <div class="hours">Tue–Thu, Sat 10:30am–5pm; Fri until 7pm</div>
-  </div>
-  <a class="website-link" href="https://themorgan.org" target="_blank">Visit website ↗</a>
-</div>
-<div class="card compact" style="border-left: 4px solid #63B995;">
-  <div class="nbhd-label">Upper East Side</div>
-  <div class="card-header">
-    <span class="venue-name">Danziger Gallery</span>
-    <span class="type-tag gallery">Gallery</span>
-  </div>
-  <div class="no-show">No current show listed — check website</div>
-  <div class="meta">
-    <a class="addr-link" href="https://maps.apple.com/?address=952+5th+Ave,+NY+10075">952 5th Ave, NY 10075</a>
-    <div class="hours">By appointment</div>
-  </div>
-  <a class="website-link" href="https://danzigergallery.com" target="_blank">Visit website ↗</a>
-</div>
-<div class="card compact" style="border-left: 4px solid #86DEB7;">
-  <div class="nbhd-label">East Village</div>
-  <div class="card-header">
-    <span class="venue-name">Laurence Miller Gallery</span>
-    <span class="type-tag gallery">Gallery</span>
-  </div>
-  <div class="no-show">No current show listed — check website</div>
-  <div class="meta">
-    <a class="addr-link" href="https://maps.apple.com/?address=9+East+8th+St,+NY+10003">9 East 8th St, NY 10003</a>
-    <div class="hours">By appointment</div>
-  </div>
-  <a class="website-link" href="https://laurencemillergallery.com" target="_blank">Visit website ↗</a>
-</div>
-<div class="card compact" style="border-left: 4px solid #50723C;">
-  <div class="nbhd-label">DUMBO, Brooklyn</div>
-  <div class="card-header">
-    <span class="venue-name">Janet Borden, Inc.</span>
-    <span class="type-tag gallery">Gallery</span>
-  </div>
-  <div class="no-show">No current show listed — check website</div>
-  <div class="meta">
-    <a class="addr-link" href="https://maps.apple.com/?address=91+Water+St,+Brooklyn,+NY+11201">91 Water St, Brooklyn, NY 11201</a>
-    <div class="hours">Check website</div>
-  </div>
-  <a class="website-link" href="https://janetbordeninc.com" target="_blank">Visit website ↗</a>
-</div>
-</section>
-  <footer>Updated April 18, 2026 · Open NYC_Photography_Galleries.xlsx for full details</footer>
-</main>
 <script>
-// Hide any card whose show has already closed, based on today's date.
-(function() {
-  var today = new Date();
-  today.setHours(0, 0, 0, 0);
-  document.querySelectorAll('.card[data-closes]').forEach(function(card) {
-    var closes = new Date(card.dataset.closes + 'T00:00:00');
-    if (closes < today) {
-      card.style.display = 'none';
-    }
+const TODAY = new Date('2026-04-24');
+const NEIGHBORHOODS = {
+  "Chelsea": {
+    "color": "#344e8a"
+  },
+  "Midtown": {
+    "color": "#1a6a6a"
+  },
+  "Upper East Side": {
+    "color": "#5a3a7a"
+  },
+  "Lower East Side": {
+    "color": "#2d7a4a"
+  },
+  "SoHo": {
+    "color": "#6a3a5a"
+  },
+  "West Village": {
+    "color": "#4a5a1a"
+  },
+  "Upper West Side": {
+    "color": "#1a5c8a"
+  },
+  "Prospect Heights, Brooklyn": {
+    "color": "#6a3a1a"
+  }
+};
+const SHOWS = [
+  {
+    "id": "yancey-richardson-gallery",
+    "gallery": "Yancey Richardson Gallery",
+    "artist": "Sheida Soleimani",
+    "title": "Forest of Stars",
+    "neighborhood": "Chelsea",
+    "address": "525 West 22nd St, NY 10011",
+    "hours": "Tue–Sat 10am–6pm",
+    "website": "yanceyrichardson.com",
+    "closing": "2026-05-22",
+    "daysLeft": 28,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://s3.amazonaws.com/files.collageplatform.com.prod/application/55f7ef8984184eba568b4568/9bfc97cfd4a417dcf7a906ffcc4f1585.png",
+    "lat": 40.747597,
+    "lng": -74.005741
+  },
+  {
+    "id": "bruce-silverstein-gallery",
+    "gallery": "Bruce Silverstein Gallery",
+    "artist": "Chester Higgins",
+    "title": "CHESTER HIGGINS: SHARED MEMORIES",
+    "neighborhood": "Chelsea",
+    "address": "529 West 20th St, 4th Floor, NY 10011",
+    "hours": "Tue–Sat 10am–6pm",
+    "website": "brucesilverstein.com",
+    "closing": "2026-06-20",
+    "daysLeft": 57,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/231/dmo-00080-sp.jpg",
+    "lat": 40.746555,
+    "lng": -74.006961
+  },
+  {
+    "id": "robert-mann-gallery",
+    "gallery": "Robert Mann Gallery",
+    "artist": "Group Exhibition",
+    "title": "Gold Standards: The Art of the Orotone",
+    "neighborhood": "Chelsea",
+    "address": "508 West 26th St, Suite 9F, NY 10001",
+    "hours": "Tue–Fri 10am–4pm; Sat 12–5pm",
+    "website": "robertmann.com",
+    "closing": "2026-05-16",
+    "daysLeft": 22,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": null,
+    "lat": 40.74986,
+    "lng": -74.003657
+  },
+  {
+    "id": "yossi-milo-gallery",
+    "gallery": "Yossi Milo Gallery",
+    "artist": "Linus Borgo",
+    "title": "Linus Borgo: Into the Blue Again",
+    "neighborhood": "Chelsea",
+    "address": "245 Tenth Ave, NY 10001",
+    "hours": "Check website",
+    "website": "yossimilo.com",
+    "closing": "2026-04-25",
+    "daysLeft": 1,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/196/into-the-blue-again-2026-east-gallery-6.jpg",
+    "lat": 40.748748,
+    "lng": -74.00363
+  },
+  {
+    "id": "benrubi-gallery",
+    "gallery": "Benrubi Gallery",
+    "artist": "Stella De Mont",
+    "title": "Stella De Mont: This Life Wants You",
+    "neighborhood": "Chelsea",
+    "address": "521 West 26th St, 2nd Floor, NY 10011",
+    "hours": "Check website",
+    "website": "benrubigallery.com",
+    "closing": "2026-05-23",
+    "daysLeft": 29,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "http://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/69a8650f28491125abec805a/1775145319184/cradled+%281%29.JPG?format=1500w",
+    "lat": 40.75012,
+    "lng": -74.003769
+  },
+  {
+    "id": "soho-photo-gallery",
+    "gallery": "Soho Photo Gallery",
+    "artist": "Various",
+    "title": "Member Exhibitions",
+    "neighborhood": "Chelsea",
+    "address": "539 West 23rd St, NY 10011",
+    "hours": "Wed 12–6pm; Thu 12–8pm; Fri–Sun 12–6pm",
+    "website": "sohophoto.com",
+    "closing": null,
+    "daysLeft": null,
+    "isOngoing": true,
+    "isMuseum": false,
+    "thumb": null,
+    "lat": 40.748515,
+    "lng": -74.005697
+  },
+  {
+    "id": "pace-gallery",
+    "gallery": "Pace Gallery",
+    "artist": "Multiple artists",
+    "title": "The Photography Show presented by AIPAD",
+    "neighborhood": "Chelsea",
+    "address": "540 West 25th St, NY 10001",
+    "hours": "Tue–Sat 10am–6pm",
+    "website": "pacegallery.com",
+    "closing": "2026-04-26",
+    "daysLeft": 2,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": null,
+    "lat": 40.749586,
+    "lng": -74.004932
+  },
+  {
+    "id": "sikkema-malloy-jenkins",
+    "gallery": "Sikkema Malloy Jenkins",
+    "artist": "Wardell Milan, KING COBRA",
+    "title": "Wardell Milan: More Action! More Excitement!; KING COBRA: Heathens",
+    "neighborhood": "Chelsea",
+    "address": "530 West 22nd St, NY 10011",
+    "hours": "Check website",
+    "website": "smjny.com",
+    "closing": "2026-05-02",
+    "daysLeft": 8,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/69b42ddb0cbe6a4eb9e6b2a9/1773417958684/Witness+no+1.jpg?format=1500w",
+    "lat": 40.747512,
+    "lng": -74.006058
+  },
+  {
+    "id": "gagosian-gallery",
+    "gallery": "Gagosian Gallery",
+    "artist": "Jasper Johns",
+    "title": "Jasper Johns: Between the Clock and the Bed",
+    "neighborhood": "Chelsea",
+    "address": "555 West 24th St, NY 10011",
+    "hours": "Tue–Sat 10am–6pm",
+    "website": "gagosian.com",
+    "closing": null,
+    "daysLeft": null,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://gagosian.com/media/images/exhibitions/2026/jasper-johns-between-the-clock-and-the-bed/MLgG3EHk7QTx_1200x1200.jpg",
+    "lat": 40.749436,
+    "lng": -74.005964
+  },
+  {
+    "id": "hauser-wirth",
+    "gallery": "Hauser & Wirth",
+    "artist": "Louise Bourgeois, Felix Gonzalez-Torres, Qiu Xiaofei",
+    "title": "Louise Bourgeois: Gathering Wool; Felix Gonzalez-Torres; Qiu Xiaofei",
+    "neighborhood": "Chelsea",
+    "address": "542 West 22nd St, NY 10011",
+    "hours": "Tue–Sat 10am–6pm",
+    "website": "hauserwirth.com",
+    "closing": "2026-04-18",
+    "daysLeft": -6,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://media.hauserwirth.com/asset/96e139ae-cd2c-4e38-be15-13c502584174/thumbnail/webimage-MARSK143540-Photo-Joshua_White-jwpictures-com-4Q6A2319",
+    "lat": 40.747759,
+    "lng": -74.006643
+  },
+  {
+    "id": "agora-gallery",
+    "gallery": "Agora Gallery",
+    "artist": "Group Exhibition",
+    "title": "Florals for Spring, Groundbreaking!",
+    "neighborhood": "Chelsea",
+    "address": "530 West 25th St, NY 10001",
+    "hours": "Check website",
+    "website": "agora-gallery.com",
+    "closing": "2026-05-21",
+    "daysLeft": 27,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://agora-gallery.com/wp-content/uploads/2025/06/aae69109-1eb4-470e-a9b8-119aa36864e3-l-550x413.jpg",
+    "lat": 40.749451,
+    "lng": -74.004613
+  },
+  {
+    "id": "howard-greenberg-gallery",
+    "gallery": "Howard Greenberg Gallery",
+    "artist": "Sabiha Çimen, Mary Ellen Mark",
+    "title": "Sabiha Çimen and Mary Ellen Mark: The Girls",
+    "neighborhood": "Midtown",
+    "address": "41 East 57th St, Suite 801, NY 10022",
+    "hours": "Tue–Fri 10am–6pm; Sat 11am–5pm",
+    "website": "howardgreenberg.com",
+    "closing": "2026-05-09",
+    "daysLeft": 15,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/197/pf156497.jpg",
+    "lat": 40.762277,
+    "lng": -73.971902
+  },
+  {
+    "id": "edwynn-houk-gallery",
+    "gallery": "Edwynn Houk Gallery",
+    "artist": "Sebastiaan Bremer",
+    "title": "Sebastiaan Bremer: Super Modern Things",
+    "neighborhood": "Midtown",
+    "address": "693 Fifth Ave, 6th Floor, NY 10022",
+    "hours": "Check website",
+    "website": "houkgallery.com",
+    "closing": "2026-06-06",
+    "daysLeft": 43,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://static-assets.artlogic.net/w_1200,c_limit,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/141/3505-asb-1902-image.jpg",
+    "lat": 40.761221,
+    "lng": -73.975016
+  },
+  {
+    "id": "moma",
+    "gallery": "MoMA",
+    "artist": "Keïta, Sidibé, Sory, Fosso & others",
+    "title": "Ideas of Africa: Portraiture and Political Imagination",
+    "neighborhood": "Midtown",
+    "address": "11 West 53rd St, NY 10019",
+    "hours": "Daily 10:30am–5:30pm (Sat until 7pm)",
+    "website": "moma.org",
+    "closing": "2026-07-25",
+    "daysLeft": 92,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": "https://www.moma.org/d/assets/W1siZiIsIjIwMjQvMDkvMTYvOTViMnltd3RycF8wMV9TYW5sZV9Tb3J5X1RyYXZlbGxlcl9MZV9Wb3lhZ2V1cl9fMTk3MF84NS5qcGciXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgOTAgLXJlc2l6ZSAyMDAweDIwMDBcdTAwM2UiXV0/01_Sanle-Sory_Traveller-%28Le-Voyageur%29_1970-85.jpg?sha=583923b83ea69615",
+    "lat": 40.761086,
+    "lng": -73.977147
+  },
+  {
+    "id": "gitterman-gallery",
+    "gallery": "Gitterman Gallery",
+    "artist": "Ruth Thorne-Thomsen",
+    "title": "Ruth Thorne-Thomsen",
+    "neighborhood": "Upper East Side",
+    "address": "3 East 66th St, 1B, NY 10065",
+    "hours": "Mon–Sat 11am–6pm",
+    "website": "gittermangallery.com",
+    "closing": "2026-06-06",
+    "daysLeft": 43,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://www.gittermangallery.com/images/26685_h500w500gt.5.jpg",
+    "lat": 40.768485,
+    "lng": -73.969161
+  },
+  {
+    "id": "metropolitan-museum-of-art",
+    "gallery": "Metropolitan Museum of Art",
+    "artist": "Various",
+    "title": "View Finding: Selections from The Walther Collection",
+    "neighborhood": "Upper East Side",
+    "address": "1000 Fifth Ave at 82nd St, NY 10028",
+    "hours": "Sun–Thu 10am–5pm; Fri–Sat 10am–9pm",
+    "website": "metmuseum.org",
+    "closing": "2026-05-03",
+    "daysLeft": 9,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": null,
+    "lat": 40.778947,
+    "lng": -73.962298
+  },
+  {
+    "id": "guggenheim-museum",
+    "gallery": "Guggenheim Museum",
+    "artist": "Carol Bove, Gabriele Münter, Robert Rauschenberg",
+    "title": "Carol Bove; Gabriele Münter; Robert Rauschenberg",
+    "neighborhood": "Upper East Side",
+    "address": "1071 Fifth Ave at 86th St, NY 10128",
+    "hours": "Daily 10:30am–5:30pm",
+    "website": "guggenheim.org",
+    "closing": "2026-05-03",
+    "daysLeft": 9,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": "https://www.guggenheim.org/wp-content/uploads/2026/03/Carol-Bove-exh_ph044_HorizontalCropped-scaled.jpg",
+    "lat": 40.781534,
+    "lng": -73.960415
+  },
+  {
+    "id": "museum-of-the-city-of-ny",
+    "gallery": "Museum of the City of NY",
+    "artist": "Robert Rauschenberg",
+    "title": "Robert Rauschenberg's New York",
+    "neighborhood": "Upper East Side",
+    "address": "1220 Fifth Ave at 103rd St, NY 10029",
+    "hours": "Mon–Fri 10am–5pm; Sat–Sun 10am–6pm",
+    "website": "mcny.org",
+    "closing": "2026-04-19",
+    "daysLeft": -5,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": null,
+    "lat": 40.792347,
+    "lng": -73.952522
+  },
+  {
+    "id": "intl-center-of-photography",
+    "gallery": "Intl. Center of Photography",
+    "artist": "Multiple artists",
+    "title": "Eugene Atget: Making of a Reputation; HARD COPY NEW YORK",
+    "neighborhood": "Lower East Side",
+    "address": "84 Ludlow St, NY 10002",
+    "hours": "Daily 10:30am–6:30pm (Thu until 8pm)",
+    "website": "icp.org",
+    "closing": "2026-05-04",
+    "daysLeft": 10,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": "https://www.icp.org/sites/default/files/styles/page_top_banner_styles/public/2025-10/101525_Bascom_9N4A0526.jpeg.webp?itok=pPrsu_83",
+    "lat": 40.718164,
+    "lng": -73.989165
+  },
+  {
+    "id": "baxter-st-at-camera-club-ny",
+    "gallery": "BAXTER ST at Camera Club NY",
+    "artist": "Hannah Smith Allen",
+    "title": "On Broken Ground; Glue Traps",
+    "neighborhood": "Lower East Side",
+    "address": "154 Ludlow St, NY 10002",
+    "hours": "Check website",
+    "website": "baxterst.org",
+    "closing": "2026-06-03",
+    "daysLeft": 40,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": null,
+    "lat": 40.720919,
+    "lng": -73.987817
+  },
+  {
+    "id": "new-museum",
+    "gallery": "New Museum",
+    "artist": "Multiple artists",
+    "title": "New Humans: Memories of the Future",
+    "neighborhood": "Lower East Side",
+    "address": "235 Bowery, NY 10002",
+    "hours": "Tue–Sun 11am–6pm (Thu until 9pm)",
+    "website": "newmuseum.org",
+    "closing": null,
+    "daysLeft": null,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": null,
+    "lat": 40.722397,
+    "lng": -73.992993
+  },
+  {
+    "id": "staley-wise-gallery",
+    "gallery": "Staley-Wise Gallery",
+    "artist": "Helmut Newton, Steven Klein",
+    "title": "Helmut Newton x Steven Klein: On the Dark Side",
+    "neighborhood": "SoHo",
+    "address": "100 Crosby St, Suite 305, NY 10012",
+    "hours": "Tue–Sat 11am–5pm",
+    "website": "staleywise.com",
+    "closing": "2026-05-02",
+    "daysLeft": 8,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://s3.amazonaws.com/files.collageplatform.com.prod/application/5be3258ca5aa2c1c768b4567/6cada4471738bd49aaa07dd8a0a364f9.png",
+    "lat": 40.723696,
+    "lng": -73.997249
+  },
+  {
+    "id": "white-columns",
+    "gallery": "White Columns",
+    "artist": "Anthony Torrano, Various",
+    "title": "Art (by) Dealers; Anthony Torrano: Concrete Spirit",
+    "neighborhood": "West Village",
+    "address": "91 Horatio St, NY 10014",
+    "hours": "Check website",
+    "website": "whitecolumns.org",
+    "closing": "2026-05-09",
+    "daysLeft": 15,
+    "isOngoing": false,
+    "isMuseum": false,
+    "thumb": "https://whitecolumns.org/wp-content/uploads/exhibitions//MaryHeilmann_Cover-768x1014.jpeg",
+    "lat": 40.738854,
+    "lng": -74.008567
+  },
+  {
+    "id": "whitney-museum",
+    "gallery": "Whitney Museum",
+    "artist": "56 artists & collectives",
+    "title": "Whitney Biennial 2026",
+    "neighborhood": "West Village",
+    "address": "99 Gansevoort St, NY 10014",
+    "hours": "Mon, Wed–Sun 10:30am–6pm; Fri until 10pm",
+    "website": "whitney.org",
+    "closing": "2026-08-23",
+    "daysLeft": 121,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": "https://whitneymedia.org/assets/image/833410/WMAA99949_BFA_53520_7759682_lpr.jpg",
+    "lat": 40.7395,
+    "lng": -74.009373
+  },
+  {
+    "id": "new-york-historical-society",
+    "gallery": "New-York Historical Society",
+    "artist": "Multiple artists",
+    "title": "The Photography Show presented by AIPAD",
+    "neighborhood": "Upper West Side",
+    "address": "170 Central Park West, NY 10024",
+    "hours": "Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm",
+    "website": "nyhistory.org",
+    "closing": "2026-04-26",
+    "daysLeft": 2,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": null,
+    "lat": 40.779193,
+    "lng": -73.974009
+  },
+  {
+    "id": "brooklyn-museum",
+    "gallery": "Brooklyn Museum",
+    "artist": "Seydou Keïta",
+    "title": "Seydou Keïta: A Tactile Lens",
+    "neighborhood": "Prospect Heights, Brooklyn",
+    "address": "200 Eastern Pkwy, Brooklyn, NY 11238",
+    "hours": "Wed–Sun 11am–6pm",
+    "website": "brooklynmuseum.org",
+    "closing": "2026-05-17",
+    "daysLeft": 23,
+    "isOngoing": false,
+    "isMuseum": true,
+    "thumb": null,
+    "lat": 40.67135,
+    "lng": -73.963683
+  }
+];
+
+let currentMode = 'plan';
+let activeFilter = 'all';
+let savedIds = new Set(JSON.parse(localStorage.getItem('gallery-savedIds') || '[]'));
+let seenIds  = new Set(JSON.parse(localStorage.getItem('gallery-seenIds')  || '[]'));
+let walkMap = null;
+let walkMarkers = {};
+
+function saveState() {
+  localStorage.setItem('gallery-savedIds', JSON.stringify([...savedIds]));
+  localStorage.setItem('gallery-seenIds',  JSON.stringify([...seenIds]));
+}
+
+function daysUntil(d) {
+  if (!d) return null;
+  return Math.round((new Date(d) - TODAY) / 86400000);
+}
+
+function fmtDate(s) {
+  return new Date(s + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'});
+}
+
+function mapsUrl(address) {
+  return 'https://maps.apple.com/?address=' + encodeURIComponent(address);
+}
+
+// ─── FILTER BAR ───
+function buildFilterBar() {
+  const bar = document.getElementById('filterBar');
+  const hoods = [];
+  SHOWS.forEach(s => { if (!hoods.includes(s.neighborhood)) hoods.push(s.neighborhood); });
+  bar.innerHTML =
+    '<button class="filter-chip active" data-filter="all">All</button>' +
+    '<button class="filter-chip closing-chip" data-filter="closing">Closing Soon</button>' +
+    '<button class="filter-chip saved-chip" data-filter="saved">My Visit</button>' +
+    hoods.map(n => `<button class="filter-chip" data-filter="${n}">${n}</button>`).join('');
+
+  bar.addEventListener('click', e => {
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    bar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    renderList();
   });
-  // If the Closing Soon section is now empty, hide it entirely
-  var alertSection = document.querySelector('.alert-section');
-  if (alertSection) {
-    var visible = alertSection.querySelectorAll('.card[data-closes]:not([style*="display: none"])');
-    var visibleNoAttr = alertSection.querySelectorAll('.card:not([data-closes])');
-    if (visible.length === 0 && visibleNoAttr.length === 0) {
-      alertSection.style.display = 'none';
+}
+
+// ─── MODE ───
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  const modeBar = document.getElementById('modeBar');
+  if (mode === 'plan') {
+    document.getElementById('planMode').style.display = 'flex';
+    document.getElementById('walkMode').classList.remove('active');
+    modeBar.innerHTML = '<span class="mode-label">Planning</span><span class="mode-hint">— add shows to your visit</span><span class="saved-count" id="savedCount"></span>';
+    renderList();
+  } else {
+    document.getElementById('planMode').style.display = 'none';
+    document.getElementById('walkMode').classList.add('active');
+    modeBar.innerHTML = '<span class="mode-label" style="color:#6dbf8a">Walking</span><span class="mode-hint" style="color:#444">— mark shows as seen</span><span class="saved-count" id="savedCount"></span>';
+    renderWalkMode();
+  }
+  updateSavedCount();
+}
+
+function updateSavedCount() {
+  const el = document.getElementById('savedCount');
+  if (el) el.textContent = savedIds.size > 0 ? `${savedIds.size} saved` : '';
+}
+
+// ─── PLAN / LIST ───
+function visibleShows() {
+  return SHOWS.filter(s => {
+    if (s.isOngoing) return true;
+    const d = daysUntil(s.closing);
+    return d !== null && d >= 0;
+  });
+}
+
+function getFilteredShows() {
+  return visibleShows().filter(s => {
+    if (activeFilter === 'all')     return true;
+    if (activeFilter === 'closing') return !s.isOngoing && daysUntil(s.closing) <= 7;
+    if (activeFilter === 'saved')   return savedIds.has(s.id);
+    return s.neighborhood === activeFilter;
+  });
+}
+
+function renderList() {
+  const page = document.getElementById('listingPage');
+  const shows = getFilteredShows();
+  page.innerHTML = '';
+
+  if (shows.length === 0) {
+    page.innerHTML = '<div style="padding:40px 20px;text-align:center;font-family:Spectral,serif;font-style:italic;font-weight:300;color:var(--muted);font-size:14px;line-height:1.8;">No shows match this filter.</div>';
+    return;
+  }
+
+  const groups = {};
+  const hoodOrder = [];
+  shows.forEach(s => {
+    if (!groups[s.neighborhood]) { groups[s.neighborhood] = []; hoodOrder.push(s.neighborhood); }
+    groups[s.neighborhood].push(s);
+  });
+
+  hoodOrder.forEach((hood, i) => {
+    const nb = NEIGHBORHOODS[hood] || {color:'#444'};
+    const hoodShows = groups[hood];
+    const sec = document.createElement('section');
+    sec.style.cssText = `opacity:0;transform:translateY(14px);animation:fadeIn 0.4s ease ${i * 0.07}s forwards`;
+    sec.innerHTML =
+      `<div class="neighborhood-header">` +
+        `<div class="neighborhood-swatch" style="background:${nb.color}"></div>` +
+        `<div class="neighborhood-inner">` +
+          `<span class="neighborhood-name">${hood}</span>` +
+          `<span class="neighborhood-count">${hoodShows.length} show${hoodShows.length !== 1 ? 's' : ''}</span>` +
+        `</div>` +
+      `</div>` +
+      hoodShows.map(s => renderCard(s)).join('');
+    page.appendChild(sec);
+  });
+}
+
+function renderCard(s) {
+  const days  = s.isOngoing ? null : daysUntil(s.closing);
+  const urgent = !s.isOngoing && days !== null && days <= 7;
+  const saved = savedIds.has(s.id);
+  const seen  = seenIds.has(s.id);
+
+  const topBadge = urgent
+    ? '<div class="urgent-badge">Closing Soon</div>'
+    : s.isOngoing ? '<div class="ongoing-badge">Ongoing</div>' : '';
+
+  const closingTag = s.isOngoing || !s.closing ? '' :
+    `<div class="closing-tag">` +
+      `<span class="closing-label">closes</span>` +
+      `<span class="closing-date">${fmtDate(s.closing)}</span>` +
+    `</div>`;
+
+  const thumbHtml = s.thumb
+    ? `<div class="card-thumb">` +
+        `<img src="${s.thumb}" alt="${s.artist}" loading="lazy"` +
+          ` onload="if(this.naturalWidth&&this.naturalHeight&&this.naturalWidth/this.naturalHeight>3)this.parentElement.style.display='none'"` +
+          ` onerror="this.parentElement.style.display='none'">` +
+        `<div class="seen-overlay"><span class="seen-check">✓</span></div>` +
+      `</div>`
+    : '';
+
+  return (
+    `<div class="show-card ${urgent?'closing-soon':''} ${saved?'is-saved':''} ${seen?'is-seen':''}"` +
+        ` id="card-${s.id}" onclick="openDetail('${s.id}')">` +
+      thumbHtml +
+      `<div class="card-body">` +
+        `<div>` +
+          topBadge +
+          `<div class="artist-name">${s.artist}</div>` +
+          `<div class="show-title">${s.title}</div>` +
+          `<div class="gallery-name">${s.gallery}</div>` +
+        `</div>` +
+        `<div class="card-bottom">` +
+          `<div class="address">${s.address}</div>` +
+          closingTag +
+        `</div>` +
+      `</div>` +
+      `<button class="save-btn ${saved?'saved':''}"` +
+              ` onclick="toggleSave(event,'${s.id}')"` +
+              ` title="${saved?'Remove from visit':'Add to visit'}">${saved?'♦':'◇'}</button>` +
+    `</div>`
+  );
+}
+
+function toggleSave(e, id) {
+  e.stopPropagation();
+  if (savedIds.has(id)) { savedIds.delete(id); } else { savedIds.add(id); }
+  saveState(); renderList(); updateSavedCount();
+}
+
+function toggleSeen(id) {
+  if (seenIds.has(id)) { seenIds.delete(id); } else { seenIds.add(id); }
+  saveState();
+  if (currentMode === 'walk') { renderWalkList(); updateWalkMarkers(); }
+  else { renderList(); }
+}
+
+// ─── WALK MODE ───
+function renderWalkMode() {
+  renderWalkList();
+  initOrUpdateWalkMap();
+}
+
+function renderWalkList() {
+  const container = document.getElementById('walkList');
+  const countEl   = document.getElementById('walkSheetCount');
+
+  if (savedIds.size === 0) {
+    container.innerHTML = '<div class="walk-no-saves"><strong>No shows saved</strong>Switch to Plan mode and tap ◇ on shows you want to visit.</div>';
+    countEl.textContent = '';
+    return;
+  }
+
+  const saved  = SHOWS.filter(s => savedIds.has(s.id));
+  const unseen = saved.filter(s => !seenIds.has(s.id));
+  const seen   = saved.filter(s =>  seenIds.has(s.id));
+  countEl.textContent = `${unseen.length} remaining`;
+
+  container.innerHTML = [...unseen, ...seen].map(s => {
+    const nb = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
+    const isSeen = seenIds.has(s.id);
+    return (
+      `<div class="walk-card ${isSeen?'is-seen':''}" onclick="openDetail('${s.id}')">` +
+        `<div class="walk-card-dot" style="background:${nb.color};${isSeen?'opacity:0.3':''}"></div>` +
+        `<div class="walk-card-info">` +
+          `<div class="walk-artist">${s.artist}</div>` +
+          `<div class="walk-gallery">${s.gallery} · ${s.neighborhood}</div>` +
+        `</div>` +
+        `<button class="seen-btn ${isSeen?'is-seen':''}"` +
+                ` onclick="event.stopPropagation();toggleSeen('${s.id}')">` +
+          `${isSeen?'Seen':'Mark Seen'}` +
+        `</button>` +
+      `</div>`
+    );
+  }).join('');
+}
+
+// ─── WALK MAP ───
+function initOrUpdateWalkMap() {
+  if (!walkMap) {
+    walkMap = L.map('walkMap', {zoomControl:false, attributionControl:false});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {maxZoom:19}).addTo(walkMap);
+    L.control.attribution({prefix:'© OpenStreetMap © Carto', position:'bottomright'}).addTo(walkMap);
+    L.control.zoom({position:'topright'}).addTo(walkMap);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const youIcon = L.divIcon({html:'<div class="you-are-here"></div>', iconSize:[16,16], iconAnchor:[8,8], className:''});
+        L.marker([pos.coords.latitude, pos.coords.longitude], {icon:youIcon}).addTo(walkMap)
+          .bindPopup('<div class="pin-popup"><div class="pin-popup-artist">You are here</div></div>');
+      });
     }
   }
-})();
+  updateWalkMarkers();
+}
 
-// Hide banner images: suppress any image with width:height ratio > 3:1
-(function() {
-  document.querySelectorAll('.card-image img').forEach(function(img) {
-    function checkRatio() {
-      if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-        if (img.naturalWidth / img.naturalHeight > 3) {
-          img.parentElement.style.display = 'none';
-        }
-      }
-    }
-    if (img.complete) { checkRatio(); }
-    else { img.addEventListener('load', checkRatio); }
+function makePinIcon(color, faded) {
+  const svg = `<svg width="28" height="36" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" style="opacity:${faded?0.3:1}">` +
+    `<path d="M14 0C6.268 0 0 6.268 0 14c0 9.333 14 22 14 22S28 23.333 28 14C28 6.268 21.732 0 14 0z" fill="${color}"/>` +
+    `<circle cx="14" cy="14" r="6" fill="white" opacity="0.9"/>` +
+    `</svg>`;
+  return L.divIcon({html:svg, iconSize:[28,36], iconAnchor:[14,36], popupAnchor:[0,-36], className:'map-pin'});
+}
+
+function updateWalkMarkers() {
+  Object.values(walkMarkers).forEach(m => walkMap.removeLayer(m));
+  walkMarkers = {};
+
+  const saved = SHOWS.filter(s => savedIds.has(s.id) && s.lat !== null && s.lng !== null);
+  if (saved.length === 0) { walkMap.setView([40.740, -74.000], 13); return; }
+
+  saved.forEach(s => {
+    const color  = (NEIGHBORHOODS[s.neighborhood] || {}).color || '#444';
+    const isSeen = seenIds.has(s.id);
+    const days   = s.isOngoing ? null : daysUntil(s.closing);
+    const urgent = days !== null && days <= 7;
+    const closingLine = s.isOngoing
+      ? 'Ongoing'
+      : `Closes ${fmtDate(s.closing)}${urgent ? ' — ' + days + (days===1?' day':' days') + ' left' : ''}`;
+
+    const marker = L.marker([s.lat, s.lng], {icon:makePinIcon(color, isSeen)})
+      .addTo(walkMap)
+      .bindPopup(
+        `<div class="pin-popup">` +
+          `<div class="pin-popup-artist">${s.artist}</div>` +
+          `<div class="pin-popup-gallery">${s.title} · ${s.gallery}</div>` +
+          `<div class="pin-popup-closing ${urgent?'urgent':''}">${closingLine}</div>` +
+        `</div>`
+      );
+    marker.on('click', () => marker.openPopup());
+    walkMarkers[s.id] = marker;
   });
-})();
+
+  const group = L.featureGroup(Object.values(walkMarkers));
+  walkMap.fitBounds(group.getBounds().pad(0.25));
+}
+
+// ─── DETAIL ───
+function openDetail(id) {
+  const s = SHOWS.find(x => x.id === id);
+  if (!s) return;
+  const nb    = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
+  const days  = s.isOngoing ? null : daysUntil(s.closing);
+  const urgent = !s.isOngoing && days !== null && days <= 7;
+  const isSaved = savedIds.has(s.id);
+  const isSeen  = seenIds.has(s.id);
+
+  let closingBlock = '';
+  if (s.isOngoing) {
+    closingBlock =
+      `<div class="detail-closing-block ongoing">` +
+        `<div class="closing-info">` +
+          `<span class="label">Closing date</span>` +
+          `<div class="date">Ongoing</div>` +
+        `</div>` +
+      `</div>`;
+  } else if (s.closing) {
+    const daysLabel = days === 0 ? 'Closes today' : days === 1 ? '1 day left' : `${days} days left`;
+    closingBlock =
+      `<div class="detail-closing-block ${urgent?'urgent':''}">` +
+        `<div class="closing-info">` +
+          `<span class="label">${urgent?'⚠ Closing soon':'Closing date'}</span>` +
+          `<div class="date">${fmtDate(s.closing)}</div>` +
+        `</div>` +
+        `<div class="days-left">${daysLabel}</div>` +
+      `</div>`;
+  }
+
+  const heroHtml = s.thumb
+    ? `<div class="detail-hero"><img src="${s.thumb}" alt="${s.artist}"></div>`
+    : `<div class="detail-hero"></div>`;
+
+  const hoursHtml = s.hours
+    ? `<div class="detail-meta-label">Hours</div><div class="detail-meta-value">${s.hours}</div>`
+    : '';
+
+  let websiteHtml = '';
+  if (s.website) {
+    const url = s.website.startsWith('http') ? s.website : 'https://' + s.website;
+    const label = s.website.replace(/^https?:\/\//, '');
+    websiteHtml = `<div class="detail-meta-label">Website</div><div class="detail-meta-value"><a href="${url}" target="_blank">${label}</a></div>`;
+  }
+
+  const addrDisplay = (s.address && s.address !== 'Check website')
+    ? `<a href="${mapsUrl(s.address + ', New York')}">${s.address}</a>`
+    : s.address;
+
+  document.getElementById('detailContent').innerHTML =
+    heroHtml +
+    `<div class="detail-content">` +
+      `<div class="detail-hood-tag">` +
+        `<span class="swatch" style="background:${nb.color}"></span>` +
+        s.neighborhood +
+      `</div>` +
+      `<div class="detail-artist">${s.artist}</div>` +
+      `<div class="detail-show-title">${s.title}</div>` +
+      `<div class="detail-divider"></div>` +
+      `<div class="detail-meta-label">Gallery</div>` +
+      `<div class="detail-meta-value gallery">${s.gallery}</div>` +
+      `<div class="detail-meta-label">Address</div>` +
+      `<div class="detail-meta-value">${addrDisplay}</div>` +
+      hoursHtml +
+      websiteHtml +
+      closingBlock +
+      `<div class="detail-actions">` +
+        `<button class="detail-save-btn ${isSaved?'saved':''}" id="detailSaveBtn" onclick="detailToggleSave('${s.id}')">` +
+          `${isSaved?'♦ Saved to Visit':'◇ Add to Visit'}` +
+        `</button>` +
+        `<button class="detail-seen-btn ${isSeen?'seen':''}" id="detailSeenBtn" onclick="detailToggleSeen('${s.id}')">` +
+          `${isSeen?'✓ Seen':'Mark Seen'}` +
+        `</button>` +
+      `</div>` +
+    `</div>`;
+
+  const page = document.getElementById('detailPage');
+  page.classList.add('active');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function detailToggleSave(id) {
+  if (savedIds.has(id)) { savedIds.delete(id); } else { savedIds.add(id); }
+  saveState(); updateSavedCount();
+  const isSaved = savedIds.has(id);
+  const btn = document.getElementById('detailSaveBtn');
+  if (btn) { btn.className = `detail-save-btn ${isSaved?'saved':''}`; btn.textContent = isSaved?'♦ Saved to Visit':'◇ Add to Visit'; }
+  renderList();
+}
+
+function detailToggleSeen(id) {
+  if (seenIds.has(id)) { seenIds.delete(id); } else { seenIds.add(id); }
+  saveState();
+  const isSeen = seenIds.has(id);
+  const btn = document.getElementById('detailSeenBtn');
+  if (btn) { btn.className = `detail-seen-btn ${isSeen?'seen':''}`; btn.textContent = isSeen?'✓ Seen':'Mark Seen'; }
+  if (currentMode === 'walk') { renderWalkList(); updateWalkMarkers(); }
+}
+
+function closeDetail() {
+  const page = document.getElementById('detailPage');
+  page.style.transition = 'opacity 0.2s, transform 0.2s';
+  page.style.opacity = '0';
+  page.style.transform = 'translateY(40px)';
+  setTimeout(() => {
+    page.classList.remove('active');
+    page.style.transition = page.style.opacity = page.style.transform = '';
+    document.body.style.overflow = '';
+  }, 200);
+}
+
+// ─── INIT ───
+buildFilterBar();
+renderList();
+updateSavedCount();
 </script>
 </body>
 </html>
