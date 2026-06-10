@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joshua Seiden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --text-primary: #2a2825;
+      --text-secondary: #9a9590;
+      --text-muted: #c5c0bb;
+      --border: #e0ddd8;
+      --sidebar-width: 160px;
+      --content-padding: 48px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── Layout ── */
+    .site {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      border-right: 0.5px solid var(--border);
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      z-index: 10;
+    }
+
+    .site-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 44px;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: block;
+    }
+
+    nav { display: flex; flex-direction: column; gap: 2px; }
+
+    nav a {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color 0.15s;
+    }
+
+    nav a:hover, nav a.active { color: var(--text-primary); }
+
+    .project-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-list-label {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .project-list a {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      text-decoration: none;
+      line-height: 1.5;
+      padding: 3px 0;
+      transition: color 0.15s;
+    }
+
+    .project-list a:hover, .project-list a.active { color: var(--text-primary); }
+
+    /* ── Main content ── */
+    .content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: var(--content-padding);
+      max-width: 860px;
+    }
+
+    /* ── Project section ── */
+    .project { display: none; }
+    .project.active { display: block; }
+
+    .project-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .project-statement {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 540px;
+      margin-bottom: 0;
+    }
+
+    .project-statement + .project-statement {
+        margin-top: 20px;
+    }
+
+
+    /* ── Image grid ── */
+    .image-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .image-grid img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .image-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 80px;
+      padding-bottom: 48px;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 680px) {
+      .sidebar { display: none; }
+
+      .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+        border-bottom: 0.5px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 10;
+      }
+
+      .mobile-name {
+        font-family: 'EB Garamond', serif;
+        font-size: 16px;
+        font-style: italic;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .mobile-menu-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px;
+      }
+
+      .mobile-menu-btn span {
+        display: block;
+        width: 20px;
+        height: 1px;
+        background: var(--text-secondary);
+      }
+
+      .project-tabs {
+        display: flex;
+        overflow-x: auto;
+        padding: 0 24px;
+        border-bottom: 0.5px solid var(--border);
+        gap: 0;
+        scrollbar-width: none;
+      }
+
+      .project-tabs::-webkit-scrollbar { display: none; }
+
+      .project-tabs button {
+        background: none;
+        border: none;
+        border-bottom: 1.5px solid transparent;
+        font-family: 'Jost', sans-serif;
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 10px 12px 10px 0;
+        white-space: nowrap;
+        cursor: pointer;
+        margin-bottom: -0.5px;
+      }
+
+      .project-tabs button.active {
+        color: var(--text-primary);
+        border-bottom-color: var(--text-primary);
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 28px 24px;
+      }
+
+      .image-row { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 681px) {
+      .mobile-header { display: none; }
+      .project-tabs { display: none; }
+    }
+    .mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 100;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 32px;
+}
+
+.mobile-overlay.open {
+  display: flex;
+}
+
+.mobile-overlay-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+}
+
+.mobile-overlay-close span {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--text-secondary);
+  position: absolute;
+}
+
+.mobile-overlay-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.mobile-overlay-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+.mobile-overlay-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-overlay-nav a {
+  font-family: 'EB Garamond', serif;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.mobile-overlay-nav a:hover {
+  color: var(--text-secondary);
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Sidebar (desktop) -->
+  <aside class="sidebar">
+    <a href="#" class="site-name">Joshua<br>Seiden</a>
+    <nav>
+      <a href="#" class="active">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="project-list">
+      <div class="project-list-label">Projects</div>
+      <a href="#" class="active" data-project="sooner">I Wish I'd Started Sooner</a>
+      <a href="#" data-project="owl">The Owl Music Parlor</a>
+      <a href="#" data-project="portraits">Portraits</a>
+      <a href="#" data-project="street">Street</a>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="mobile-header">
+    <a href="#" class="mobile-name">Joshua Seiden</a>
+    <button class="mobile-menu-btn" id="menu-btn" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-overlay" id="mobile-overlay">
+    <button class="mobile-overlay-close" id="overlay-close" aria-label="Close">
+      <span></span><span></span>
+    </button>
+    <nav class="mobile-overlay-nav">
+      <a href="#">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="content">
+
+    <!-- Mobile project tabs -->
+    <div class="project-tabs">
+        <button class="active" data-project="sooner">Sooner</button>
+        <button data-project="owl">Owl</button>
+        <button data-project="portraits">Portraits</button>
+        <button data-project="street">Street</button>
+      </div>
+  
+      <!-- Project: I Wish I'd Started Sooner -->
+      <section class="project active" id="sooner">
+        <h1 class="project-title">I Wish I'd Started Sooner</h1>
+        <p class="project-statement">A diary of family and place that began during lockdown and continues...</p>
+        <div class="image-grid">
+          <img src="images/sooner/1.jpg" alt="">
+        </div>
+        
+        <div class="image-grid" style="margin-top: 40px;">
+          <div class="image-row">
+            <img src="images/sooner/2.jpg" alt="">
+            <img src="images/sooner/3.jpg" alt="">
+          </div>
+          <img src="images/sooner/4.jpg" alt="">
+          <img src="images/sooner/5.jpg" alt="">
+          <div class="image-row">
+            <img src="images/sooner/6.jpg" alt="">
+            <img src="images/sooner/7.jpg" alt="">
+          </div>
+          <img src="images/sooner/8.jpg" alt="">
+          <div class="image-row">
+            <img src="images/sooner/9.jpg" alt="">
+            <img src="images/sooner/10.jpg" alt="">
+          </div>
+          <img src="images/sooner/11.jpg" alt="">
+          <img src="images/sooner/12.jpg" alt="">
+        </div>
+        <p class="project-statement" style="margin-top: 40px;">In March of 2020 my family and I moved from NYC to Cape Cod to ride out the pandemic lockdown. I Wish I'd Started Sooner is a diary that began in March 2020, when I moved from NYC to Cape Cod to ride out the pandemic lockdown with my family.</p>
+        <p class="project-statement">It's filled with things I would never have predicted. Surgeries. Injuries. Antidepressants. Rehab. Therapy. But also: love and renewal and growth.</p>
+        <p class="project-statement">Through this all, I was learning to make photographs, photographing the place around me. Cape Cod is a summer destination, but in the off-season, it's a wild place, filled with magic, wonder, and light. The winter is cold, hard, sea-blown; the spring a miracle of blooms and pale, tender light. The population is sparse. It felt like a private world, and I wanted my pictures to share that emptiness, but also guard its secrets. I won't name my favorite beach, or the sweetest hidden ponds. Diaries have locks on them for a reason.</p>
+        <p class="project-statement">I photographed the few people around me. This period had a magic, out-of-time quality, filled with closeness, frustrations, fights, love, and discovery. The people here are my inner circle: my grown children, my aging mother and mother-in-law, my close friends, my wife. They have secrets too and so do I. Those secrets have a feeling. I want you to see that feeling, illuminated by the pale, tender light. It's so fleeting. It's here and then it's gone.</p>
+      </section>
+  
+      <!-- Project: The Owl Music Parlor -->
+      <section class="project" id="owl">
+        <h1 class="project-title">The Owl Music Parlor</h1>
+        <p class="project-statement">The Owl was a unique music venue in Prospect Lefferts, Brooklyn, NY that closed at the end of 2025. Over the course of ten years, it became home to a vibrant group of young (and not so young) musicians who are pushing the edges of songwriting.</p>
+        <div class="image-grid">
+          <img src="images/owl/1.jpg" alt="">
+          <img src="images/owl/2.jpg" alt="">
+          <div class="image-row">
+            <img src="images/owl/3.jpg" alt="">
+            <img src="images/owl/4.jpg" alt="">
+          </div>
+          <img src="images/owl/5.jpg" alt="">
+          <img src="images/owl/6.jpg" alt="">
+          <div class="image-row">
+            <img src="images/owl/7.jpg" alt="">
+            <img src="images/owl/8.jpg" alt="">
+          </div>
+          <img src="images/owl/9.jpg" alt="">
+          <div class="image-row">
+            <img src="images/owl/10.jpg" alt="">
+            <img src="images/owl/11.jpg" alt="">
+          </div>
+        </div>
+        <p class="project-statement" style="margin-top: 48px;">Curated and run with great care and love, this is a place that has given me (and many others) a great deal of pleasure. During the final year of The Owl, I spent as much time as I could there, working to create a portrait of a place and of the people who make it special. I am currently working on turning these photos into a book.</p>
+      </section>
+  
+      <!-- Project: Portraits -->
+      <section class="project" id="portraits">
+        <h1 class="project-title">Portraits</h1>
+        <p class="project-statement">In this portrait series, I'm interested in what this age looks like, what it feels like, and more generally, what we think of when we consider how old we are.</p>
+        <div class="image-grid">
+          <img src="images/portraits/1.jpg" alt="">
+          <div class="image-row">
+            <img src="images/portraits/2.jpg" alt="">
+            <img src="images/portraits/3.jpg" alt="">
+          </div>
+          <img src="images/portraits/4.jpg" alt="">
+          <img src="images/portraits/5.jpg" alt="">
+          <div class="image-row">
+            <img src="images/portraits/6.jpg" alt="">
+            <img src="images/portraits/7.jpg" alt="">
+          </div>
+        </div>
+        <p class="project-statement" style="margin-top: 48px;">In 1976, the US observed the country's Bicentennial–our 200th birthday. The July 4th celebrations included a parade of Tall Ships in New York Harbor, visiting us from around the world.</p>
+        <p class="project-statement">I watched the ships from the balcony of my Grandmother's 22nd floor apartment in Brooklyn Heights. I was 12 years old, and impressed by the historical significance of the date. Would there be another date like this in my life? I thought ahead to the year 2000. The turn of the century! I would be 36 years old. I wondered what my life would be like. My parents were 36 that year. That was as old as I could imagine ever getting.</p>
+        <p class="project-statement">That failure of imagination continues, even as I turned 60 this past year. It never once occurred to me to consider what it would feel like to be inside a 60-year-old body.</p>
+        <p class="project-statement">When I look at my close friends, I try to read their age, but I don't know what to look for. I'm fascinated by the mix of things I see on their faces–the complexity of their life experience overlaid on the essential youthful core.</p>
+        <p class="project-statement">Right now, in this moment, do you feel old or young? And what will we think of these pictures when we see them in 10 years, or in 20, if we live that long. I want to be there when my sitters say, "My god. I was so young then."</p>
+      </section>
+  
+      <!-- Project: Street -->
+      <section class="project" id="street">
+        <h1 class="project-title">Street</h1>
+        <div class="image-grid">
+          <img src="images/street/1.jpg" alt="">
+          <div class="image-row">
+            <img src="images/street/2.jpg" alt="">
+            <img src="images/street/3.jpg" alt="">
+          </div>
+          <img src="images/street/4.jpg" alt="">
+          <img src="images/street/5.jpg" alt="">
+          <div class="image-row">
+            <img src="images/street/6.jpg" alt="">
+            <img src="images/street/7.jpg" alt="">
+          </div>
+          <img src="images/street/8.jpg" alt="">
+          <img src="images/street/9.jpg" alt="">
+        </div>
+      </section>
+  
+      <footer class="footer">
+        © Joshua Seiden, 2025. All rights reserved. 
+        This site is a showcase for Josh Seiden's photography. 
+        For the other side of Josh's work, visit <a href="https://joshuaseiden.com" style="color: var(--text-muted);">joshuaseiden.com</a>.
+      </footer>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const projects = document.querySelectorAll('.project');
+      const sidebarLinks = document.querySelectorAll('.project-list a[data-project]');
+      const mobileTabs = document.querySelectorAll('.project-tabs button');
+
+      function showProject(id) {
+        projects.forEach(p => p.classList.toggle('active', p.id === id));
+        sidebarLinks.forEach(a => a.classList.toggle('active', a.dataset.project === id));
+        mobileTabs.forEach(b => b.classList.toggle('active', b.dataset.project === id));
+        window.scrollTo(0, 0);
+      }
+
+      sidebarLinks.forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          showProject(a.dataset.project);
+        });
+      });
+
+      mobileTabs.forEach(b => {
+        b.addEventListener('click', () => showProject(b.dataset.project));
+      });
+      const menuBtn = document.getElementById('menu-btn');
+      const overlay = document.getElementById('mobile-overlay');
+      const overlayClose = document.getElementById('overlay-close');
+
+      menuBtn.addEventListener('click', () => overlay.classList.add('open'));
+      overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+      overlay.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => overlay.classList.remove('open'));
+     });
+    });
+  </script>
+
+</body>
+
+</html>
