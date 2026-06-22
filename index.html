@@ -180,6 +180,10 @@
 
   </main>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <img src="" alt="">
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const projects = document.querySelectorAll('.project');
@@ -202,6 +206,22 @@
 
       mobileTabs.forEach(b => {
         b.addEventListener('click', () => showProject(b.dataset.project));
+      });
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = lightbox.querySelector('img');
+
+      document.querySelectorAll('.image-grid img').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightbox.classList.add('open');
+        });
+      });
+
+      lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') lightbox.classList.remove('open');
       });
 
       const menuBtn = document.getElementById('menu-btn');
