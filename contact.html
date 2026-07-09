@@ -6,9 +6,26 @@
   <title>Contact — Joshua Seiden</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+</head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuBtn = document.getElementById('menu-btn');
+      const overlay = document.getElementById('mobile-overlay');
+      const overlayClose = document.getElementById('overlay-close');
+  
+      menuBtn.addEventListener('click', () => overlay.classList.add('open'));
+      overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
+      overlay.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => overlay.classList.remove('open'));
+      });
+    });
+</script>
+
+
 <body>
 
   <!-- Sidebar (desktop) -->
@@ -23,7 +40,7 @@
 
   <!-- Mobile header -->
   <header class="mobile-header">
-    <a href="index.html" class="mobile-name">Joshua Seiden</a>
+    <a href="#" class="mobile-name">Joshua Seiden</a>
     <button class="mobile-menu-btn" id="menu-btn" aria-label="Menu">
       <span></span><span></span>
     </button>
@@ -35,7 +52,7 @@
       <span></span><span></span>
     </button>
     <nav class="mobile-overlay-nav">
-      <a href="index.html">Portfolio</a>
+      <a href="#">Portfolio</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -68,19 +85,6 @@
 
   </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuBtn = document.getElementById('menu-btn');
-      const overlay = document.getElementById('mobile-overlay');
-      const overlayClose = document.getElementById('overlay-close');
-
-      menuBtn.addEventListener('click', () => overlay.classList.add('open'));
-      overlayClose.addEventListener('click', () => overlay.classList.remove('open'));
-      overlay.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => overlay.classList.remove('open'));
-      });
-    });
-  </script>
-
 </body>
+
 </html>
