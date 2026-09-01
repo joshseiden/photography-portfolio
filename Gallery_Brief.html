@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NYC Photo Shows · August 2026</title>
+<title>NYC Photo Shows · September 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -683,7 +683,7 @@ html, body {
     <div class="header-top">
       <div>
         <h1>NYC<br>Photo Shows</h1>
-        <p class="tagline">Current exhibitions — August 2026</p>
+        <p class="tagline">Current exhibitions — September 2026</p>
       </div>
       <div class="mode-toggle">
         <button class="mode-btn active" data-mode="plan" onclick="setMode('plan')">Plan</button>
@@ -726,7 +726,7 @@ html, body {
 </div>
 
 <script>
-const TODAY = new Date('2026-08-16');
+const TODAY = new Date('2026-09-01');
 const NEIGHBORHOODS = {
   "Chelsea": {
     "color": "#344e8a"
@@ -740,9 +740,6 @@ const NEIGHBORHOODS = {
   "Lower East Side": {
     "color": "#2d7a4a"
   },
-  "SoHo": {
-    "color": "#4a4a8a"
-  },
   "West Village": {
     "color": "#4a5a1a"
   },
@@ -752,48 +749,14 @@ const NEIGHBORHOODS = {
   "Upper West Side": {
     "color": "#1a5c8a"
   },
-  "DUMBO, Brooklyn": {
+  "Prospect Heights, Brooklyn": {
     "color": "#6a3a1a"
   },
-  "Prospect Heights, Brooklyn": {
+  "DUMBO, Brooklyn": {
     "color": "#3a5a2a"
   }
 };
 const SHOWS = [
-  {
-    "id": "yancey-richardson-gallery",
-    "gallery": "Yancey Richardson Gallery",
-    "artist": "Group Exhibition",
-    "title": "Once More, With Feeling (Yale MFA Photography 2026 Thesis Show)",
-    "neighborhood": "Chelsea",
-    "address": "525 West 22nd St, NY 10011",
-    "hours": "Tue–Sat 10am–6pm",
-    "website": "yanceyrichardson.com",
-    "closing": "2026-08-28",
-    "daysLeft": 12,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": null,
-    "lat": 40.747597,
-    "lng": -74.005741
-  },
-  {
-    "id": "yossi-milo-gallery",
-    "gallery": "Yossi Milo Gallery",
-    "artist": "Navot Miller",
-    "title": "Navot Miller: Sweet Liberty",
-    "neighborhood": "Chelsea",
-    "address": "245 Tenth Ave, NY 10001",
-    "hours": "Check website",
-    "website": "yossimilo.com",
-    "closing": "2026-08-21",
-    "daysLeft": 5,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/198/josh-merv-in-the-farm-47-x-59-in.jpg",
-    "lat": 40.748748,
-    "lng": -74.00363
-  },
   {
     "id": "benrubi-gallery",
     "gallery": "Benrubi Gallery",
@@ -804,7 +767,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "benrubigallery.com",
     "closing": "2026-09-12",
-    "daysLeft": 27,
+    "daysLeft": 11,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://images.squarespace-cdn.com/content/v1/65d4a908ad207c44f92d3c28/1777663886831-4TM7UDO6CQUC4AXCXWVI/First+Dusk%2C+36x36%2522%2C+mixed+media+on+linen%2C+2026.jpeg",
@@ -821,46 +784,12 @@ const SHOWS = [
     "hours": "Wed 12–6pm; Thu 12–8pm; Fri–Sun 12–6pm",
     "website": "sohophoto.com",
     "closing": "2026-09-06",
-    "daysLeft": 21,
+    "daysLeft": 5,
     "isOngoing": false,
     "isMuseum": false,
-    "thumb": null,
+    "thumb": "https://www.sohophoto.com/wp-content/uploads/2026/08/Mancia_01_Reflections.jpg",
     "lat": 40.748564,
     "lng": -74.0055857
-  },
-  {
-    "id": "gagosian-gallery",
-    "gallery": "Gagosian Gallery",
-    "artist": "Helen Marden",
-    "title": "Interlude of Joy",
-    "neighborhood": "Chelsea",
-    "address": "555 West 24th St, NY 10011",
-    "hours": "Tue–Sat 10am–6pm",
-    "website": "gagosian.com",
-    "closing": "2026-08-27",
-    "daysLeft": 11,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": "https://gagosian.com/media/images/exhibitions/2026/helen-marden-interlude-of-joy/iEeSKsVjuPwk_1200x1200.jpg",
-    "lat": 40.749436,
-    "lng": -74.005964
-  },
-  {
-    "id": "agora-gallery",
-    "gallery": "Agora Gallery",
-    "artist": "Group Exhibition",
-    "title": "The 40th Chelsea International Fine Art Competition",
-    "neighborhood": "Chelsea",
-    "address": "530 West 25th St, NY 10001",
-    "hours": "Check website",
-    "website": "agora-gallery.com",
-    "closing": "2026-08-29",
-    "daysLeft": 13,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": "https://agora-gallery.com/wp-content/uploads/2026/06/ae5b7db3-dbe7-4c08-8bf8-5be11dc41259-l-1.jpg",
-    "lat": 40.749451,
-    "lng": -74.004613
   },
   {
     "id": "howard-greenberg-gallery",
@@ -872,7 +801,7 @@ const SHOWS = [
     "hours": "Tue–Fri 10am–6pm; Sat 11am–5pm",
     "website": "howardgreenberg.com",
     "closing": "2026-09-12",
-    "daysLeft": 27,
+    "daysLeft": 11,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/artworks/main_image/items/e1/e1ccbd9fa76349ddae6b3ec5849c0f0d/pf52661.jpg",
@@ -889,7 +818,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–5:30pm (Sat until 7pm)",
     "website": "moma.org",
     "closing": "2026-09-12",
-    "daysLeft": 27,
+    "daysLeft": 11,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.moma.org/d/assets/W1siZiIsIjIwMjUvMTIvMTkvNmM3Nm8yaDk2M18yMTQ4XzIwMDFfUklDUl9GdWxsX3NpemVfSlBFRy5qcGciXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgOTAgLXJlc2l6ZSAyMDAweDIwMDBcdTAwM2UiXV0/2148_2001_RICR-Full-size-JPEG.jpg?sha=684929f36cf79037",
@@ -906,29 +835,12 @@ const SHOWS = [
     "hours": "Tue–Thu, Sat 10:30am–5pm; Fri until 7pm",
     "website": "themorgan.org",
     "closing": "2026-11-08",
-    "daysLeft": 84,
+    "daysLeft": 68,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.themorgan.org/sites/default/files/exhibitions/hummel-362520v_0001.jpg",
     "lat": 40.749093,
     "lng": -73.981809
-  },
-  {
-    "id": "danziger-gallery",
-    "gallery": "Danziger Gallery",
-    "artist": "Group Exhibition",
-    "title": "Summer Selection",
-    "neighborhood": "Upper East Side",
-    "address": "952 5th Ave, NY 10075",
-    "hours": "By appointment",
-    "website": "danzigergallery.com",
-    "closing": "2026-09-19",
-    "daysLeft": 34,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": null,
-    "lat": 40.775219,
-    "lng": -73.964792
   },
   {
     "id": "guggenheim-museum",
@@ -940,7 +852,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–5:30pm",
     "website": "guggenheim.org",
     "closing": "2027-01-10",
-    "daysLeft": 147,
+    "daysLeft": 131,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://files.ocula.com/ri/7f/7f7d1abb-5df6-4afe-a9a7-b70d60f3a0cb/1200/675/untitled.jpg",
@@ -957,7 +869,7 @@ const SHOWS = [
     "hours": "Mon–Fri 10am–5pm; Sat–Sun 10am–6pm",
     "website": "mcny.org",
     "closing": "2027-05-01",
-    "daysLeft": 258,
+    "daysLeft": 242,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.mcny.org/sites/default/files/styles/1488x480/public/TheOccupiedCity-Banner-2.jpg?h=4b163266&itok=udAi2uAk",
@@ -974,7 +886,7 @@ const SHOWS = [
     "hours": "Daily 10:30am–6:30pm (Thu until 8pm)",
     "website": "icp.org",
     "closing": "2026-09-28",
-    "daysLeft": 43,
+    "daysLeft": 27,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://www.icp.org/sites/default/files/styles/webp/public/2026-03/YSL_1_0.png.webp?itok=n78XdBIG",
@@ -991,29 +903,12 @@ const SHOWS = [
     "hours": "Tue–Sun 11am–6pm (Thu until 9pm)",
     "website": "newmuseum.org",
     "closing": "2027-03-22",
-    "daysLeft": 218,
+    "daysLeft": 202,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://admin.newmuseum.org/wp-content/uploads/2025/02/New-Museum_New-Humans_0326_0203-1.jpg",
     "lat": 40.722397,
     "lng": -73.992993
-  },
-  {
-    "id": "staley-wise-gallery",
-    "gallery": "Staley-Wise Gallery",
-    "artist": "Group Exhibition",
-    "title": "Becoming Marilyn",
-    "neighborhood": "SoHo",
-    "address": "100 Crosby St, Suite 305, NY 10012",
-    "hours": "Tue–Sat 11am–5pm",
-    "website": "staleywise.com",
-    "closing": "2026-08-21",
-    "daysLeft": 5,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": "https://static-assets.artlogic.net/w_1200,h_1200,c_limit/exhibit-e/5be3258ca5aa2c1c768b4567/ff509b3e136f084e906573bbb8ebf7ef.jpeg",
-    "lat": 40.723696,
-    "lng": -73.997249
   },
   {
     "id": "white-columns",
@@ -1025,7 +920,7 @@ const SHOWS = [
     "hours": "Check website",
     "website": "whitecolumns.org",
     "closing": "2026-09-12",
-    "daysLeft": 27,
+    "daysLeft": 11,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://whitecolumns.org/wp-content/uploads/exhibitions//image-2-768x566.jpeg",
@@ -1041,8 +936,8 @@ const SHOWS = [
     "address": "99 Gansevoort St, NY 10014",
     "hours": "Mon, Wed–Sun 10:30am–6pm; Fri until 10pm",
     "website": "whitney.org",
-    "closing": "2026-08-23",
-    "daysLeft": 7,
+    "closing": "2026-10-12",
+    "daysLeft": 41,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://whitneymedia.org/assets/image/833410/WMAA99949_BFA_53520_7759682_lpr.jpg",
@@ -1059,7 +954,7 @@ const SHOWS = [
     "hours": "By appointment",
     "website": "laurencemillergallery.com",
     "closing": "2026-09-30",
-    "daysLeft": 45,
+    "daysLeft": 29,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": null,
@@ -1076,29 +971,12 @@ const SHOWS = [
     "hours": "Tue–Thu, Sat 11am–5pm; Fri 10am–8pm; Sun 11am–5pm",
     "website": "nyhistory.org",
     "closing": "2026-10-25",
-    "daysLeft": 70,
+    "daysLeft": 54,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://images.prismic.io/nyhs-prod/aWpX9AIvOtkhBp4B_5Excelsior.jpg",
     "lat": 40.779193,
     "lng": -73.974009
-  },
-  {
-    "id": "janet-borden-inc",
-    "gallery": "Janet Borden, Inc.",
-    "artist": "Jim Dow",
-    "title": "Jim Dow",
-    "neighborhood": "DUMBO, Brooklyn",
-    "address": "91 Water St, Brooklyn, NY 11201",
-    "hours": "Check website",
-    "website": "janetbordeninc.com",
-    "closing": null,
-    "daysLeft": null,
-    "isOngoing": true,
-    "isMuseum": false,
-    "thumb": "https://janetbordeninc.com/wp-content/uploads/2025/05/L1000302.jpg",
-    "lat": 40.703363,
-    "lng": -73.99067
   },
   {
     "id": "brooklyn-museum",
@@ -1110,29 +988,12 @@ const SHOWS = [
     "hours": "Wed–Sun 11am–6pm",
     "website": "brooklynmuseum.org",
     "closing": "2026-12-06",
-    "daysLeft": 112,
+    "daysLeft": 96,
     "isOngoing": false,
     "isMuseum": true,
     "thumb": "https://cms-images.brooklynmuseum.org/ae2f18de163422a4dc9c8be883a0425021e899c1-3687x3602.jpg",
     "lat": 40.67135,
     "lng": -73.963683
-  },
-  {
-    "id": "clampart",
-    "gallery": "ClampArt",
-    "artist": "Anthony Peyton Young, Lindsay Perryman",
-    "title": "From the Ground Up; Tops",
-    "neighborhood": "Chelsea",
-    "address": "247 W 29th St, Ground Floor, NY 10001",
-    "hours": "Tue–Sat 11am–6pm",
-    "website": "clampart.com",
-    "closing": "2026-08-28",
-    "daysLeft": 12,
-    "isOngoing": false,
-    "isMuseum": false,
-    "thumb": "https://clampart.com/wp-content/uploads/2026/07/Young-Catch-Me-in-Good-Spirits-front-1200-367x550.jpg",
-    "lat": 40.74876,
-    "lng": -73.994786
   },
   {
     "id": "higher-pictures-generation",
@@ -1144,7 +1005,7 @@ const SHOWS = [
     "hours": "Tue–Sat 11am–6pm",
     "website": "higherpictures.com",
     "closing": "2026-10-03",
-    "daysLeft": 48,
+    "daysLeft": 32,
     "isOngoing": false,
     "isMuseum": false,
     "thumb": "https://higherpictures.com/wp-content/uploads/2026/04/Holding-Zero-1-copy.jpeg",
