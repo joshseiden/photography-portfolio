@@ -29,6 +29,17 @@
       <span class="mode-hint">— add shows to your visit</span>
       <span class="closing-legend"><span class="pulse-dot"></span>closing within 7 days</span>
     </div>
+    <div class="sync-control" id="syncControl">
+      <button class="sync-btn" id="syncToggleBtn" onclick="toggleSyncPanel()">Sync</button>
+      <span class="sync-status" id="syncStatusText">Not syncing</span>
+      <div class="sync-panel" id="syncPanel">
+        <input type="password" id="syncKeyInput" placeholder="Personal key" autocomplete="off" spellcheck="false">
+        <div class="sync-panel-actions">
+          <button class="primary" onclick="saveSyncKey()">Save</button>
+          <button onclick="stopSyncing()">Stop syncing on this device</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <div id="planMode" style="display:flex; flex-direction:column; flex:1; overflow:hidden;">

@@ -30,14 +30,265 @@ let SHOWS = [];
 
 let currentMode  = 'plan';
 let activeFilter = 'all';
-let savedIds = new Set(JSON.parse(localStorage.getItem('gallery-savedIds') || '[]'));
-let seenIds  = new Set(JSON.parse(localStorage.getItem('gallery-seenIds')  || '[]'));
+
+// Saved / seen / hidden, keyed per show (not per gallery — see showKeyFor).
+// Build 2: cross-device state. Local storage is always the source of truth
+// for rendering; when a sync key is set, it's kept in step with the server.
+let savedKeys  = new Set();
+let seenKeys   = new Set();
+let hiddenMap  = new Map(); // showKey -> { key, gallery, title, at }
+
 let walkMap  = null;
 let walkMarkers = {};
 
-function saveState() {
-  localStorage.setItem('gallery-savedIds', JSON.stringify([...savedIds]));
-  localStorage.setItem('gallery-seenIds',  JSON.stringify([...seenIds]));
+// Show key = `<galleryId>::<slug(title)>`. Keeps saved/seen/hidden tied to
+// a specific show rather than the gallery, so a gallery's next show starts
+// clean (see Build 2 handoff, decision 4).
+function slugify(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function showKeyFor(galleryId, title) {
+  return `${galleryId}::${slugify(title)}`;
+}
+
+function findShow(id) {
+  return SHOWS.find(s => s.id === id);
+}
+
+function persistLocalState() {
+  localStorage.setItem('gallery-state', JSON.stringify({
+    saved: [...savedKeys],
+    seen: [...seenKeys],
+    hidden: [...hiddenMap.values()],
+  }));
+}
+
+function loadLocalState() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('gallery-state') || 'null');
+    if (!raw) return { saved: new Set(), seen: new Set(), hidden: new Map() };
+    return {
+      saved: new Set(raw.saved || []),
+      seen: new Set(raw.seen || []),
+      hidden: new Map((raw.hidden || []).map(h => [h.key, h])),
+    };
+  } catch {
+    return { saved: new Set(), seen: new Set(), hidden: new Map() };
+  }
+}
+
+// One-time migration from Build 1's gallery-savedIds / gallery-seenIds
+// (gallery ids, pre-dating show keys). Old keys are left in place —
+// harmless, and a later build can remove them.
+function runMigration() {
+  if (localStorage.getItem('gallery-migrated-v2')) return;
+
+  const oldSaved = JSON.parse(localStorage.getItem('gallery-savedIds') || '[]');
+  const oldSeen  = JSON.parse(localStorage.getItem('gallery-seenIds')  || '[]');
+
+  if (oldSaved.length === 0 && oldSeen.length === 0) {
+    localStorage.setItem('gallery-migrated-v2', '1');
+    return;
+  }
+
+  const byGalleryId = {};
+  SHOWS.forEach(s => { byGalleryId[s.galleryId] = s; });
+
+  oldSaved.forEach(galleryId => {
+    const s = byGalleryId[galleryId];
+    if (!s || savedKeys.has(s.showKey)) return;
+    savedKeys.add(s.showKey);
+    queueOp({ op: 'save', key: s.showKey });
+  });
+  oldSeen.forEach(galleryId => {
+    const s = byGalleryId[galleryId];
+    if (!s || seenKeys.has(s.showKey)) return;
+    seenKeys.add(s.showKey);
+    queueOp({ op: 'seen', key: s.showKey });
+  });
+
+  persistLocalState();
+  localStorage.setItem('gallery-migrated-v2', '1');
+}
+
+// ─── SYNC ───
+let pendingOps   = JSON.parse(localStorage.getItem('gallery-pending') || '[]');
+let keyRejected  = false;
+let syncInFlight = false;
+let flushTimer   = null;
+
+function getSyncKey() { return localStorage.getItem('gallery-key'); }
+
+function persistPending() {
+  localStorage.setItem('gallery-pending', JSON.stringify(pendingOps));
+}
+
+function queueOp(op) {
+  pendingOps.push(op);
+  persistPending();
+  updateSyncStatusUI();
+  if (getSyncKey() && !keyRejected) scheduleFlush();
+}
+
+function scheduleFlush() {
+  clearTimeout(flushTimer);
+  flushTimer = setTimeout(flushPending, 500);
+}
+
+function applyLocalOp(op) {
+  switch (op.op) {
+    case 'save':   savedKeys.add(op.key); break;
+    case 'unsave': savedKeys.delete(op.key); break;
+    case 'seen':   seenKeys.add(op.key); break;
+    case 'unseen': seenKeys.delete(op.key); break;
+    case 'hide':   hiddenMap.set(op.key, { key: op.key, gallery: op.gallery, title: op.title, at: new Date().toISOString() }); break;
+    case 'unhide': hiddenMap.delete(op.key); break;
+  }
+}
+
+function adoptServerState(state) {
+  savedKeys = new Set(state.saved);
+  seenKeys  = new Set(state.seen);
+  hiddenMap = new Map(state.hidden.map(h => [h.key, h]));
+}
+
+function rerenderCurrent() {
+  buildFilterBar();
+  if (currentMode === 'plan') renderList();
+  else { renderWalkList(); updateWalkMarkers(); }
+}
+
+async function flushPending() {
+  if (!getSyncKey() || keyRejected || pendingOps.length === 0) { updateSyncStatusUI(); return; }
+  const batch = pendingOps.slice(0, 100);
+  syncInFlight = true;
+  updateSyncStatusUI();
+  try {
+    const res = await fetch('/gallery/api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Gallery-Key': getSyncKey() },
+      body: JSON.stringify({ ops: batch }),
+    });
+    if (res.status === 401) {
+      keyRejected = true;
+      syncInFlight = false;
+      updateSyncStatusUI();
+      return;
+    }
+    if (!res.ok) throw new Error('POST failed: ' + res.status);
+    const serverState = await res.json();
+    pendingOps = pendingOps.slice(batch.length);
+    persistPending();
+    adoptServerState(serverState);
+    persistLocalState();
+    syncInFlight = false;
+    updateSyncStatusUI();
+    rerenderCurrent();
+    if (pendingOps.length > 0) scheduleFlush();
+  } catch (err) {
+    syncInFlight = false;
+    updateSyncStatusUI();
+  }
+}
+
+async function syncNow() {
+  if (!getSyncKey() || keyRejected) { updateSyncStatusUI(); return; }
+  syncInFlight = true;
+  updateSyncStatusUI();
+  try {
+    const res = await fetch('/gallery/api/state', {
+      headers: { 'X-Gallery-Key': getSyncKey() },
+    });
+    if (res.status === 401) {
+      keyRejected = true;
+      syncInFlight = false;
+      updateSyncStatusUI();
+      return;
+    }
+    if (!res.ok) throw new Error('GET failed: ' + res.status);
+    const serverState = await res.json();
+    adoptServerState(serverState);
+    pendingOps.forEach(applyLocalOp); // reapply not-yet-flushed local ops on top
+    persistLocalState();
+    syncInFlight = false;
+    updateSyncStatusUI();
+    rerenderCurrent();
+    if (pendingOps.length > 0) flushPending();
+  } catch (err) {
+    syncInFlight = false;
+    updateSyncStatusUI();
+  }
+}
+
+function syncStatusText() {
+  if (!getSyncKey()) return 'Not syncing';
+  if (keyRejected) return 'Key not accepted';
+  if (syncInFlight) return 'Syncing…';
+  if (pendingOps.length > 0) return `Offline — ${pendingOps.length} change${pendingOps.length === 1 ? '' : 's'} waiting`;
+  return 'Synced';
+}
+
+function syncStatusClass() {
+  if (!getSyncKey()) return '';
+  if (keyRejected) return 'is-rejected';
+  if (pendingOps.length > 0 && !syncInFlight) return 'is-offline';
+  if (!syncInFlight) return 'is-synced';
+  return '';
+}
+
+function updateSyncStatusUI() {
+  const el = document.getElementById('syncStatusText');
+  if (el) { el.textContent = syncStatusText(); el.className = `sync-status ${syncStatusClass()}`; }
+  const btn = document.getElementById('syncToggleBtn');
+  if (btn) btn.classList.toggle('active', !!getSyncKey() && !keyRejected);
+}
+
+function toggleSyncPanel() {
+  const panel = document.getElementById('syncPanel');
+  const opening = !panel.classList.contains('open');
+  panel.classList.toggle('open', opening);
+  if (opening) {
+    const input = document.getElementById('syncKeyInput');
+    input.value = getSyncKey() || '';
+    input.focus();
+  }
+}
+
+function saveSyncKey() {
+  const val = document.getElementById('syncKeyInput').value.trim();
+  if (!val) return;
+  localStorage.setItem('gallery-key', val);
+  keyRejected = false;
+  document.getElementById('syncPanel').classList.remove('open');
+  updateSyncStatusUI();
+  syncNow();
+}
+
+function stopSyncing() {
+  localStorage.removeItem('gallery-key');
+  keyRejected = false;
+  document.getElementById('syncPanel').classList.remove('open');
+  updateSyncStatusUI();
+}
+
+// ─── HIDE / UNHIDE ───
+function hideShowByKey(key, gallery, title) {
+  hiddenMap.set(key, { key, gallery, title, at: new Date().toISOString() });
+  queueOp({ op: 'hide', key, gallery, title });
+  persistLocalState();
+}
+
+function unhideByKey(key) {
+  hiddenMap.delete(key);
+  queueOp({ op: 'unhide', key });
+  persistLocalState();
+}
+
+function unhideShow(e, key) {
+  e.stopPropagation();
+  unhideByKey(key);
+  buildFilterBar();
+  renderList();
 }
 
 function daysUntil(d) {
@@ -58,20 +309,31 @@ function buildFilterBar() {
   const bar = document.getElementById('filterBar');
   const hoods = [];
   SHOWS.forEach(s => { if (!hoods.includes(s.neighborhood)) hoods.push(s.neighborhood); });
-  bar.innerHTML =
-    '<button class="filter-chip active" data-filter="all">All</button>' +
-    '<button class="filter-chip closing-chip" data-filter="closing">Closing Soon</button>' +
-    '<button class="filter-chip saved-chip" data-filter="saved">My Visit</button>' +
-    hoods.map(n => `<button class="filter-chip" data-filter="${n}">${n}</button>`).join('');
+  const hiddenCount = SHOWS.filter(s => hiddenMap.has(s.showKey)).length;
+  if (activeFilter === 'hidden' && hiddenCount === 0) activeFilter = 'all';
 
-  bar.addEventListener('click', e => {
-    const chip = e.target.closest('.filter-chip');
-    if (!chip) return;
-    bar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    activeFilter = chip.dataset.filter;
-    renderList();
-  });
+  const chip = (filter, label, cls) =>
+    `<button class="filter-chip ${cls || ''} ${activeFilter === filter ? 'active' : ''}" data-filter="${filter}">${label}</button>`;
+
+  bar.innerHTML =
+    chip('all', 'All') +
+    chip('closing', 'Closing Soon', 'closing-chip') +
+    chip('saved', 'My Visit', 'saved-chip') +
+    (hiddenCount > 0 ? chip('hidden', `Hidden (${hiddenCount})`, 'hidden-chip') : '') +
+    hoods.map(n => chip(n, n)).join('');
+
+  // buildFilterBar() is now called on every filter change (to keep the
+  // hidden count current), so only bind the delegated click listener once.
+  if (!bar.dataset.bound) {
+    bar.dataset.bound = '1';
+    bar.addEventListener('click', e => {
+      const chipEl = e.target.closest('.filter-chip');
+      if (!chipEl) return;
+      activeFilter = chipEl.dataset.filter;
+      buildFilterBar();
+      renderList();
+    });
+  }
 }
 
 // ─── MODE ───
@@ -101,12 +363,15 @@ function setMode(mode) {
 
 function updateSavedCount() {
   const el = document.getElementById('savedCount');
-  if (el) el.textContent = savedIds.size > 0 ? `${savedIds.size} saved` : '';
+  if (!el) return;
+  const count = SHOWS.filter(s => savedKeys.has(s.showKey) && !hiddenMap.has(s.showKey)).length;
+  el.textContent = count > 0 ? `${count} saved` : '';
 }
 
 // ─── PLAN / LIST ───
 function visibleShows() {
   return SHOWS.filter(s => {
+    if (hiddenMap.has(s.showKey)) return false;
     if (s.isOngoing) return true;
     const d = daysUntil(s.closing);
     return d !== null && d >= 0;
@@ -114,10 +379,13 @@ function visibleShows() {
 }
 
 function getFilteredShows() {
+  if (activeFilter === 'hidden') {
+    return SHOWS.filter(s => hiddenMap.has(s.showKey));
+  }
   return visibleShows().filter(s => {
     if (activeFilter === 'all')     return true;
     if (activeFilter === 'closing') return !s.isOngoing && daysUntil(s.closing) <= 7;
-    if (activeFilter === 'saved')   return savedIds.has(s.id);
+    if (activeFilter === 'saved')   return savedKeys.has(s.showKey);
     return s.neighborhood === activeFilter;
   });
 }
@@ -125,10 +393,13 @@ function getFilteredShows() {
 function renderList() {
   const page  = document.getElementById('listingPage');
   const shows = getFilteredShows();
+  const hiddenView = activeFilter === 'hidden';
   page.innerHTML = '';
 
   if (shows.length === 0) {
-    page.innerHTML = '<div class="empty-state">No shows match this filter.</div>';
+    page.innerHTML = hiddenView
+      ? '<div class="empty-state">Nothing hidden.</div>'
+      : '<div class="empty-state">No shows match this filter.</div>';
     return;
   }
 
@@ -152,16 +423,16 @@ function renderList() {
           `<span class="neighborhood-count">${hoodShows.length} show${hoodShows.length !== 1 ? 's' : ''}</span>` +
         `</div>` +
       `</div>` +
-      hoodShows.map(s => renderCard(s)).join('');
+      hoodShows.map(s => renderCard(s, hiddenView)).join('');
     page.appendChild(sec);
   });
 }
 
-function renderCard(s) {
+function renderCard(s, hiddenView) {
   const days   = s.isOngoing ? null : daysUntil(s.closing);
   const urgent = !s.isOngoing && days !== null && days <= 7;
-  const saved  = savedIds.has(s.id);
-  const seen   = seenIds.has(s.id);
+  const saved  = savedKeys.has(s.showKey);
+  const seen   = seenKeys.has(s.showKey);
 
   const topBadge = urgent
     ? '<div class="urgent-badge">Closing Soon</div>'
@@ -195,22 +466,32 @@ function renderCard(s) {
           closeHtml +
         `</div>` +
       `</div>` +
-      `<button class="save-btn ${saved?'saved':''}"` +
-              ` onclick="toggleSave(event,'${s.id}')"` +
-              ` title="${saved?'Remove from visit':'Add to visit'}">${saved?'♦':'◇'}</button>` +
+      (hiddenView
+        ? `<button class="unhide-btn" onclick="unhideShow(event,'${s.showKey}')">Unhide</button>`
+        : `<button class="save-btn ${saved?'saved':''}"` +
+                  ` onclick="toggleSave(event,'${s.id}')"` +
+                  ` title="${saved?'Remove from visit':'Add to visit'}">${saved?'♦':'◇'}</button>`) +
     `</div>`
   );
 }
 
 function toggleSave(e, id) {
   e.stopPropagation();
-  if (savedIds.has(id)) { savedIds.delete(id); } else { savedIds.add(id); }
-  saveState(); renderList(); updateSavedCount();
+  const s = findShow(id);
+  if (!s) return;
+  const key = s.showKey;
+  if (savedKeys.has(key)) { savedKeys.delete(key); queueOp({ op: 'unsave', key }); }
+  else { savedKeys.add(key); queueOp({ op: 'save', key }); }
+  persistLocalState(); renderList(); updateSavedCount();
 }
 
 function toggleSeen(id) {
-  if (seenIds.has(id)) { seenIds.delete(id); } else { seenIds.add(id); }
-  saveState();
+  const s = findShow(id);
+  if (!s) return;
+  const key = s.showKey;
+  if (seenKeys.has(key)) { seenKeys.delete(key); queueOp({ op: 'unseen', key }); }
+  else { seenKeys.add(key); queueOp({ op: 'seen', key }); }
+  persistLocalState();
   if (currentMode === 'walk') { renderWalkList(); updateWalkMarkers(); }
   else { renderList(); }
 }
@@ -225,19 +506,20 @@ function renderWalkList() {
   const container = document.getElementById('walkList');
   const countEl   = document.getElementById('walkSheetCount');
 
-  if (savedIds.size === 0) {
+  const saved  = SHOWS.filter(s => savedKeys.has(s.showKey) && !hiddenMap.has(s.showKey));
+
+  if (saved.length === 0) {
     container.innerHTML = '<div class="walk-no-saves"><strong>No shows saved</strong>Switch to Plan mode and tap ◇ to add shows to your visit.</div>';
     if (countEl) countEl.textContent = '';
     return;
   }
 
-  const saved  = SHOWS.filter(s => savedIds.has(s.id));
-  const unseen = saved.filter(s => !seenIds.has(s.id));
-  const seen   = saved.filter(s =>  seenIds.has(s.id));
+  const unseen = saved.filter(s => !seenKeys.has(s.showKey));
+  const seen   = saved.filter(s =>  seenKeys.has(s.showKey));
   if (countEl) countEl.textContent = `${unseen.length} remaining`;
 
   container.innerHTML = [...unseen, ...seen].map(s => {
-    const isSeen = seenIds.has(s.id);
+    const isSeen = seenKeys.has(s.showKey);
     const thumbHtml = s.thumb
       ? `<img src="${s.thumb}" alt="${s.artist}" loading="lazy">`
       : '';
@@ -297,12 +579,12 @@ function updateWalkMarkers() {
   Object.values(walkMarkers).forEach(m => walkMap.removeLayer(m));
   walkMarkers = {};
 
-  const saved = SHOWS.filter(s => savedIds.has(s.id) && s.lat !== null && s.lng !== null);
+  const saved = SHOWS.filter(s => savedKeys.has(s.showKey) && !hiddenMap.has(s.showKey) && s.lat !== null && s.lng !== null);
   if (saved.length === 0) { walkMap.setView([40.740, -74.000], 13); return; }
 
   saved.forEach(s => {
     const color  = (NEIGHBORHOODS[s.neighborhood] || {}).color || '#444';
-    const isSeen = seenIds.has(s.id);
+    const isSeen = seenKeys.has(s.showKey);
     const days   = s.isOngoing ? null : daysUntil(s.closing);
     const urgent = days !== null && days <= 7;
     const closingLine = s.isOngoing
@@ -341,8 +623,9 @@ function openDetail(id) {
   const nb     = NEIGHBORHOODS[s.neighborhood] || {color:'#444'};
   const days   = s.isOngoing ? null : daysUntil(s.closing);
   const urgent = !s.isOngoing && days !== null && days <= 7;
-  const isSaved = savedIds.has(s.id);
-  const isSeen  = seenIds.has(s.id);
+  const isSaved  = savedKeys.has(s.showKey);
+  const isSeen   = seenKeys.has(s.showKey);
+  const isHidden = hiddenMap.has(s.showKey);
 
   let closingBlock = '';
   if (s.isOngoing) {
@@ -409,6 +692,9 @@ function openDetail(id) {
           `${isSeen?'✓ Seen':'Mark Seen'}` +
         `</button>` +
       `</div>` +
+      `<button class="detail-hide-btn ${isHidden?'is-hidden':''}" id="detailHideBtn" onclick="detailToggleHide('${s.id}')">` +
+        `${isHidden?'Unhide — mark as photography':'Not photography'}` +
+      `</button>` +
     `</div>`;
 
   const page = document.getElementById('detailPage');
@@ -418,21 +704,45 @@ function openDetail(id) {
 }
 
 function detailToggleSave(id) {
-  if (savedIds.has(id)) { savedIds.delete(id); } else { savedIds.add(id); }
-  saveState(); updateSavedCount();
-  const isSaved = savedIds.has(id);
+  const s = findShow(id);
+  if (!s) return;
+  const key = s.showKey;
+  if (savedKeys.has(key)) { savedKeys.delete(key); queueOp({ op: 'unsave', key }); }
+  else { savedKeys.add(key); queueOp({ op: 'save', key }); }
+  persistLocalState(); updateSavedCount();
+  const isSaved = savedKeys.has(key);
   const btn = document.getElementById('detailSaveBtn');
   if (btn) { btn.className = `detail-save-btn ${isSaved?'saved':''}`; btn.textContent = isSaved?'♦ Saved to Visit':'◇ Add to Visit'; }
   renderList();
 }
 
 function detailToggleSeen(id) {
-  if (seenIds.has(id)) { seenIds.delete(id); } else { seenIds.add(id); }
-  saveState();
-  const isSeen = seenIds.has(id);
+  const s = findShow(id);
+  if (!s) return;
+  const key = s.showKey;
+  if (seenKeys.has(key)) { seenKeys.delete(key); queueOp({ op: 'unseen', key }); }
+  else { seenKeys.add(key); queueOp({ op: 'seen', key }); }
+  persistLocalState();
+  const isSeen = seenKeys.has(key);
   const btn = document.getElementById('detailSeenBtn');
   if (btn) { btn.className = `detail-seen-btn ${isSeen?'seen':''}`; btn.textContent = isSeen?'✓ Seen':'Mark Seen'; }
   if (currentMode === 'walk') { renderWalkList(); updateWalkMarkers(); }
+}
+
+function detailToggleHide(id) {
+  const s = findShow(id);
+  if (!s) return;
+  const key = s.showKey;
+  if (hiddenMap.has(key)) {
+    unhideByKey(key);
+    const btn = document.getElementById('detailHideBtn');
+    if (btn) { btn.classList.remove('is-hidden'); btn.textContent = 'Not photography'; }
+    rerenderCurrent();
+  } else {
+    hideShowByKey(key, s.gallery, s.title);
+    closeDetail();
+    rerenderCurrent();
+  }
 }
 
 function closeDetail() {
@@ -473,6 +783,8 @@ async function loadData() {
         const closing = (!isOngoing && sh.closes) ? sh.closes : null;
         return {
           id: sh.id,
+          galleryId: sh.galleryId,
+          showKey: showKeyFor(sh.galleryId, sh.title),
           gallery: gal.name,
           artist: sh.artists || 'Group Exhibition',
           title: sh.title,
@@ -491,6 +803,12 @@ async function loadData() {
       })
       .filter(s => s !== null);
 
+    const local = loadLocalState();
+    savedKeys = local.saved;
+    seenKeys  = local.seen;
+    hiddenMap = local.hidden;
+    runMigration();
+
     const monthYear = TODAY.toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
     const tagline = document.querySelector('.tagline');
     if (tagline) tagline.textContent = `Current exhibitions — ${monthYear}`;
@@ -499,6 +817,8 @@ async function loadData() {
     buildFilterBar();
     renderList();
     updateSavedCount();
+
+    if (getSyncKey()) syncNow();
   } catch (err) {
     console.error('Failed to load gallery data:', err);
     document.getElementById('listingPage').innerHTML =
@@ -507,4 +827,11 @@ async function loadData() {
 }
 
 // ─── INIT ───
+updateSyncStatusUI();
 loadData();
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') syncNow();
+});
+window.addEventListener('online', flushPending);
+setInterval(() => { if (pendingOps.length > 0) flushPending(); }, 30000);
