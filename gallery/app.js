@@ -331,7 +331,7 @@ function updateWalkMarkers() {
   });
 
   const group = L.featureGroup(Object.values(walkMarkers));
-  walkMap.fitBounds(group.getBounds().pad(0.25));
+  walkMap.fitBounds(group.getBounds().pad(0.25), {maxZoom: 16});
 }
 
 // ─── DETAIL ───
