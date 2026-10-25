@@ -1,0 +1,311 @@
+{
+  "updated": "2026-10-25",
+  "shows": [
+    {
+      "id": "yancey-richardson-gallery",
+      "galleryId": "yancey-richardson-gallery",
+      "title": "Flowering",
+      "artists": "Sharon Core",
+      "closes": "2026-12-19",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "bruce-silverstein-gallery",
+      "galleryId": "bruce-silverstein-gallery",
+      "title": "Sarah Sense: Land, Line, Blood, Memory",
+      "artists": "Sarah Sense",
+      "closes": "2026-11-21",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/241/sarah-sense_landlinebloodmemory_square-format-flyers-07.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "robert-mann-gallery",
+      "galleryId": "robert-mann-gallery",
+      "title": "silent monoliths",
+      "artists": "Jeff Brouws",
+      "closes": "2026-12-12",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "yossi-milo-gallery",
+      "galleryId": "yossi-milo-gallery",
+      "title": "Shaping Time",
+      "artists": "Ibrahim Said",
+      "closes": "2027-01-09",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/201/ibrahim-5-piece-arrangement-new-edits-.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "benrubi-gallery",
+      "galleryId": "benrubi-gallery",
+      "title": "Marta Soul: Love After Love",
+      "artists": "Marta Soul",
+      "closes": "2026-11-30",
+      "image": "https://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/6aa1b3207da0e23c85cdfecb/1788982709908/Romance+at+golf+course.jpg?format=1500w",
+      "isPhotography": null
+    },
+    {
+      "id": "soho-photo-gallery",
+      "galleryId": "soho-photo-gallery",
+      "title": "MEMBERS",
+      "artists": null,
+      "closes": "2026-11-01",
+      "image": "https://www.sohophoto.com/wp-content/uploads/2026/09/Jacobs_01_From-the-Highline.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "pace-gallery",
+      "galleryId": "pace-gallery",
+      "title": "David Byrne: Stairwell Drawings",
+      "artists": "David Byrne",
+      "closes": "2026-12-31",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "sikkema-malloy-jenkins",
+      "galleryId": "sikkema-malloy-jenkins",
+      "title": "Erin Shirreff: New Work",
+      "artists": "Erin Shirreff",
+      "closes": "2026-12-19",
+      "image": "http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/6ad7bcfa2f17d50e5a3c3589/1789840973394/MP+23715+detail+1.jpg?format=1500w",
+      "isPhotography": null
+    },
+    {
+      "id": "hauser-wirth",
+      "galleryId": "hauser-wirth",
+      "title": "Anna Maria Maiolino: ANNA—And the infinite line",
+      "artists": "Anna Maria Maiolino",
+      "closes": "2026-10-31",
+      "image": "https://media.hauserwirth.com/asset/54b4086f-ac1e-4c93-a0ab-fb8b077e852b/web-hires-jpg-72dpi/MAIOL60754-Det-GH.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "agora-gallery",
+      "galleryId": "agora-gallery",
+      "title": "The Showroom: Mid-Century Modern",
+      "artists": null,
+      "closes": "2026-12-12",
+      "image": "https://agora-gallery.com/wp-content/uploads/2026/09/85df2b09-eac5-4d34-8f6f-5c9265d6e6c4-l.png",
+      "isPhotography": null
+    },
+    {
+      "id": "howard-greenberg-gallery",
+      "galleryId": "howard-greenberg-gallery",
+      "title": "Baldwin Lee: New York (1975–1979)",
+      "artists": "Baldwin Lee",
+      "closes": "2026-11-11",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/199/pf156214.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "edwynn-houk-gallery",
+      "galleryId": "edwynn-houk-gallery",
+      "title": "Abelardo Morell: Out of Paper",
+      "artists": "Abelardo Morell",
+      "closes": "2026-10-31",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/144/abelardo-morell-paper-cut-outs-3.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "moma",
+      "galleryId": "moma",
+      "title": "Full Disclosure: The Edge of Information Design",
+      "artists": null,
+      "closes": "2027-06-13",
+      "image": "https://www.moma.org/d/assets/W1siZiIsIjIwMjYvMDcvMjQvM3dpY2UyMG55N19DRV9Dcm9wX01PTUFfQklHLmpwZyJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ/CE-Crop-MOMA-BIG.jpg?sha=5a7ba957650a28d6",
+      "isPhotography": null
+    },
+    {
+      "id": "the-morgan-library-museum",
+      "galleryId": "the-morgan-library-museum",
+      "title": "Luminous Color",
+      "artists": "Group Exhibition",
+      "closes": "2026-11-08",
+      "image": "https://www.themorgan.org/sites/default/files/exhibitions/hummel-362520v_0001.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "gitterman-gallery",
+      "galleryId": "gitterman-gallery",
+      "title": "Jean-Pierre Sudre",
+      "artists": "Jean-Pierre Sudre",
+      "closes": "2026-10-31",
+      "image": "https://www.gittermangallery.com/images/27002_h500w500gt.5.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "metropolitan-museum-of-art",
+      "galleryId": "metropolitan-museum-of-art",
+      "title": "Chasing Clouds",
+      "artists": null,
+      "closes": "2027-02-28",
+      "image": "https://cdn.sanity.io/images/cctd4ker/production/18f96c20ef2c369072c289525228d05c18208b6c-5120x2880.jpg?w=1200&q=75&auto=format",
+      "isPhotography": null
+    },
+    {
+      "id": "guggenheim-museum",
+      "galleryId": "guggenheim-museum",
+      "title": "Guggenheim Pop",
+      "artists": null,
+      "closes": "2027-01-10",
+      "image": "https://files.ocula.com/ri/7f/7f7d1abb-5df6-4afe-a9a7-b70d60f3a0cb/1200/675/untitled.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "museum-of-the-city-of-ny",
+      "galleryId": "museum-of-the-city-of-ny",
+      "title": "The Occupied City: New York and the American Revolution",
+      "artists": null,
+      "closes": "2027-05-01",
+      "image": "https://www.mcny.org/sites/default/files/styles/1488x480/public/TheOccupiedCity-Banner-2.jpg?h=4b163266&itok=udAi2uAk",
+      "isPhotography": null
+    },
+    {
+      "id": "intl-center-of-photography",
+      "galleryId": "intl-center-of-photography",
+      "title": "I'm So Happy You Are Here: Japanese Women Photographers from the 1950s to Now",
+      "artists": null,
+      "closes": "2027-01-11",
+      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-07/kawauchi-the-eyes-the-ears.jpg.webp?itok=z_n-KIXq",
+      "isPhotography": null
+    },
+    {
+      "id": "baxter-st-at-camera-club-ny",
+      "galleryId": "baxter-st-at-camera-club-ny",
+      "title": "Milk Teeth",
+      "artists": "Allie Tsubota",
+      "closes": "2026-11-11",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "new-museum",
+      "galleryId": "new-museum",
+      "title": "New Humans: Memories of the Future",
+      "artists": null,
+      "closes": "2027-03-22",
+      "image": "https://admin.newmuseum.org/wp-content/uploads/2025/02/New-Museum_New-Humans_0326_0203-1.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "staley-wise-gallery",
+      "galleryId": "staley-wise-gallery",
+      "title": "Lifelike",
+      "artists": null,
+      "closes": "2026-11-12",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "whitney-museum",
+      "galleryId": "whitney-museum",
+      "title": "Roy Lichtenstein: Like New",
+      "artists": "Roy Lichtenstein",
+      "closes": "2027-05-10",
+      "image": "https://whitneymedia.org/assets/image/817171/lichtenstein_1_web_789_789.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "new-york-historical-society",
+      "galleryId": "new-york-historical-society",
+      "title": "You Should Be Dancing: New York, 1976 and Beyond",
+      "artists": "Group Exhibition",
+      "closes": "2027-04-04",
+      "image": "https://images.prismic.io/nyhs-prod/TCWn2cMo1YLXUu1h_BillBernstein_Reflections_NYC_1979.jpg?auto=format%2Ccompress&rect=0%2C1708%2C3751%2C2343&w=1066&h=666",
+      "isPhotography": null
+    },
+    {
+      "id": "brooklyn-museum",
+      "galleryId": "brooklyn-museum",
+      "title": "Iris van Herpen: Sculpting the Senses",
+      "artists": "Iris van Herpen",
+      "closes": "2026-12-06",
+      "image": "https://cms-images.brooklynmuseum.org/ae2f18de163422a4dc9c8be883a0425021e899c1-3687x3602.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "bronx-documentary-center",
+      "galleryId": "bronx-documentary-center",
+      "title": "Built in the Bronx: 15 Years of the Bronx Documentary Center",
+      "artists": null,
+      "closes": "2026-10-30",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "clampart",
+      "galleryId": "clampart",
+      "title": "Curtice Taylor: Vintage Underwater Nudes",
+      "artists": "Curtice Taylor",
+      "closes": "2026-10-31",
+      "image": "https://clampart.com/wp-content/uploads/2026/08/Taylor-Untitled-UnderwaterNude1-1-680x464.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "rick-wester-fine-art",
+      "galleryId": "rick-wester-fine-art",
+      "title": "Perchance to Dream: Royal and Noble Bedchambers",
+      "artists": "David Leventi",
+      "closes": "2026-12-30",
+      "image": "https://images.squarespace-cdn.com/content/v1/608c30fb855c215eaae3f215/8f5e593e-54bb-4a16-82bd-3e80fbdd7436/versailles+frame+ps+copy.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "gladstone-gallery",
+      "galleryId": "gladstone-gallery",
+      "title": "Joseph Yaeger: Agita",
+      "artists": "Joseph Yaeger",
+      "closes": "2026-10-31",
+      "image": "https://files.ocula.com/ri/98/98cf2e06-fabf-43c5-9347-bacc0c1f9371/1200/675/untitled.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "jack-shainman-gallery",
+      "galleryId": "jack-shainman-gallery",
+      "title": "Becky Suss: Night House",
+      "artists": "Becky Suss",
+      "closes": "2026-10-31",
+      "image": "https://jackshainman.com/uploads/17000170/1789141108415/JSGChelsea_BS_Night_House_2026_RUSH3_LR-800-0x48x2000x1335_q85.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "sean-kelly-gallery",
+      "galleryId": "sean-kelly-gallery",
+      "title": "Anthony McCall: Solid Light, 1973, 2020, 2026",
+      "artists": "Anthony McCall",
+      "closes": "2026-10-31",
+      "image": "https://www.galleriesnow.net/wp-content/uploads/2026/08/LDAC-Lugano-Photo-08.webp",
+      "isPhotography": null
+    },
+    {
+      "id": "throckmorton-fine-art",
+      "galleryId": "throckmorton-fine-art",
+      "title": "Lucien Clergue: A Life Through the Lens",
+      "artists": "Lucien Clergue",
+      "closes": "2027-01-16",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "sous-les-etoiles-gallery",
+      "galleryId": "sous-les-etoiles-gallery",
+      "title": "Sophie Delaporte: The Thread Between",
+      "artists": "Sophie Delaporte",
+      "closes": "2026-10-31",
+      "image": "https://static-assets.artlogic.net/w_680,h_500,c_lfill/exhibit-e/554a25b407a72cfb3b763dad/7a7d4ab7f5408ffd5f74243290b0298d.jpeg",
+      "isPhotography": null
+    },
+    {
+      "id": "higher-pictures-generation",
+      "galleryId": "higher-pictures-generation",
+      "title": "River's Dream, 2010-2020",
+      "artists": "Curran Hatleberg",
+      "closes": "2026-12-12",
+      "image": "https://higherpictures.com/wp-content/uploads/2026/10/RD_01.jpg",
+      "isPhotography": null
+    }
+  ]
+}
