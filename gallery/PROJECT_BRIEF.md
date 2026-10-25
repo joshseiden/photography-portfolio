@@ -1,5 +1,5 @@
 # Gallery Thing (NYC Photo Shows) — Project Brief
-**Last updated:** 2026-10-24
+**Last updated:** 2026-10-25
 *A personal gallery planning tool for Josh Seiden. Lives in `gallery/` inside the `joshseiden/photography-portfolio` repo.*
 
 ---
@@ -139,6 +139,23 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 
 **Seed:** converted from the spreadsheet on 2026-10-24: 46 galleries (43 open), 40 shows. Verified to match the generator's output exactly (same 40 ids; titles, dates, images, coordinates identical).
 
+### Show keys and state document (Build 2)
+
+Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's next show starts with a clean slate instead of inheriting "seen" from the show it replaced.
+
+- **Show key:** `` `<galleryId>::<slug(title)>` ``, where `slug` lowercases the title, replaces runs of non-alphanumeric characters with `-`, and trims leading/trailing `-`. Computed client-side on load (`showKeyFor` in `app.js`) and server-side identically wherever a key needs validating.
+- **State document** (one per Josh, stored at Blobs key `"josh"` in the `gallery-state` store):
+  ```json
+  {
+    "saved": ["<showKey>", ...],
+    "seen": ["<showKey>", ...],
+    "hidden": [{ "key": "<showKey>", "gallery": "<name>", "title": "<title>", "at": "<ISO timestamp>" }, ...],
+    "updatedAt": "<ISO timestamp>"
+  }
+  ```
+  `hidden` carries `gallery`/`title` (not just the key) so a hide survives the show rotating out of `shows.json` and so the weekend refresh can match it back up without rejoining against historical data.
+- **Local mirror:** the browser keeps the same shape in `localStorage['gallery-state']`, plus an ops queue in `localStorage['gallery-pending']` for whatever hasn't been confirmed by the server yet. The personal sync key lives in `localStorage['gallery-key']`.
+
 ---
 
 ## Technical Decisions
@@ -146,8 +163,8 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 - **Plain static files, no build step:** `gallery/index.html`, `gallery/app.js`, `gallery/style.css`. The page fetches `data/galleries.json` and `data/shows.json` at load. No framework. Leaflet and Google Fonts from CDN as before.
 - **No generator.** Retired 2026-10-24. The refresh edits data files only; it never touches page code.
 - **URL:** `joshuaseidenphotography.com/gallery/`. Root `_redirects` sends `/Gallery_Brief.html` (and Netlify's pretty-URL form `/Gallery_Brief`) to `/gallery/` with a 301.
-- **Personal state (Build 1):** unchanged, browser localStorage with keys `gallery-savedIds` and `gallery-seenIds`. **Keep these exact keys** so Josh's current lists survive the move.
-- **Personal state (Build 2, planned):** saved / seen / hidden move to a Netlify Function + Netlify Blobs store, read live by the page, protected by a personal key entered once per device. The weekend refresh reads hides and records them in the data files so hidden shows aren't re-added.
+- **Personal state (Build 1):** browser localStorage with keys `gallery-savedIds` and `gallery-seenIds`, gallery-id-keyed. Superseded by Build 2's show-keyed state; the old keys are left in place (unused after migration) rather than deleted, since deleting them would be a destructive step with no benefit.
+- **Personal state (Build 2, built):** saved / seen / hidden live in `localStorage['gallery-state']` (always, local-first) and, when a personal key is set, are kept in sync with a single Netlify Function (`netlify/functions/gallery-state.mjs`) backed by Netlify Blobs. See "Show keys and state document" above for the shapes, and "Shared Infrastructure" below for the new root files. The weekend refresh does **not** yet read hides back into the data files — see Decisions Log; that's a follow-up, not part of Build 2.
 - **Map:** Esri World Dark Gray Base + Reference tile layers, `maxNativeZoom: 16`, `maxZoom: 19`, attribution "Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors".
 - **Scripts:** `gallery/scripts/hunt_images.py` fills/validates show images in `shows.json` (needs open network). Never clears an image on a network failure, only on a definitive 4xx/5xx.
 
@@ -166,6 +183,11 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 - Gallery work touches only `gallery/` and the root `_redirects` file. Never edit portfolio files.
 - Never force-push. Merges to `main` are by Josh only.
 - The Workshop token can technically write portfolio files; this is accepted for now (decision 2026-10-24). Revisit if risk increases or when Gallery Thing moves to its own domain.
+
+**Build 2 added, also outside `gallery/`:**
+- `netlify/functions/gallery-state.mjs` — the sync function (Netlify's default functions directory; no `netlify.toml` needed since the function declares its own route via `export const config = { path: ... }`).
+- Root `package.json` + `package-lock.json` — the single dependency is `@netlify/blobs` (no transitive deps). No build command; the site still ships as plain static files.
+- Root `.gitignore` — just `node_modules/`, so installing that dependency locally doesn't get committed.
 
 ---
 
@@ -202,14 +224,27 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 24 2026 | Retire the generator; page loads JSON at runtime | Refresh touches data only; Workshop edits plain web files; Build 2 slots in |
 | Oct 24 2026 | New URL `/gallery/`, 301 from the old URL | Old bookmarks keep working |
 | Oct 24 2026 | No laptop mirror of this brief for now | Claude reads it from GitHub when planning |
+| Oct 25 2026 | Build 2 storage: one Netlify Function + Netlify Blobs on the existing site, no other services | Keeps infrastructure simple; avoids a second service for one person's state |
+| Oct 25 2026 | Build 2 lock: personal key in Netlify env var `GALLERY_KEY`, never in Git; page keeps it in `localStorage` once entered; no key → page works local-only as before | Enough protection for a personal tool without building real auth |
+| Oct 25 2026 | Build 2 hiding is per show, not per gallery (no gallery-level hide this build) | Matches how "not photography" actually comes up — one bad show, not a whole gallery |
+| Oct 25 2026 | Build 2 saved/seen/hidden keyed per show (`<galleryId>::<slug(title)>`), not per gallery | Fixes "seen carries over to the gallery's next show" |
+| Oct 25 2026 | Build 2 weekend refresh is unchanged | Hides stay correct because they're tied to the show; reading hides back into the data files is a later task, not part of Build 2 |
+| Oct 25 2026 | Build 2 follows Build 1's routine: branch, PR, deploy preview, Josh merges | Consistency with how the rest of this project ships |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-24 — Build 1, PR open, not yet merged*
+*Last updated: 2026-10-25 — Build 1 merged and live; Build 2 built, PR open, not yet merged*
 
-Build 1 migration is done and up for review: PR [#1](https://github.com/joshseiden/photography-portfolio/pull/1) on branch `build/gallery-migration`. `gallery/index.html` / `style.css` / `app.js` now fetch `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime instead of the page being generated by `generate_brief-v3.py`. Root `Gallery_Brief.html` is deleted in that PR (kept in git history) with a `_redirects` 301 from the old URL to `/gallery/`. Not yet merged to `main`, so the live site is still serving the old generated page until Josh merges. Verified by diffing the migration's computed data/CSS/JS against the current `Gallery_Brief.html` output (see the PR description); the deploy-preview checklist in `HANDOFF-build-1.md` step 4 still needs a human pass. Cutover steps (data regeneration, merge, weekend-task rewrite) are in `HANDOFF-build-1.md`'s "After the PR" section, not part of Build 1.
+Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site now fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
+
+Build 2 (cross-device state + "Not photography") is built on branch `build/cross-device-state`, PR open, **not merged**:
+- `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
+- `app.js` adds show-keyed saved/seen/hidden state, a local-storage-first sync layer (debounced flush, 30s retry fallback, `visibilitychange`/`online` triggers), a one-time migration off the Build 1 localStorage keys, a quiet Sync control with key-entry panel, and the "Not photography" hide/unhide flow (detail overlay button + "Hidden (n)" filter chip).
+- **Verified so far:** the function's op-application/validation logic has 19 passing unit tests against a mocked Blobs store (dependency injection on `handleRequest`, since this account has no live Netlify Blobs access); the show-key migration mapping was run against the real `gallery/data/*.json` files (no collisions, correct skip-on-missing-gallery behavior); and a Playwright smoke test drove the actual page in a real browser against a mock stand-in for the sync endpoint — save/seen/hide/unhide, the Hidden chip appearing and disappearing, key entry, wrong-key rejection, stop-syncing, and an actual cross-device save propagating between two separate browser sessions all passed with zero console errors.
+- **Still needs a human pass in the real deploy preview** (per the handoff): confirming `netlify dev`/production actually wires the function route and Blobs store correctly end-to-end, and the two-laptop/phone test with the real `GALLERY_KEY` Josh sets in the Netlify dashboard.
+- Reading hides back into `shows.json`/`galleries.json` on the weekend refresh is **not** part of Build 2 — hides just stay correct locally and server-side; wiring the refresh is a follow-up.
 
 ---
 Companion planning doc: `claude-context/projects/gallery-thing.md` (Josh's Dropbox)
