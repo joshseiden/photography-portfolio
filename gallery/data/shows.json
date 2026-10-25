@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24",
+  "updated": "2026-10-25",
   "shows": [
     {
       "id": "yancey-richardson-gallery",
@@ -22,10 +22,10 @@
     {
       "id": "robert-mann-gallery",
       "galleryId": "robert-mann-gallery",
-      "title": "Orly Cogan: Behind the Lens & Through the Needle",
-      "artists": "Orly Cogan",
-      "closes": "2026-10-24",
-      "image": "https://images.squarespace-cdn.com/content/v1/51009644e4b0aea0734361ca/7acdaf61-b980-406f-99bd-57532e2d8130/Banner+Template+%2817%29.png",
+      "title": "silent monoliths",
+      "artists": "Jeff Brouws",
+      "closes": "2026-12-12",
+      "image": null,
       "isPhotography": null
     },
     {
@@ -58,37 +58,28 @@
     {
       "id": "pace-gallery",
       "galleryId": "pace-gallery",
-      "title": "Lynda Benglis: KNOTTING, TYING, FOLDING",
-      "artists": "Lynda Benglis",
-      "closes": "2026-10-24",
-      "image": "https://www.pacegallery.com/media/images/1026179keytw5If-2-9l71O6n-OAE8zg.2e16d0ba.fill-1200x630.webp",
+      "title": "David Byrne: Stairwell Drawings",
+      "artists": "David Byrne",
+      "closes": "2026-12-31",
+      "image": null,
       "isPhotography": null
     },
     {
       "id": "sikkema-malloy-jenkins",
       "galleryId": "sikkema-malloy-jenkins",
-      "title": "Of the sacred and eternal blessing",
-      "artists": "Malcolm Peacock",
-      "closes": "2026-10-24",
-      "image": "https://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/6aaecfd051e8655725fa5e1f/1789841360561/Peacock+installation+view+SMJ+09-2026_01.jpg?format=1500w",
-      "isPhotography": null
-    },
-    {
-      "id": "gagosian-gallery",
-      "galleryId": "gagosian-gallery",
-      "title": "Jordan Wolfson",
-      "artists": "Jordan Wolfson",
-      "closes": "2026-10-24",
-      "image": "https://gagosian.com/media/images/exhibitions/2026/jordan-wolfson/FqnFg9CuWwXx_1200x1200.jpg",
+      "title": "Erin Shirreff: New Work",
+      "artists": "Erin Shirreff",
+      "closes": "2026-12-19",
+      "image": "http://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/6ad7bcfa2f17d50e5a3c3589/1789840973394/MP+23715+detail+1.jpg?format=1500w",
       "isPhotography": null
     },
     {
       "id": "hauser-wirth",
       "galleryId": "hauser-wirth",
-      "title": "Lee Bul: The Anatomy of Every Setting Sun",
-      "artists": "Lee Bul",
-      "closes": "2026-10-24",
-      "image": "https://media.hauserwirth.com/transform/2b00f68d-55fb-418b-ad66-6903007ffd25/Lee-Bul-inst-021-tif",
+      "title": "Anna Maria Maiolino: ANNA—And the infinite line",
+      "artists": "Anna Maria Maiolino",
+      "closes": "2026-10-31",
+      "image": "https://media.hauserwirth.com/asset/54b4086f-ac1e-4c93-a0ab-fb8b077e852b/web-hires-jpg-72dpi/MAIOL60754-Det-GH.jpg",
       "isPhotography": null
     },
     {
@@ -209,15 +200,6 @@
       "isPhotography": null
     },
     {
-      "id": "white-columns",
-      "galleryId": "white-columns",
-      "title": "Mieko Meguro / Eric Spencer / Juliette Collet — Save The Date",
-      "artists": null,
-      "closes": "2026-10-24",
-      "image": "https://whitecolumns.org/wp-content/uploads/exhibitions//Fear-768x650.jpg",
-      "isPhotography": null
-    },
-    {
       "id": "whitney-museum",
       "galleryId": "whitney-museum",
       "title": "Roy Lichtenstein: Like New",
@@ -272,39 +254,12 @@
       "isPhotography": null
     },
     {
-      "id": "david-zwirner",
-      "galleryId": "david-zwirner",
-      "title": "Nate Lowman: Hanging Out",
-      "artists": "Nate Lowman",
-      "closes": "2026-10-24",
-      "image": "https://cdn.sanity.io/images/juzvn5an/release-adp/0a68f57903acbbd8e5d04166dac38800cb764235-2100x1182.jpg?bg=ffffff&w=1200&h=630&fit=fill&crop=entropy&auto=format",
-      "isPhotography": null
-    },
-    {
-      "id": "matthew-marks-gallery",
-      "galleryId": "matthew-marks-gallery",
-      "title": "Leidy Churchman: Space Remembers",
-      "artists": "Leidy Churchman",
-      "closes": "2026-10-24",
-      "image": "https://cdn.matthewmarks.com/online/leidy-churchman-space-remembers-09-2026/_1000xAUTO_crop_center-center_none/52002_01_wall.jpg",
-      "isPhotography": null
-    },
-    {
-      "id": "luhring-augustine",
-      "galleryId": "luhring-augustine",
-      "title": "settle for a good fantasy",
-      "artists": null,
-      "closes": "2026-10-24",
-      "image": "https://static-assets.artlogic.net/w_1000,h_1000,c_limit/exhibit-e/556d89b2cfaf3421548b4568/6a9de85ad381cadd69d8e0d9cf047ea3.jpeg",
-      "isPhotography": null
-    },
-    {
       "id": "gladstone-gallery",
       "galleryId": "gladstone-gallery",
-      "title": "Ugo Rondinone: waterfall",
-      "artists": "Ugo Rondinone",
+      "title": "Joseph Yaeger: Agita",
+      "artists": "Joseph Yaeger",
       "closes": "2026-10-31",
-      "image": "https://images.ctfassets.net/cmz556ev1x99/4a3sWfl5iNOO5Aw1en1S7P/13f2f7e7f70e85f8e167122ec2f6a32b/1_-_UR_BGG26_install_2b_e.jpg",
+      "image": "https://files.ocula.com/ri/98/98cf2e06-fabf-43c5-9347-bacc0c1f9371/1200/675/untitled.jpg",
       "isPhotography": null
     },
     {
@@ -313,7 +268,7 @@
       "title": "Becky Suss: Night House",
       "artists": "Becky Suss",
       "closes": "2026-10-31",
-      "image": "https://jackshainman.com/uploads/17000170/178957093164/JSGChelsea_BS_Night_House_2026_v1_LR-1400-xxx_q85.jpg",
+      "image": "https://jackshainman.com/uploads/17000170/1789141108415/JSGChelsea_BS_Night_House_2026_RUSH3_LR-800-0x48x2000x1335_q85.jpg",
       "isPhotography": null
     },
     {
@@ -350,15 +305,6 @@
       "artists": "Curran Hatleberg",
       "closes": "2026-12-12",
       "image": "https://higherpictures.com/wp-content/uploads/2026/10/RD_01.jpg",
-      "isPhotography": null
-    },
-    {
-      "id": "marian-goodman-gallery",
-      "galleryId": "marian-goodman-gallery",
-      "title": "Tony Cragg",
-      "artists": "Tony Cragg",
-      "closes": "2026-10-24",
-      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-mariangoodman/usr/images/exhibitions/main_image_override/items/42/4298e7ca47f247d98b884e838cedbf83/28704_26597_33121_33119cragg_photocreditalexyudzon_3rd-floor-installation_7.jpg",
       "isPhotography": null
     }
   ]
