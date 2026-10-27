@@ -242,16 +242,19 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Online-only shows are not listed | The page is for walking |
 | Oct 27 2026 | Multiple locations per gallery go into the data model (Build 3) | Many galleries have several NYC spaces; shows at second addresses were being missed |
 | Oct 27 2026 | Phase 1 flags resolved: Aperture open (UWS); Laurence Miller closed (private dealer); Janet Borden closed; Agora excluded; Danziger kept; Robert Mann Suite 4C and Benrubi's move confirmed; stale notes fixed | Josh's answers on PR #4 |
+| Oct 27 2026 | Phase 2: 38 venues added to `galleries.json` per Josh's verdict on the candidate list (candidates 1–35 plus Cooper Hewitt and Museum of the Moving Image; NYPL as two entries, Schwarzman Building and Schomburg Center). Data only | Broader coverage: all five boroughs, museums and generalist galleries that show photography. The Friday refresh finds their shows |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-27 — Builds 1 and 2 merged and live; Phase 1 (registry audit) in progress*
+*Last updated: 2026-10-27 — Builds 1 and 2 and Phase 1 merged and live; Phase 2 (add venues) in progress*
 
 Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site now fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
 
-**Phase 1 (registry audit), in progress:** branch `data/registry-audit`, PR open, not merged. Fills `exhibitionsUrl` and `photoFocus` for every gallery it could reach and corrects addresses and hours from each gallery's own site. Data only: `shows.json` and page code are untouched. Seven venues (Gagosian, Hauser & Wirth, MoMA, the Morgan, the Met, NY Historical, Brooklyn Museum) put a Cloudflare or Vercel bot challenge in front of plain HTTP clients, so a refresh run from the AI Workshop can't read them directly. Open questions for Josh are listed in the PR.
+**Phase 1 (registry audit), merged 2026-10-27 as PR #4:** filled `exhibitionsUrl` and `photoFocus` and corrected addresses and hours from each gallery's own site. Seven venues (Gagosian, Hauser & Wirth, MoMA, the Morgan, the Met, NY Historical, Brooklyn Museum) put a Cloudflare or Vercel bot challenge in front of plain HTTP clients, so a refresh run from the AI Workshop can't read them directly.
+
+**Phase 2 (add venues), in progress:** branch `data/add-venues`, PR open, not merged. Appends 38 venues to `galleries.json` (84 in all), with every field filled from each venue's own site where reachable and coordinates from OpenStreetMap Nominatim. Data only: `shows.json` and page code are untouched. Five of the new venues (NYPL Schwarzman and Schomburg, El Museo del Barrio, Asia Society, Museum of the Moving Image) are behind bot challenges, so their address, hours, coordinates and `exhibitionsUrl` are null for now. Daniel Cooney (moved to Santa Fe), Foley (closed), Steven Kasher and Klompching (appointment-only, no public space) were added as `closed`. Open questions for Josh are listed in the PR.
 
 Build 2 (cross-device state + "Not photography") merged 2026-10-25 as PR #3. As built:
 - `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
