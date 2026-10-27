@@ -120,7 +120,7 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 | `address`, `hours`, `website`, `notes` | string \| null | `notes` is free text |
 | `isMuseum` | bool | |
 | `lat`, `lng` | number \| null | |
-| `exhibitionsUrl` | string \| null | The gallery's own page listing its *current* New York exhibitions (a "current" page in preference to a full archive; never a third-party listing site like Artsy or Ocula). The refresh reads this instead of guessing URLs. Filled by the Phase 1 registry audit (2026-10-27); null where the site blocks plain HTTP clients or couldn't be reached |
+| `exhibitionsUrl` | string \| null | The gallery's own page listing its *current* New York exhibitions (a "current" page in preference to a full archive; never a third-party listing site like Artsy or Ocula). The refresh reads this instead of guessing URLs. Filled by the Phase 1 registry audit (2026-10-27); **Unverified** for the 7 venues behind bot challenges (Gagosian, Hauser & Wirth, MoMA, Morgan, Met, NY Historical, Brooklyn Museum): recorded 2026-10-27 as the likely pages, not fetched; how the refresh reads them is decided in Phase 3 |
 | `photoFocus` | `"specialist"` \| `"regular"` \| `"occasional"` \| `"museum"` \| null | How much photography the venue shows, judged on the last ~2 years of its exhibition history. `specialist`: photography is the program (most shows are photography). `regular`: shows photography often, alongside other media. `occasional`: photography shows are uncommon. `museum`: any museum or institution with several concurrent shows (independent of `isMuseum`, which is left as is). null = not yet assessed |
 
 ### `shows.json` — `{ "updated": "YYYY-MM-DD", "shows": [...] }` (current exhibitions, rewritten by each refresh)
@@ -173,7 +173,7 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
 ## Workflow
 
 - **Builds: AI Workshop** (autonomous, branch-per-step, PRs, Netlify deploy previews, Josh merges by hand). **Planning and visual prototyping: Josh's laptop.** See `claude-context/dev-workflow-ai-workshop.md` in Josh's Dropbox.
-- **Weekend refresh:** a scheduled task (Sat + Sun 8am ET) clones this repo, updates `gallery/data/*.json`, commits to `main` and pushes. Netlify deploys. Until the Build 1 cutover, it still runs the old spreadsheet + generator flow.
+- **Weekly refresh:** a scheduled task (Fridays 5:47am ET since 2026-10-27; was Sat + Sun 8am) clones this repo, updates `gallery/data/shows.json`, commits to `main` and pushes. Netlify deploys. Its instructions are rewritten in Phase 3 to read `exhibitionsUrl`, classify shows, and handle multiple shows per venue.
 
 ---
 
@@ -237,6 +237,11 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Refresh weekly, Fridays 5:47am ET (replaces Sat + Sun) | One fresh pass before the weekend is enough |
 | Oct 27 2026 | Targets: ≥90% of listed shows are photography, ≥90% have images, ≤1 web search per researched gallery | Measures "better, cheaper data gathering"; the refresh reads each gallery's stored `exhibitionsUrl` instead of searching. Full plan: `Gallery Thing/data-gathering-plan.md` (Josh's Dropbox; not in the repo) |
 | Oct 27 2026 | Phase 1 = registry audit of `galleries.json` (data only, no page code) | Make the registry reliable before the refresh starts depending on it |
+| Oct 27 2026 | `status` values: `open` (shown), `closed` (closed, or no longer a public gallery, e.g. now a private dealer), `relocating`, `excluded` (deliberately left off, e.g. pay-to-exhibit). The page shows only `open` | Distinguishes "gone" from "not wanted" |
+| Oct 27 2026 | Keep closed galleries in the registry and recheck them quarterly | Galleries reopen or move (Aperture did); the list is cheap to keep |
+| Oct 27 2026 | Online-only shows are not listed | The page is for walking |
+| Oct 27 2026 | Multiple locations per gallery go into the data model (Build 3) | Many galleries have several NYC spaces; shows at second addresses were being missed |
+| Oct 27 2026 | Phase 1 flags resolved: Aperture open (UWS); Laurence Miller closed (private dealer); Janet Borden closed; Agora excluded; Danziger kept; Robert Mann Suite 4C and Benrubi's move confirmed; stale notes fixed | Josh's answers on PR #4 |
 
 ---
 
