@@ -11,8 +11,8 @@
     "isMuseum": false,
     "lat": 40.747597,
     "lng": -74.005741,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://yanceyrichardson.com/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "bruce-silverstein-gallery",
@@ -26,23 +26,23 @@
     "isMuseum": false,
     "lat": 40.746555,
     "lng": -74.006961,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://brucesilverstein.com/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "robert-mann-gallery",
     "name": "Robert Mann Gallery",
     "neighborhood": "Chelsea",
     "status": "open",
-    "address": "508 West 26th St, Suite 9F, NY 10001",
-    "hours": "Tue–Fri 10am–4pm; Sat 12–5pm",
+    "address": "508 West 26th St, Suite 4C, NY 10001",
+    "hours": "Tue–Fri 10am–6pm; Sat 11am–6pm",
     "website": "robertmann.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.74986,
     "lng": -74.003657,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://robertmann.com/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "yossi-milo-gallery",
@@ -50,29 +50,29 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "245 Tenth Ave, NY 10001",
-    "hours": "Check website",
+    "hours": "Tue–Sat 10am–6pm",
     "website": "yossimilo.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.748748,
     "lng": -74.00363,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://yossimilo.com/exhibitions/current/",
+    "photoFocus": "regular"
   },
   {
     "id": "benrubi-gallery",
     "name": "Benrubi Gallery",
     "neighborhood": "Chelsea",
     "status": "open",
-    "address": "521 West 26th St, 2nd Floor, NY 10011",
-    "hours": "Check website",
+    "address": "529 West 20th St, 8th Floor, NY 10011",
+    "hours": "Wed–Sat 11am–5pm",
     "website": "benrubigallery.com",
     "notes": "Gallery",
     "isMuseum": false,
-    "lat": 40.75012,
-    "lng": -74.003769,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "lat": 40.746555,
+    "lng": -74.006961,
+    "exhibitionsUrl": "https://www.benrubigallery.com/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "soho-photo-gallery",
@@ -80,14 +80,14 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "539 W 23rd St, New York, NY 10011",
-    "hours": "Wed 12–6pm; Thu 12–8pm; Fri–Sun 12–6pm",
+    "hours": "Wed–Sun 12–6pm; and by appointment",
     "website": "sohophoto.com",
     "notes": "Gallery · Member-run cooperative",
     "isMuseum": false,
     "lat": 40.748564,
     "lng": -74.0055857,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.sohophoto.com/",
+    "photoFocus": "specialist"
   },
   {
     "id": "pace-gallery",
@@ -101,8 +101,8 @@
     "isMuseum": false,
     "lat": 40.749586,
     "lng": -74.004932,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.pacegallery.com/exhibitions/",
+    "photoFocus": "occasional"
   },
   {
     "id": "sikkema-malloy-jenkins",
@@ -110,14 +110,14 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "530 West 22nd St, NY 10011",
-    "hours": "Check website",
+    "hours": "Tue–Sat 10am–6pm",
     "website": "smjny.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.747512,
     "lng": -74.006058,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.smjny.com/current-exhibitions",
+    "photoFocus": "occasional"
   },
   {
     "id": "gagosian-gallery",
@@ -170,14 +170,14 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "530 West 25th St, NY 10001",
-    "hours": "Check website",
+    "hours": "Tue–Sat 11am–6pm",
     "website": "agora-gallery.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.749451,
     "lng": -74.004613,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://agora-gallery.com/current-art-exhibits-ny/",
+    "photoFocus": "occasional"
   },
   {
     "id": "howard-greenberg-gallery",
@@ -191,8 +191,8 @@
     "isMuseum": false,
     "lat": 40.762277,
     "lng": -73.971902,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.howardgreenberg.com/exhibitions/current/",
+    "photoFocus": "specialist"
   },
   {
     "id": "edwynn-houk-gallery",
@@ -200,14 +200,14 @@
     "neighborhood": "Midtown",
     "status": "open",
     "address": "693 Fifth Ave, 6th Floor, NY 10022",
-    "hours": "Check website",
+    "hours": "Tue–Sat 11am–5pm",
     "website": "houkgallery.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.761221,
     "lng": -73.975016,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.houkgallery.com/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "moma",
@@ -222,7 +222,7 @@
     "lat": 40.761086,
     "lng": -73.977147,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "the-morgan-library-museum",
@@ -237,22 +237,22 @@
     "lat": 40.749093,
     "lng": -73.981809,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "danziger-gallery",
     "name": "Danziger Gallery",
     "neighborhood": "Upper East Side",
     "status": "open",
-    "address": "952 5th Ave, NY 10075",
+    "address": "952 5th Ave, 2nd Floor, NY 10075",
     "hours": "By appointment",
     "website": "danzigergallery.com",
     "notes": "Gallery · Appointment required",
     "isMuseum": false,
     "lat": 40.775219,
     "lng": -73.964792,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://danzigergallery.com/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "gitterman-gallery",
@@ -260,14 +260,14 @@
     "neighborhood": "Upper East Side",
     "status": "open",
     "address": "3 East 66th St, 1B, NY 10065",
-    "hours": "Mon–Sat 11am–6pm",
+    "hours": "Tue–Sat 11am–6pm during exhibitions; otherwise by appointment",
     "website": "gittermangallery.com",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.768485,
     "lng": -73.969161,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://gittermangallery.com/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "metropolitan-museum-of-art",
@@ -282,7 +282,7 @@
     "lat": 40.778947,
     "lng": -73.962298,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "guggenheim-museum",
@@ -296,8 +296,8 @@
     "isMuseum": true,
     "lat": 40.781534,
     "lng": -73.960415,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.guggenheim.org/exhibitions",
+    "photoFocus": "museum"
   },
   {
     "id": "museum-of-the-city-of-ny",
@@ -311,23 +311,23 @@
     "isMuseum": true,
     "lat": 40.792347,
     "lng": -73.952522,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.mcny.org/exhibitions",
+    "photoFocus": "museum"
   },
   {
     "id": "intl-center-of-photography",
     "name": "Intl. Center of Photography",
     "neighborhood": "Lower East Side",
     "status": "open",
-    "address": "79 Essex St, NY 10002",
+    "address": "84 Ludlow St, NY 10002",
     "hours": "Daily 10:30am–6:30pm (Thu until 8pm)",
     "website": "icp.org",
     "notes": "Museum · Multiple exhibitions on view",
     "isMuseum": true,
     "lat": 40.718045,
     "lng": -73.988635,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.icp.org/exhibitions",
+    "photoFocus": "museum"
   },
   {
     "id": "baxter-st-at-camera-club-ny",
@@ -335,14 +335,14 @@
     "neighborhood": "Lower East Side",
     "status": "open",
     "address": "154 Ludlow St, NY 10002",
-    "hours": "Check website",
+    "hours": "Tue–Sat 12–6pm",
     "website": "baxterst.org",
     "notes": "Gallery · Emerging photographers",
     "isMuseum": false,
     "lat": 40.720919,
     "lng": -73.987817,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.baxterst.org/all-exhibitions/?schedule=current",
+    "photoFocus": "specialist"
   },
   {
     "id": "new-museum",
@@ -356,8 +356,8 @@
     "isMuseum": true,
     "lat": 40.722397,
     "lng": -73.992993,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.newmuseum.org/exhibitions/",
+    "photoFocus": "museum"
   },
   {
     "id": "staley-wise-gallery",
@@ -371,8 +371,8 @@
     "isMuseum": false,
     "lat": 40.723696,
     "lng": -73.997249,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.staleywise.com/exhibitions-fairs",
+    "photoFocus": "specialist"
   },
   {
     "id": "white-columns",
@@ -380,14 +380,14 @@
     "neighborhood": "West Village",
     "status": "open",
     "address": "91 Horatio St, NY 10014",
-    "hours": "Check website",
+    "hours": "Tue–Sat 11am–6pm",
     "website": "whitecolumns.org",
     "notes": "Gallery",
     "isMuseum": false,
     "lat": 40.738854,
     "lng": -74.008567,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://whitecolumns.org/exhibitions-programming/",
+    "photoFocus": "occasional"
   },
   {
     "id": "whitney-museum",
@@ -401,8 +401,8 @@
     "isMuseum": true,
     "lat": 40.7395,
     "lng": -74.009373,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://whitney.org/exhibitions",
+    "photoFocus": "museum"
   },
   {
     "id": "laurence-miller-gallery",
@@ -432,7 +432,7 @@
     "lat": 40.779193,
     "lng": -73.974009,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "janet-borden-inc",
@@ -446,8 +446,8 @@
     "isMuseum": false,
     "lat": 40.703363,
     "lng": -73.99067,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://janetbordeninc.com/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "brooklyn-museum",
@@ -462,22 +462,22 @@
     "lat": 40.67135,
     "lng": -73.963683,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "aperture-foundation",
     "name": "Aperture Foundation",
     "neighborhood": "Relocating (UWS)",
     "status": "relocating",
-    "address": "TBD — Upper West Side",
-    "hours": "Temporarily Closed",
+    "address": "380 Columbus Ave at West 78th St, NY 10024",
+    "hours": "Wed–Sat 11am–6pm; Sun 12–5pm",
     "website": "aperture.org",
     "notes": "Gallery · Reopening in 2026",
     "isMuseum": false,
-    "lat": null,
-    "lng": null,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "lat": 40.781618,
+    "lng": -73.97594,
+    "exhibitionsUrl": "https://aperture.org/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "fotografiska-new-york",
@@ -492,7 +492,7 @@
     "lat": null,
     "lng": null,
     "exhibitionsUrl": null,
-    "photoFocus": null
+    "photoFocus": "museum"
   },
   {
     "id": "bronx-documentary-center",
@@ -500,14 +500,14 @@
     "neighborhood": "South Bronx",
     "status": "open",
     "address": "614 Courtlandt Ave, Bronx, NY 10451",
-    "hours": "Thu–Fri 4–8pm; Sat–Sun 1–6pm",
+    "hours": "Thu–Fri 3–7pm; Sat 1–5pm",
     "website": "bronxdoc.org",
     "notes": "Gallery · Non-profit; documentary photography & photojournalism",
     "isMuseum": false,
     "lat": 40.818039,
     "lng": -73.91873,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.bronxdoc.org/bronx-documentary-center/exhibits/current-exhibits/",
+    "photoFocus": "specialist"
   },
   {
     "id": "clampart",
@@ -515,14 +515,14 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "247 W 29th St, Ground Floor, NY 10001",
-    "hours": "Tue–Sat 11am–6pm",
+    "hours": "Tue–Sat 10am–6pm",
     "website": "clampart.com",
     "notes": "Gallery · Photo-primary; AIPAD member",
     "isMuseum": false,
     "lat": 40.74876,
     "lng": -73.994786,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://clampart.com/category/type/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "rick-wester-fine-art",
@@ -530,14 +530,14 @@
     "neighborhood": "Chelsea",
     "status": "open",
     "address": "526 W 26th St, Suite 417, NY 10001",
-    "hours": "Tue–Sat 10am–6pm",
+    "hours": "Tue by appointment; Wed–Fri 11am–6pm; Sat 12–5pm",
     "website": "rickwesterfineart.com",
     "notes": "Gallery · Photo-primary; AIPAD member",
     "isMuseum": false,
     "lat": 40.750126,
     "lng": -74.004296,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.rickwesterfineart.com/exhibitions",
+    "photoFocus": "regular"
   },
   {
     "id": "david-zwirner",
@@ -551,8 +551,8 @@
     "isMuseum": false,
     "lat": 40.745968,
     "lng": -74.007428,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.davidzwirner.com/exhibitions",
+    "photoFocus": "regular"
   },
   {
     "id": "matthew-marks-gallery",
@@ -566,8 +566,8 @@
     "isMuseum": false,
     "lat": 40.747413,
     "lng": -74.005824,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://matthewmarks.com/exhibitions/current",
+    "photoFocus": "occasional"
   },
   {
     "id": "luhring-augustine",
@@ -581,8 +581,8 @@
     "isMuseum": false,
     "lat": 40.749048,
     "lng": -74.005043,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.luhringaugustine.com/exhibitions",
+    "photoFocus": "occasional"
   },
   {
     "id": "gladstone-gallery",
@@ -596,8 +596,8 @@
     "isMuseum": false,
     "lat": 40.748861,
     "lng": -74.004604,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://gladstonegallery.com/exhibitions/",
+    "photoFocus": "occasional"
   },
   {
     "id": "jack-shainman-gallery",
@@ -611,8 +611,8 @@
     "isMuseum": false,
     "lat": 40.746259,
     "lng": -74.006298,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://jackshainman.com/exhibitions",
+    "photoFocus": "occasional"
   },
   {
     "id": "sean-kelly-gallery",
@@ -620,14 +620,14 @@
     "neighborhood": "Hell's Kitchen",
     "status": "open",
     "address": "475 Tenth Ave, NY 10018",
-    "hours": "Tue–Sat 10am–6pm",
+    "hours": "Tue–Fri 11am–6pm; Sat 10am–6pm",
     "website": "skny.com",
     "notes": "Gallery · Dawoud Bey primary gallery; 22,000 sq ft space",
     "isMuseum": false,
     "lat": 40.756143,
     "lng": -73.998243,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.skny.com/exhibitions",
+    "photoFocus": "occasional"
   },
   {
     "id": "throckmorton-fine-art",
@@ -635,14 +635,14 @@
     "neighborhood": "Midtown",
     "status": "open",
     "address": "145 E 57th St, 3rd Floor, NY 10022",
-    "hours": "Tue–Sat 11am–5pm",
+    "hours": "Mon–Fri 10am–5pm; Sat 11am–5pm",
     "website": "throckmorton-nyc.com",
     "notes": "Gallery · Photo-primary; AIPAD member; Latin American photography specialty",
     "isMuseum": false,
     "lat": 40.760878,
     "lng": -73.968585,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://throckmorton-nyc.com/exhibits/",
+    "photoFocus": "regular"
   },
   {
     "id": "sous-les-etoiles-gallery",
@@ -650,14 +650,14 @@
     "neighborhood": "Upper East Side",
     "status": "open",
     "address": "16 E 71st St, NY 10021",
-    "hours": "Tue–Fri 10am–6pm; Sat 11am–5pm",
+    "hours": "Wed–Sat 12–6pm; Mon–Tue by appointment",
     "website": "souslesetoilesgallery.net",
     "notes": "Gallery · Photo-primary; French/international program; moved from Chelsea 2021",
     "isMuseum": false,
     "lat": 40.771225,
     "lng": -73.966461,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.souslesetoilesgallery.net/exhibitions",
+    "photoFocus": "specialist"
   },
   {
     "id": "higher-pictures-generation",
@@ -665,14 +665,14 @@
     "neighborhood": "DUMBO, Brooklyn",
     "status": "open",
     "address": "45 Main St, Suite 723, Brooklyn, NY 11201",
-    "hours": "Tue–Sat 11am–6pm",
+    "hours": "Wed–Sat 12–6pm",
     "website": "higherpictures.com",
     "notes": "Gallery · Photo-primary; historical + contemporary; also UES location",
     "isMuseum": false,
     "lat": 40.702778,
     "lng": -73.990585,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://higherpictures.com/exhibitions/",
+    "photoFocus": "specialist"
   },
   {
     "id": "marian-goodman-gallery",
@@ -686,7 +686,7 @@
     "isMuseum": false,
     "lat": 40.718295,
     "lng": -74.003002,
-    "exhibitionsUrl": null,
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.mariangoodman.com/exhibitions/",
+    "photoFocus": "occasional"
   }
 ]
