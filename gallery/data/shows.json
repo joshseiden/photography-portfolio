@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25",
+  "updated": "2026-10-27",
   "shows": [
     {
       "id": "yancey-richardson-gallery",
@@ -103,7 +103,7 @@
     {
       "id": "edwynn-houk-gallery",
       "galleryId": "edwynn-houk-gallery",
-      "title": "Abelardo Morell: Out of Paper",
+      "title": "Abelardo Morell: Out of Paper / In Dialogue with Gene Davis, Kenneth Noland, Jules Olitski & Larry Poons",
       "artists": "Abelardo Morell",
       "closes": "2026-10-31",
       "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/144/abelardo-morell-paper-cut-outs-3.jpg",
@@ -122,7 +122,7 @@
       "id": "the-morgan-library-museum",
       "galleryId": "the-morgan-library-museum",
       "title": "Luminous Color",
-      "artists": "Group Exhibition",
+      "artists": null,
       "closes": "2026-11-08",
       "image": "https://www.themorgan.org/sites/default/files/exhibitions/hummel-362520v_0001.jpg",
       "isPhotography": null
@@ -305,6 +305,348 @@
       "artists": "Curran Hatleberg",
       "closes": "2026-12-12",
       "image": "https://higherpictures.com/wp-content/uploads/2026/10/RD_01.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "hans-p-kraus-jr",
+      "galleryId": "hans-p-kraus-jr",
+      "title": "Photographs from the Collection of William L. Schaeffer",
+      "artists": null,
+      "closes": "2026-11-25",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "sva-chelsea-gallery",
+      "galleryId": "sva-chelsea-gallery",
+      "title": "A Vivid Blur",
+      "artists": null,
+      "closes": "2026-10-30",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "studio-museum-in-harlem",
+      "galleryId": "studio-museum-in-harlem",
+      "title": "Kapwani Kiwanga: BLEED",
+      "artists": "Kapwani Kiwanga",
+      "closes": "2027-04-01",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "cooper-hewitt-smithsonian-design-museum",
+      "galleryId": "cooper-hewitt-smithsonian-design-museum",
+      "title": "The Substitute",
+      "artists": null,
+      "closes": "2027-02-15",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "bronx-museum-of-the-arts",
+      "galleryId": "bronx-museum-of-the-arts",
+      "title": "Saya Woolfalk: The WoodsWoman Method",
+      "artists": "Saya Woolfalk",
+      "closes": "2027-03-28",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "gagosian-gallery",
+      "galleryId": "gagosian-gallery",
+      "title": "Brice Marden: I Am Plane Image",
+      "artists": "Brice Marden",
+      "closes": "2026-12-12",
+      "image": "https://gagosian.com/media/images/exhibitions/2026/brice-marden-i-am-plane-image/M1qEe-RD9T88_1200x1200.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "white-columns",
+      "galleryId": "white-columns",
+      "title": "Marc Hundley / Claire Watson",
+      "artists": "Marc Hundley, Claire Watson",
+      "closes": "2026-12-19",
+      "image": "https://whitecolumns.org/wp-content/uploads/exhibitions//we-got-beat-up_jpeg-768x956.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "deborah-bell-photographs",
+      "galleryId": "deborah-bell-photographs",
+      "title": "Mexico 1994: The Cibachromes",
+      "artists": null,
+      "closes": null,
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "ubu-gallery",
+      "galleryId": "ubu-gallery",
+      "title": "Edmund Kesting (1892-1970)",
+      "artists": "Edmund Kesting",
+      "closes": null,
+      "image": "https://www.ubugallery.com/wp-content/uploads/2026/09/KEST_43_BANNER.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "nyu-gallatin-galleries",
+      "galleryId": "nyu-gallatin-galleries",
+      "title": "Ain't No Grave Gonna Hold My Body Down",
+      "artists": "Stacy Kranitz",
+      "closes": "2026-12-15",
+      "image": "https://wp.nyu.edu/gallatingalleries/files/2026/07/SK-ANBGHMBD_01-1024x667.png",
+      "isPhotography": null
+    },
+    {
+      "id": "el-museo-del-barrio",
+      "galleryId": "el-museo-del-barrio",
+      "title": "Teddy Sandoval and the Butch Gardens School of Art",
+      "artists": "Teddy Sandoval",
+      "closes": "2027-01-10",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "queens-museum",
+      "galleryId": "queens-museum",
+      "title": "Te Amo Porque S.O.S. Pueblo! Altares Ocultos de Duelo y Memoria (Hidden Altars of Grief and Remembrance)",
+      "artists": null,
+      "closes": "2027-02-07",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "aperture-foundation",
+      "galleryId": "aperture-foundation",
+      "title": "Aperture Loves New York",
+      "artists": null,
+      "closes": "2026-11-01",
+      "image": "https://aperture.org/wp-content/uploads/2026/08/Carrie-mae-weems-harlem-1978-copy.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "bienvenu-steinberg-c",
+      "galleryId": "bienvenu-steinberg-c",
+      "title": "Higher Perplexity",
+      "artists": "Marco Maggi",
+      "closes": "2026-11-14",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "leslie-lohman-museum-of-art",
+      "galleryId": "leslie-lohman-museum-of-art",
+      "title": "Soft Spaces: Heather Marie Scholl and Eva Wu",
+      "artists": "Heather Marie Scholl, Eva Wu",
+      "closes": "2026-11-15",
+      "image": "https://leslielohman.org/web/app/templates/uploads/http%3A//34.217.207.249/templates/uploads/Eva-Wu-Red-Light-Green.png",
+      "isPhotography": null
+    },
+    {
+      "id": "asia-society-museum",
+      "galleryId": "asia-society-museum",
+      "title": "Buddha and Shiva, Lotus and Dragon: Celebrating 70 Years of Asia Society and the Rockefeller Legacy",
+      "artists": null,
+      "closes": "2027-01-03",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "pioneer-works",
+      "galleryId": "pioneer-works",
+      "title": "There's no me without you",
+      "artists": "Finnegan Shannon",
+      "closes": "2026-12-20",
+      "image": "https://cdn.sanity.io/images/vgvol637/production/9757139189a1694c52ee7d64dc13e6ede59a91a2-3000x2250.jpg?w=800",
+      "isPhotography": null
+    },
+    {
+      "id": "moma-ps1",
+      "galleryId": "moma-ps1",
+      "title": "En el lugar de los hechos (At the Scene)",
+      "artists": "Teresa Margolles",
+      "closes": "2027-02-08",
+      "image": "https://www.filepicker.io/api/file/9FJheywScuy5PvDndpzi",
+      "isPhotography": null
+    },
+    {
+      "id": "dashwood-projects",
+      "galleryId": "dashwood-projects",
+      "title": "Stefan Marx: PAD Passengers Available for Disembarkation",
+      "artists": "Stefan Marx",
+      "closes": "2026-11-07",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "ryan-lee-gallery",
+      "galleryId": "ryan-lee-gallery",
+      "title": "Cinématique",
+      "artists": null,
+      "closes": "2026-12-23",
+      "image": "https://ryanleegallery.com/wp-content/uploads/2026/10/Rubin-Yellow-Kimono.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "nypl-stephen-a-schwarzman-building",
+      "galleryId": "nypl-stephen-a-schwarzman-building",
+      "title": "Declaring America: 1776 and Beyond",
+      "artists": null,
+      "closes": "2027-01-10",
+      "image": "https://drupal.nypl.org/sites-drupal/default/files/styles/2_1_960/public/2026-03/US250_exhibition_identity.png?h=5dabf909&itok=e0hJRUL_",
+      "isPhotography": null
+    },
+    {
+      "id": "grey-art-museum",
+      "galleryId": "grey-art-museum",
+      "title": "by Alison Knowles: A Retrospective (1960-2022)",
+      "artists": "Alison Knowles",
+      "closes": "2027-01-30",
+      "image": "https://greyartmuseum.nyu.edu/client-uploads/transforms/Exhibitions/Alison-Knowles/Installation/_goldenRatio/15_Grey_Knowles_byMikhailMishin_2026-09-21-210738_vpuz_2026-09-21-210956_wdbh.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "bric-house",
+      "galleryId": "bric-house",
+      "title": "Johan Orellana: Remnants of Forking Paths",
+      "artists": "Johan Orellana",
+      "closes": "2026-12-12",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "museum-of-the-moving-image",
+      "galleryId": "museum-of-the-moving-image",
+      "title": "Felix the Cat",
+      "artists": null,
+      "closes": "2026-11-12",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "penumbra-foundation",
+      "galleryId": "penumbra-foundation",
+      "title": "North North South",
+      "artists": "Ayda Gragossian",
+      "closes": "2026-11-24",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "sundaram-tagore-gallery",
+      "galleryId": "sundaram-tagore-gallery",
+      "title": "Miya Ando: Rain Drawings",
+      "artists": "Miya Ando",
+      "closes": "2026-11-14",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "schomburg-center-for-research-in-black-culture",
+      "galleryId": "schomburg-center-for-research-in-black-culture",
+      "title": "To Uncover and Reveal to the World: Arturo Schomburg's Library",
+      "artists": null,
+      "closes": "2026-12-05",
+      "image": "https://www.nypl.org/sites-drupal/default/files/styles/2_1_2400/public/2026-04/Uncover%20Title_Dark%20Green.png?h=1f7db51e&itok=n84PsAhJ",
+      "isPhotography": null
+    },
+    {
+      "id": "the-museum-at-fit",
+      "galleryId": "the-museum-at-fit",
+      "title": "Doll Dressing",
+      "artists": null,
+      "closes": "2027-01-03",
+      "image": "https://www.fitnyc.edu/museum/images/doll-dressing-mfit-home-banner-dates.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "center-for-brooklyn-history",
+      "galleryId": "center-for-brooklyn-history",
+      "title": "The Battle of Brooklyn: Fought and Remembered",
+      "artists": null,
+      "closes": "2026-12-31",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "alice-austen-house",
+      "galleryId": "alice-austen-house",
+      "title": "Andrea Modica: Italian Story",
+      "artists": "Andrea Modica",
+      "closes": "2027-02-20",
+      "image": "https://i0.wp.com/aliceausten.org/wp-content/uploads/2026/07/070-bad-jpeg.jpg?fit=945%2C1200&ssl=1",
+      "isPhotography": null
+    },
+    {
+      "id": "danziger-gallery",
+      "galleryId": "danziger-gallery",
+      "title": "Portraits",
+      "artists": "Oliver Wasow",
+      "closes": "2026-11-27",
+      "image": "https://static-assets.artlogic.net/w_1050,h_1050,c_lfill/exhibit-e/5abb9910a09a728e158b4568/ee998d71cc4762ddcd5b36d3eb2f7810.jpeg",
+      "isPhotography": null
+    },
+    {
+      "id": "david-zwirner",
+      "galleryId": "david-zwirner",
+      "title": "New York: 19th Street and New York: 20th Street",
+      "artists": "Yoshitomo Nara",
+      "closes": "2026-12-12",
+      "image": "https://cdn.sanity.io/images/juzvn5an/release-adp/74092f28c1a70ef4cdee8844b3746cb827dfbd3c-3000x1688.jpg?bg=ffffff&w=1200&h=630&fit=fill&crop=entropy&auto=format",
+      "isPhotography": null
+    },
+    {
+      "id": "keith-de-lellis-gallery",
+      "galleryId": "keith-de-lellis-gallery",
+      "title": "Frank Meadow Sutcliffe: The Village People",
+      "artists": "Frank Meadow Sutcliffe",
+      "closes": "2026-12-01",
+      "image": null,
+      "isPhotography": null
+    },
+    {
+      "id": "hannah-traore-gallery",
+      "galleryId": "hannah-traore-gallery",
+      "title": "Nonsites Revisited",
+      "artists": "James Perkins",
+      "closes": "2026-11-14",
+      "image": "https://hannahtraoregallery.com/wp-content/uploads/2026/09/asnd-1024x550.png",
+      "isPhotography": null
+    },
+    {
+      "id": "jewish-museum",
+      "galleryId": "jewish-museum",
+      "title": "Sacred Splendor: Jewish Ritual Art and Christian Treasures from St. Vitus Cathedral in Prague",
+      "artists": null,
+      "closes": "2027-02-07",
+      "image": "https://thejewishmuseum.org/wp-content/uploads/2026/01/Fragments-of-Memory_01.png",
+      "isPhotography": null
+    },
+    {
+      "id": "japan-society-gallery",
+      "galleryId": "japan-society-gallery",
+      "title": "Gen'ichirō Inokuma's NYC Salon",
+      "artists": "Gen'ichirō Inokuma",
+      "closes": "2027-01-10",
+      "image": "https://japansociety.org/wp-content/uploads/2026/05/Banner-graphic.jpg",
+      "isPhotography": null
+    },
+    {
+      "id": "en-foco",
+      "galleryId": "en-foco",
+      "title": "Archives of the Image Becoming: The 2026 En Foco Fellowship Exhibition",
+      "artists": "Tyler DeHaarte, George Grullon, Damien Jackson, Jeffrey Jin, Morrison Gong, Omar Soto, Kanishka Puri, Duane Bailey-Castro, Antonia Kuo, Sibyl Montoya, Vasudev Vashisht, Johnny Ramos, Horatio Nguyễn, Katherine Miranda, Michael Young",
+      "closes": "2026-11-21",
+      "image": "https://enfoco.org/wp-content/uploads/2026/09/Updated-Fellowship-Graphics-2025-IG-SIZE-2-scaled.png",
+      "isPhotography": null
+    },
+    {
+      "id": "sva-flatiron-project-space",
+      "galleryId": "sva-flatiron-project-space",
+      "title": "Anywhere, Everywhere: Selections from the Peter J. Cohen Collection of Vernacular Photography",
+      "artists": null,
+      "closes": "2026-11-12",
+      "image": null,
       "isPhotography": null
     }
   ]
