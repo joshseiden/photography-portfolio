@@ -1,5 +1,5 @@
 # Gallery Thing (NYC Photo Shows) — Project Brief
-**Last updated:** 2026-10-25
+**Last updated:** 2026-10-27
 *A personal gallery planning tool for Josh Seiden. Lives in `gallery/` inside the `joshseiden/photography-portfolio` repo.*
 
 ---
@@ -120,8 +120,8 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 | `address`, `hours`, `website`, `notes` | string \| null | `notes` is free text |
 | `isMuseum` | bool | |
 | `lat`, `lng` | number \| null | |
-| `exhibitionsUrl` | string \| null | New, empty for now. For the data-gathering redesign |
-| `photoFocus` | `"specialist"` \| `"sometimes"` \| null | New, empty for now |
+| `exhibitionsUrl` | string \| null | The gallery's own page listing its *current* New York exhibitions (a "current" page in preference to a full archive; never a third-party listing site like Artsy or Ocula). The refresh reads this instead of guessing URLs. Filled by the Phase 1 registry audit (2026-10-27); **Unverified** for the 7 venues behind bot challenges (Gagosian, Hauser & Wirth, MoMA, Morgan, Met, NY Historical, Brooklyn Museum): recorded 2026-10-27 as the likely pages, not fetched; how the refresh reads them is decided in Phase 3 |
+| `photoFocus` | `"specialist"` \| `"regular"` \| `"occasional"` \| `"museum"` \| null | How much photography the venue shows, judged on the last ~2 years of its exhibition history. `specialist`: photography is the program (most shows are photography). `regular`: shows photography often, alongside other media. `occasional`: photography shows are uncommon. `museum`: any museum or institution with several concurrent shows (independent of `isMuseum`, which is left as is). null = not yet assessed |
 
 ### `shows.json` — `{ "updated": "YYYY-MM-DD", "shows": [...] }` (current exhibitions, rewritten by each refresh)
 
@@ -173,7 +173,7 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
 ## Workflow
 
 - **Builds: AI Workshop** (autonomous, branch-per-step, PRs, Netlify deploy previews, Josh merges by hand). **Planning and visual prototyping: Josh's laptop.** See `claude-context/dev-workflow-ai-workshop.md` in Josh's Dropbox.
-- **Weekend refresh:** a scheduled task (Sat + Sun 8am ET) clones this repo, updates `gallery/data/*.json`, commits to `main` and pushes. Netlify deploys. Until the Build 1 cutover, it still runs the old spreadsheet + generator flow.
+- **Weekly refresh:** a scheduled task (Fridays 5:47am ET since 2026-10-27; was Sat + Sun 8am) clones this repo, updates `gallery/data/shows.json`, commits to `main` and pushes. Netlify deploys. Its instructions are rewritten in Phase 3 to read `exhibitionsUrl`, classify shows, and handle multiple shows per venue.
 
 ---
 
@@ -230,16 +230,30 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 25 2026 | Build 2 saved/seen/hidden keyed per show (`<galleryId>::<slug(title)>`), not per gallery | Fixes "seen carries over to the gallery's next show" |
 | Oct 25 2026 | Build 2 weekend refresh is unchanged | Hides stay correct because they're tied to the show; reading hides back into the data files is a later task, not part of Build 2 |
 | Oct 25 2026 | Build 2 follows Build 1's routine: branch, PR, deploy preview, Josh merges | Consistency with how the rest of this project ships |
+| Oct 27 2026 | Cover photography *shows* anywhere in NYC: specialist galleries, museums, and generalist galleries when they show photography | The page is about the shows, not a fixed list of photo galleries |
+| Oct 27 2026 | A show counts as photography when photography is the primary medium, or a substantial part of a group show. Video and light work don't count | Gives the refresh a testable rule |
+| Oct 27 2026 | Non-photography shows are kept in the data but hidden by default (Build 3) | Keeps the evidence and lets Josh override, without cluttering the list |
+| Oct 27 2026 | All five boroughs; priority Manhattan → Brooklyn → others | Broader coverage, in the order Josh actually visits |
+| Oct 27 2026 | Refresh weekly, Fridays 5:47am ET (replaces Sat + Sun) | One fresh pass before the weekend is enough |
+| Oct 27 2026 | Targets: ≥90% of listed shows are photography, ≥90% have images, ≤1 web search per researched gallery | Measures "better, cheaper data gathering"; the refresh reads each gallery's stored `exhibitionsUrl` instead of searching. Full plan: `Gallery Thing/data-gathering-plan.md` (Josh's Dropbox; not in the repo) |
+| Oct 27 2026 | Phase 1 = registry audit of `galleries.json` (data only, no page code) | Make the registry reliable before the refresh starts depending on it |
+| Oct 27 2026 | `status` values: `open` (shown), `closed` (closed, or no longer a public gallery, e.g. now a private dealer), `relocating`, `excluded` (deliberately left off, e.g. pay-to-exhibit). The page shows only `open` | Distinguishes "gone" from "not wanted" |
+| Oct 27 2026 | Keep closed galleries in the registry and recheck them quarterly | Galleries reopen or move (Aperture did); the list is cheap to keep |
+| Oct 27 2026 | Online-only shows are not listed | The page is for walking |
+| Oct 27 2026 | Multiple locations per gallery go into the data model (Build 3) | Many galleries have several NYC spaces; shows at second addresses were being missed |
+| Oct 27 2026 | Phase 1 flags resolved: Aperture open (UWS); Laurence Miller closed (private dealer); Janet Borden closed; Agora excluded; Danziger kept; Robert Mann Suite 4C and Benrubi's move confirmed; stale notes fixed | Josh's answers on PR #4 |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-25 — Build 1 merged and live; Build 2 built, PR open, not yet merged*
+*Last updated: 2026-10-27 — Builds 1 and 2 merged and live; Phase 1 (registry audit) in progress*
 
 Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site now fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
 
-Build 2 (cross-device state + "Not photography") is built on branch `build/cross-device-state`, PR open, **not merged**:
+**Phase 1 (registry audit), in progress:** branch `data/registry-audit`, PR open, not merged. Fills `exhibitionsUrl` and `photoFocus` for every gallery it could reach and corrects addresses and hours from each gallery's own site. Data only: `shows.json` and page code are untouched. Seven venues (Gagosian, Hauser & Wirth, MoMA, the Morgan, the Met, NY Historical, Brooklyn Museum) put a Cloudflare or Vercel bot challenge in front of plain HTTP clients, so a refresh run from the AI Workshop can't read them directly. Open questions for Josh are listed in the PR.
+
+Build 2 (cross-device state + "Not photography") merged 2026-10-25 as PR #3. As built:
 - `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
 - `app.js` adds show-keyed saved/seen/hidden state, a local-storage-first sync layer (debounced flush, 30s retry fallback, `visibilitychange`/`online` triggers), a one-time migration off the Build 1 localStorage keys, a quiet Sync control with key-entry panel, and the "Not photography" hide/unhide flow (detail overlay button + "Hidden (n)" filter chip).
 - **Verified so far:** the function's op-application/validation logic has 19 passing unit tests against a mocked Blobs store (dependency injection on `handleRequest`, since this account has no live Netlify Blobs access); the show-key migration mapping was run against the real `gallery/data/*.json` files (no collisions, correct skip-on-missing-gallery behavior); and a Playwright smoke test drove the actual page in a real browser against a mock stand-in for the sync endpoint — save/seen/hide/unhide, the Hidden chip appearing and disappearing, key entry, wrong-key rejection, stop-syncing, and an actual cross-device save propagating between two separate browser sessions all passed with zero console errors.
