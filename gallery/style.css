@@ -233,6 +233,7 @@ html, body {
 .filter-chip.closing-chip.active { background: var(--accent); border-color: var(--accent); }
 .filter-chip.saved-chip.active   { background: var(--saved);  border-color: var(--saved); }
 .filter-chip.hidden-chip.active  { background: var(--muted);  border-color: var(--muted); }
+.filter-chip.notphoto-chip.active { background: var(--muted); border-color: var(--muted); }
 
 /* ─── SCROLLABLE BODY ─── */
 .scroll-body {
@@ -607,6 +608,18 @@ html, body {
 }
 .pin-popup-closing.urgent { color: #d97070; }
 
+/* Several saved shows at one venue share one pin; each row opens its detail. */
+.pin-popup-venue { margin-top: 0; }
+.pin-popup-item {
+  cursor: pointer;
+  margin-top: 6px; padding-top: 6px;
+  border-top: 1px solid #1e1e1e;
+}
+.pin-popup-item .pin-popup-artist { font-size: 15px; }
+.pin-popup-item .pin-popup-closing { margin-top: 2px; padding-top: 0; border-top: none; }
+.leaflet-popup-scrolled { border: none; }
+.pin-popup-item.is-seen { opacity: 0.45; }
+
 /* ─── DETAIL PAGE ─── */
 #detailPage {
   display: none;
@@ -717,6 +730,12 @@ html, body {
   font-size: 12px; color: var(--muted); text-align: right;
 }
 .detail-closing-block.urgent .days-left { color: var(--accent); }
+
+.detail-photo-note {
+  font-family: 'Spectral', serif; font-style: italic;
+  font-weight: 300; font-size: 12px; color: var(--muted);
+  margin-top: -10px; margin-bottom: 18px;
+}
 
 .detail-actions { display: flex; gap: 10px; margin-top: 22px; }
 .detail-save-btn, .detail-seen-btn {
