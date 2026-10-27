@@ -243,6 +243,7 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Multiple locations per gallery go into the data model (Build 3) | Many galleries have several NYC spaces; shows at second addresses were being missed |
 | Oct 27 2026 | Phase 1 flags resolved: Aperture open (UWS); Laurence Miller closed (private dealer); Janet Borden closed; Agora excluded; Danziger kept; Robert Mann Suite 4C and Benrubi's move confirmed; stale notes fixed | Josh's answers on PR #4 |
 | Oct 27 2026 | Phase 2: 38 venues added to `galleries.json` per Josh's verdict on the candidate list (candidates 1–35 plus Cooper Hewitt and Museum of the Moving Image; NYPL as two entries, Schwarzman Building and Schomburg Center). Data only | Broader coverage: all five boroughs, museums and generalist galleries that show photography. The Friday refresh finds their shows |
+| Oct 27 2026 | Phase 2 answers (PR #5): Cooney, Foley, Kasher, Klompching closed (Cooney not rechecked: left NYC); Ubu open (Industry City, by appointment); Jenkins Johnson moved to its 385 Broadway space (Brooklyn = Build 3 second location); 5 blocked venues given addresses/coords (OSM Nominatim) and exhibitions pages, marked unverified; Bronx Museum → South Bronx; SVA Flatiron Project Space added (85 venues) | Josh's answers on PR #5 |
 
 ---
 
