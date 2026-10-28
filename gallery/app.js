@@ -308,9 +308,11 @@ function mapsUrl(address) {
 function buildFilterBar() {
   const bar = document.getElementById('filterBar');
   const hoods = [];
-  SHOWS.forEach(s => { if (!hoods.includes(s.neighborhood)) hoods.push(s.neighborhood); });
+  SHOWS.forEach(s => { if (!isNotPhoto(s) && !hoods.includes(s.neighborhood)) hoods.push(s.neighborhood); });
   const hiddenCount = SHOWS.filter(s => hiddenMap.has(s.showKey)).length;
+  const notPhotoCount = visibleShows().filter(isNotPhoto).length;
   if (activeFilter === 'hidden' && hiddenCount === 0) activeFilter = 'all';
+  if (activeFilter === 'notphoto' && notPhotoCount === 0) activeFilter = 'all';
 
   const chip = (filter, label, cls) =>
     `<button class="filter-chip ${cls || ''} ${activeFilter === filter ? 'active' : ''}" data-filter="${filter}">${label}</button>`;
@@ -320,6 +322,7 @@ function buildFilterBar() {
     chip('closing', 'Closing Soon', 'closing-chip') +
     chip('saved', 'My Visit', 'saved-chip') +
     (hiddenCount > 0 ? chip('hidden', `Hidden (${hiddenCount})`, 'hidden-chip') : '') +
+    (notPhotoCount > 0 ? chip('notphoto', `Not photography (${notPhotoCount})`, 'notphoto-chip') : '') +
     hoods.map(n => chip(n, n)).join('');
 
   // buildFilterBar() is now called on every filter change (to keep the
@@ -369,6 +372,12 @@ function updateSavedCount() {
 }
 
 // ─── PLAN / LIST ───
+// Build 3b: the refresh classifies shows. Only an explicit `false` is left out
+// of the default views; `true` and `null` (unclassified) show as before.
+function isNotPhoto(s) {
+  return s.isPhotography === false;
+}
+
 function visibleShows() {
   return SHOWS.filter(s => {
     if (hiddenMap.has(s.showKey)) return false;
@@ -382,10 +391,13 @@ function getFilteredShows() {
   if (activeFilter === 'hidden') {
     return SHOWS.filter(s => hiddenMap.has(s.showKey));
   }
+  if (activeFilter === 'notphoto') return visibleShows().filter(isNotPhoto);
+  // My Visit lists everything saved, photography or not.
+  if (activeFilter === 'saved') return visibleShows().filter(s => savedKeys.has(s.showKey));
   return visibleShows().filter(s => {
+    if (isNotPhoto(s)) return false;
     if (activeFilter === 'all')     return true;
     if (activeFilter === 'closing') return !s.isOngoing && daysUntil(s.closing) <= 7;
-    if (activeFilter === 'saved')   return savedKeys.has(s.showKey);
     return s.neighborhood === activeFilter;
   });
 }
@@ -566,13 +578,27 @@ function initOrUpdateWalkMap() {
   updateWalkMarkers();
 }
 
-function makePinIcon(color, faded) {
+// count > 1 puts the number of saved shows at that venue in the pin's dot.
+function makePinIcon(color, faded, count) {
+  const label = count > 1
+    ? `<text x="14" y="17.5" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="11" fill="${color}">${count}</text>`
+    : '';
   const svg =
     `<svg width="28" height="36" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" style="opacity:${faded?0.3:1}">` +
     `<path d="M14 0C6.268 0 0 6.268 0 14c0 9.333 14 22 14 22S28 23.333 28 14C28 6.268 21.732 0 14 0z" fill="${color}"/>` +
-    `<circle cx="14" cy="14" r="6" fill="white" opacity="0.9"/>` +
+    `<circle cx="14" cy="14" r="${count > 1 ? 7 : 6}" fill="white" opacity="0.9"/>` +
+    label +
     `</svg>`;
   return L.divIcon({html:svg, iconSize:[28,36], iconAnchor:[14,36], popupAnchor:[0,-36], className:'map-pin'});
+}
+
+function pinClosing(s) {
+  const days   = s.isOngoing ? null : daysUntil(s.closing);
+  const urgent = days !== null && days <= 7;
+  const closingLine = s.isOngoing
+    ? 'Ongoing'
+    : `Closes ${fmtDate(s.closing)}${urgent ? ' — ' + days + (days===1?' day':' days') + ' left' : ''}`;
+  return { urgent, closingLine };
 }
 
 function updateWalkMarkers() {
@@ -582,22 +608,27 @@ function updateWalkMarkers() {
   const saved = SHOWS.filter(s => savedKeys.has(s.showKey) && !hiddenMap.has(s.showKey) && s.lat !== null && s.lng !== null);
   if (saved.length === 0) { walkMap.setView([40.740, -74.000], 13); return; }
 
+  // One marker per venue: several saved shows at one gallery share its
+  // coordinates, so separate markers would stack and hide each other.
+  const byVenue = new Map();
   saved.forEach(s => {
-    const color  = (NEIGHBORHOODS[s.neighborhood] || {}).color || '#444';
-    const isSeen = seenKeys.has(s.showKey);
-    const days   = s.isOngoing ? null : daysUntil(s.closing);
-    const urgent = days !== null && days <= 7;
-    const closingLine = s.isOngoing
-      ? 'Ongoing'
-      : `Closes ${fmtDate(s.closing)}${urgent ? ' — ' + days + (days===1?' day':' days') + ' left' : ''}`;
+    if (!byVenue.has(s.galleryId)) byVenue.set(s.galleryId, []);
+    byVenue.get(s.galleryId).push(s);
+  });
 
-    const imgHtml = s.thumb
-      ? `<img class="pin-popup-img" src="${s.thumb}" alt="${s.artist}">`
-      : '';
+  byVenue.forEach((shows, galleryId) => {
+    const first  = shows[0];
+    const color  = (NEIGHBORHOODS[first.neighborhood] || {}).color || '#444';
+    const allSeen = shows.every(s => seenKeys.has(s.showKey));
 
-    const marker = L.marker([s.lat, s.lng], {icon:makePinIcon(color, isSeen)})
-      .addTo(walkMap)
-      .bindPopup(
+    let popupHtml;
+    if (shows.length === 1) {
+      const s = first;
+      const { urgent, closingLine } = pinClosing(s);
+      const imgHtml = s.thumb
+        ? `<img class="pin-popup-img" src="${s.thumb}" alt="${s.artist}">`
+        : '';
+      popupHtml =
         `<div class="pin-popup">` +
           imgHtml +
           `<div class="pin-popup-body">` +
@@ -606,10 +637,36 @@ function updateWalkMarkers() {
             `<div class="pin-popup-gallery">${s.gallery}</div>` +
             `<div class="pin-popup-closing ${urgent?'urgent':''}">${closingLine}</div>` +
           `</div>` +
-        `</div>`
-      );
+        `</div>`;
+    } else {
+      popupHtml =
+        `<div class="pin-popup">` +
+          `<div class="pin-popup-body">` +
+            `<div class="pin-popup-gallery pin-popup-venue">${first.gallery} · ${shows.length} shows</div>` +
+            shows.map(s => {
+              const { urgent, closingLine } = pinClosing(s);
+              return (
+                `<div class="pin-popup-item ${seenKeys.has(s.showKey)?'is-seen':''}" onclick="openDetail('${s.id}')">` +
+                  `<div class="pin-popup-artist">${s.artist}</div>` +
+                  `<div class="pin-popup-show">${s.title}</div>` +
+                  `<div class="pin-popup-closing ${urgent?'urgent':''}">${closingLine}</div>` +
+                `</div>`
+              );
+            }).join('') +
+          `</div>` +
+        `</div>`;
+    }
+
+    // The map is a short strip on a phone, so a list of shows scrolls inside
+    // the popup instead of running off the bottom of the map.
+    const popupOpts = shows.length > 1
+      ? { maxHeight: Math.max(120, walkMap.getSize().y - 70), autoPanPaddingBottomRight: [5, 30] }
+      : {};
+    const marker = L.marker([first.lat, first.lng], {icon:makePinIcon(color, allSeen, shows.length)})
+      .addTo(walkMap)
+      .bindPopup(popupHtml, popupOpts);
     marker.on('click', () => marker.openPopup());
-    walkMarkers[s.id] = marker;
+    walkMarkers[galleryId] = marker;
   });
 
   const group = L.featureGroup(Object.values(walkMarkers));
@@ -663,9 +720,24 @@ function openDetail(id) {
     websiteHtml = `<div class="detail-meta-label">Website</div><div class="detail-meta-value"><a href="${url}" target="_blank">${label}</a></div>`;
   }
 
-  const addrDisplay = (s.address && s.address !== 'Check website')
-    ? `<a href="${mapsUrl(s.address + ', New York')}">${s.address}</a>`
-    : s.address;
+  // No address (e.g. a venue whose site couldn't be read) → omit the row,
+  // as the Hours row already does.
+  let addressHtml = '';
+  if (s.address) {
+    const addrDisplay = s.address !== 'Check website'
+      ? `<a href="${mapsUrl(s.address + ', New York')}">${s.address}</a>`
+      : s.address;
+    addressHtml = `<div class="detail-meta-label">Address</div><div class="detail-meta-value">${addrDisplay}</div>`;
+  }
+
+  // The refresh's one-line reason for its photography call, e.g.
+  // "Photography: gelatin silver prints" / "Not photography: paintings".
+  let photoNoteHtml = '';
+  if (s.photoNote) {
+    const note = /^[A-Z][a-z]/.test(s.photoNote) ? s.photoNote[0].toLowerCase() + s.photoNote.slice(1) : s.photoNote;
+    const prefix = s.isPhotography === true ? 'Photography: ' : s.isPhotography === false ? 'Not photography: ' : '';
+    photoNoteHtml = `<div class="detail-photo-note">${prefix ? prefix + note : s.photoNote}</div>`;
+  }
 
   document.getElementById('detailContent').innerHTML =
     heroHtml +
@@ -679,11 +751,11 @@ function openDetail(id) {
       `<div class="detail-divider"></div>` +
       `<div class="detail-meta-label">Gallery</div>` +
       `<div class="detail-meta-value gallery">${s.gallery}</div>` +
-      `<div class="detail-meta-label">Address</div>` +
-      `<div class="detail-meta-value">${addrDisplay}</div>` +
+      addressHtml +
       hoursHtml +
       websiteHtml +
       closingBlock +
+      photoNoteHtml +
       `<div class="detail-actions">` +
         `<button class="detail-save-btn ${isSaved?'saved':''}" id="detailSaveBtn" onclick="detailToggleSave('${s.id}')">` +
           `${isSaved?'♦ Saved to Visit':'◇ Add to Visit'}` +
@@ -775,16 +847,24 @@ async function loadData() {
     const galleryById = {};
     galleries.forEach(g => { galleryById[g.id] = g; });
 
+    // Show ids are moving from `<galleryId>` to `<galleryId>::<slug(title)>`
+    // (Build 3b); both work. The page finds shows by id, so if two entries
+    // ever share one (e.g. two old-style ids at one gallery), the later one
+    // falls back to its show key rather than becoming unreachable.
+    const usedIds = new Set();
     SHOWS = showsData.shows
       .map(sh => {
         const gal = galleryById[sh.galleryId];
         if (!gal || gal.status !== 'open') return null;
         const isOngoing = sh.closes === 'ongoing';
         const closing = (!isOngoing && sh.closes) ? sh.closes : null;
+        const showKey = showKeyFor(sh.galleryId, sh.title);
+        const id = usedIds.has(sh.id) ? showKey : sh.id;
+        usedIds.add(id);
         return {
-          id: sh.id,
+          id: id,
           galleryId: sh.galleryId,
-          showKey: showKeyFor(sh.galleryId, sh.title),
+          showKey: showKey,
           gallery: gal.name,
           artist: sh.artists || 'Group Exhibition',
           title: sh.title,
@@ -797,6 +877,8 @@ async function loadData() {
           isOngoing: isOngoing,
           isMuseum: gal.isMuseum,
           thumb: sh.image,
+          isPhotography: sh.isPhotography === undefined ? null : sh.isPhotography,
+          photoNote: sh.photoNote || null,
           lat: gal.lat,
           lng: gal.lng,
         };

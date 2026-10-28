@@ -127,13 +127,14 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | Currently equals `galleryId` (one show per gallery), which keeps existing saved/seen state valid. If multiple shows per gallery are ever needed, that's a deliberate migration |
+| `id` | string | `<galleryId>::<slug(title)>` (same slug as the page's show key) from the Phase 3 refresh on, so several shows can share one `galleryId`. Older entries have `id == galleryId`; the page accepts both (Build 3b). Saved/seen/hidden state is keyed on the show key, not on `id`, so the change doesn't touch it |
 | `galleryId` | string | Joins to `galleries.json` |
 | `title` | string | |
 | `artists` | string \| null | Page shows "Group Exhibition" when null |
 | `closes` | `"YYYY-MM-DD"` \| `"ongoing"` \| null | |
 | `image` | string \| null | Direct image URL; null → placeholder card |
-| `isPhotography` | bool \| null | New, empty for now (Build 2 / data gathering) |
+| `isPhotography` | bool \| null | Filled by the refresh from Phase 3 on, per the Oct 27 photography rule. `false` shows are left out of the page's default views and listed under the "Not photography (n)" chip (Build 3b). `null` = not classified; shown as normal |
+| `photoNote` | string \| null | One line on why, e.g. "Gelatin silver prints" or "Paintings". The detail view shows it under the dates as "Photography: …" / "Not photography: …" (Build 3b) |
 
 **Derived on the page, not stored:** days left, closing-soon (≤7 days), artist fallback, hiding shows whose closing date has passed, neighborhood colors.
 
@@ -244,18 +245,23 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Phase 1 flags resolved: Aperture open (UWS); Laurence Miller closed (private dealer); Janet Borden closed; Agora excluded; Danziger kept; Robert Mann Suite 4C and Benrubi's move confirmed; stale notes fixed | Josh's answers on PR #4 |
 | Oct 27 2026 | Phase 2: 38 venues added to `galleries.json` per Josh's verdict on the candidate list (candidates 1–35 plus Cooper Hewitt and Museum of the Moving Image; NYPL as two entries, Schwarzman Building and Schomburg Center). Data only | Broader coverage: all five boroughs, museums and generalist galleries that show photography. The Friday refresh finds their shows |
 | Oct 27 2026 | Phase 2 answers (PR #5): Cooney, Foley, Kasher, Klompching closed (Cooney not rechecked: left NYC); Ubu open (Industry City, by appointment); Jenkins Johnson moved to its 385 Broadway space (Brooklyn = Build 3 second location); 5 blocked venues given addresses/coords (OSM Nominatim) and exhibitions pages, marked unverified; Bronx Museum → South Bronx; SVA Flatiron Project Space added (85 venues) | Josh's answers on PR #5 |
+| Oct 27 2026 | Build 3b: `isPhotography: false` shows hidden from All, Closing Soon and neighborhood chips; listed under a "Not photography (n)" chip after "Hidden (n)"; `photoNote` shown in the detail view | The refresh keeps non-photography shows (Josh finds them interesting) without making them the page's focus |
+| Oct 27 2026 | Build 3b: Josh's own hides win over `isPhotography` (a hidden show appears only under Hidden). My Visit and Walk mode show exactly what Josh saved, photography or not | Josh: in Walk mode he wants only the shows he added with the diamond |
+| Oct 27 2026 | Build 3b: one map marker per venue; when several saved shows share a venue, the pin shows the count and its popup lists each show (scrolls on a phone; each row opens the detail) | Shows at one gallery share coordinates, so separate markers would stack and hide each other |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-27 — Builds 1 and 2 and Phase 1 merged and live; Phase 2 (add venues) in progress*
+*Last updated: 2026-10-27 — Builds 1 and 2, Phases 1 and 2 merged and live; Build 3b (photography filter) in progress*
 
 Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site now fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
 
 **Phase 1 (registry audit), merged 2026-10-27 as PR #4:** filled `exhibitionsUrl` and `photoFocus` and corrected addresses and hours from each gallery's own site. Seven venues (Gagosian, Hauser & Wirth, MoMA, the Morgan, the Met, NY Historical, Brooklyn Museum) put a Cloudflare or Vercel bot challenge in front of plain HTTP clients, so a refresh run from the AI Workshop can't read them directly.
 
-**Phase 2 (add venues), in progress:** branch `data/add-venues`, PR open, not merged. Appends 38 venues to `galleries.json` (84 in all), with every field filled from each venue's own site where reachable and coordinates from OpenStreetMap Nominatim. Data only: `shows.json` and page code are untouched. Five of the new venues (NYPL Schwarzman and Schomburg, El Museo del Barrio, Asia Society, Museum of the Moving Image) are behind bot challenges, so their address, hours, coordinates and `exhibitionsUrl` are null for now. Daniel Cooney (moved to Santa Fe), Foley (closed), Steven Kasher and Klompching (appointment-only, no public space) were added as `closed`. Open questions for Josh are listed in the PR.
+**Phase 2 (add venues), merged 2026-10-27 as PR #5** (plus Josh's answers): 38 venues added, 84 in all.
+
+**Build 3b (photography filter + multi-show check), in progress:** branch `build/photo-filter`, PR open, not merged. Page code only (`app.js`, `style.css`); data files untouched. Readies the page for the Phase 3 refresh, which writes several shows per venue, new-style ids and `isPhotography`/`photoNote`. **Must merge before the new refresh instructions go in.** Verified in Chromium (Playwright) against a throwaway test `shows.json`, and live data renders identically to `main`.
 
 Build 2 (cross-device state + "Not photography") merged 2026-10-25 as PR #3. As built:
 - `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
