@@ -135,6 +135,7 @@ All data lives in `gallery/data/` as JSON. The spreadsheet that preceded it is r
 | `image` | string \| null | Direct image URL; null → placeholder card |
 | `isPhotography` | bool \| null | Filled by the refresh from Phase 3 on, per the Oct 27 photography rule. `false` shows are left out of the page's default views and listed under the "Not photography (n)" chip (Build 3b). `null` = not classified; shown as normal |
 | `photoNote` | string \| null | One line on why, e.g. "Gelatin silver prints" or "Paintings". The detail view shows it under the dates as "Photography: …" / "Not photography: …" (Build 3b) |
+| `url` | string \| null | **Coming (not yet written by the refresh).** The show's own page on the venue's site. The image finder (Build 4) reads it; Cowork is adding it to the refresh instructions. Until then the finder only runs on shows given a url by hand (`--seed`) |
 
 **Derived on the page, not stored:** days left, closing-soon (≤7 days), artist fallback, hiding shows whose closing date has passed, neighborhood colors.
 
@@ -168,7 +169,9 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
 - **Personal state (Build 1):** browser localStorage with keys `gallery-savedIds` and `gallery-seenIds`, gallery-id-keyed. Superseded by Build 2's show-keyed state; the old keys are left in place (unused after migration) rather than deleted, since deleting them would be a destructive step with no benefit.
 - **Personal state (Build 2, built):** saved / seen / hidden live in `localStorage['gallery-state']` (always, local-first) and, when a personal key is set, are kept in sync with a single Netlify Function (`netlify/functions/gallery-state.mjs`) backed by Netlify Blobs. See "Show keys and state document" above for the shapes, and "Shared Infrastructure" below for the new root files. The weekly refresh does **not** yet read hides back into the data files — see Decisions Log; that's a follow-up, not part of Build 2.
 - **Map:** Esri World Dark Gray Base + Reference tile layers, `maxNativeZoom: 16`, `maxZoom: 19`, attribution "Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors".
-- **Scripts:** `gallery/scripts/hunt_images.py` fills/validates show images in `shows.json` (needs open network). Never clears an image on a network failure, only on a definitive 4xx/5xx.
+- **Image finder (Build 4):** `gallery/scripts/find_images.py`, Python 3 standard library only. For each show with no `image` and with a `url`, it reads the page's raw HTML and picks `og:image` / `og:image:url` / `og:image:secure_url` / `twitter:image`, then artwork images in the page body (`data-enlarge`, `data-enlarge-srcset`, `data-img`, `data-src`, `srcset`, inline CSS backgrounds, `<img src>`), skipping logos, icons, header/nav/footer images, SVGs and trackers. Each pick must load as a jpeg/png/webp/gif at least 400 px on its longer side. Bot challenges are skipped, never worked around. Homepages and listing pages are used only when the url is a listing and it's the venue's only show, and then only an image in the same block as the show's title (marked "listing"). It never overwrites or clears an image. `--dry-run --seed <file> [--compare]` writes a review page instead of changing `shows.json`.
+- **Image Action (Build 4):** `.github/workflows/gallery-images.yml` runs the finder on GitHub's servers on every push to `main` that changes `shows.json` (i.e. after each refresh), and by hand from the Actions tab. If it found images it commits "Gallery images YYYY-MM-DD" as `github-actions[bot]`, rebases once and pushes; a failed push fails the run, with no retry. Its push uses the built-in `GITHUB_TOKEN`, which doesn't start new workflow runs, so it can't loop. 10-minute timeout; runs never overlap.
+- **Old script:** `gallery/scripts/hunt_images.py` (July 2026 approach, ported from the spreadsheet) is still in the repo but nothing runs it. It also clears images on a 4xx/5xx, which the finder deliberately doesn't do. Superseded by the finder; left in place pending Josh's call.
 
 ---
 
@@ -190,6 +193,9 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 - `netlify/functions/gallery-state.mjs` — the sync function (Netlify's default functions directory; no `netlify.toml` needed since the function declares its own route via `export const config = { path: ... }`).
 - Root `package.json` + `package-lock.json` — the single dependency is `@netlify/blobs` (no transitive deps). No build command; the site still ships as plain static files.
 - Root `.gitignore` — just `node_modules/`, so installing that dependency locally doesn't get committed.
+
+**Build 4 added, also outside `gallery/`** (approved by Josh 2026-10-28):
+- `.github/workflows/gallery-images.yml` — the image Action. The first file the gallery project owns outside `gallery/`, `netlify/` and `_redirects`. It commits to `main` as `github-actions[bot]` with the built-in token (no secrets), touching only `gallery/data/shows.json`.
 
 ---
 
@@ -249,13 +255,15 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Build 3b: `isPhotography: false` shows hidden from All, Closing Soon and neighborhood chips; listed under a "Not photography (n)" chip after "Hidden (n)"; `photoNote` shown in the detail view | The refresh keeps non-photography shows (Josh finds them interesting) without making them the page's focus |
 | Oct 27 2026 | Build 3b: Josh's own hides win over `isPhotography` (a hidden show appears only under Hidden). My Visit and Walk mode show exactly what Josh saved, photography or not | Josh: in Walk mode he wants only the shows he added with the diamond |
 | Oct 27 2026 | Build 3b: one map marker per venue; when several saved shows share a venue, the pin shows the count and its popup lists each show (scrolls on a phone; each row opens the detail) | Shows at one gallery share coordinates, so separate markers would stack and hide each other |
+| Oct 28 2026 | Build 4: images come from a deterministic script (`find_images.py`) run by a GitHub Action after each refresh, not from the refresh's AI fetch tool | The fetch tool strips the header and the attributes that hold images, and can't fetch raw HTML. A script on GitHub's servers needs no change to the refresh beyond recording each show's `url` |
+| Oct 28 2026 | Build 4: wrong images are worse than none. On a listing page, only an image in the same block as the title counts; a page's own logo (alt text = venue name, or inside a `logo` element) never counts | The dry run's first pass took the Portfolio Reviews photo for Soho Photo's MEMBERS show, and two venues' logos |
 | Oct 28 2026 | Clean-up 1: `/gallery/*.md` files return a forced 404 on the live site; `HANDOFF-build-1.md` removed from the repo (copy in Josh's Dropbox archive) | The brief describes tokens, the sync key's env var name and the infrastructure; no reason for it to be public. Finished handoffs are history |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-28 — Builds 1, 2 and 3b and Phases 1–3 merged and live; Clean-up 1 in progress*
+*Last updated: 2026-10-28 — Builds 1, 2 and 3b, Phases 1–3 and Clean-up 1 merged and live; Build 4 (image finder) in review*
 
 Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
 
@@ -267,7 +275,9 @@ Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merg
 
 **Phase 3 (refresh instructions), live.** See Workflow above. First test run 2026-10-27 (PR #6): **90% of shows on the page are photography** (target ≥90%: met) and **60% of photography shows have images** (target ≥90%: not met).
 
-**Image test (Clean-up 1, 2026-10-28):** checked the 17 photography shows with no image. The working idea was that the refresh's AI fetch tool turns pages into text and drops the `og:image` tag. That's partly right: the fetch tool does drop the page header, and also images held in `data-*` attributes and CSS backgrounds. But only 2 of the 17 show pages have an `og:image` at all. Nearly every reachable page has the artwork image in its raw HTML body. Next step: have the refresh read raw HTML and take the image from the page body, not just from `og:image`. Full table in the Clean-up 1 PR.
+**Image test (Clean-up 1, 2026-10-28):** checked the 17 photography shows with no image. The working idea was that the refresh's AI fetch tool turns pages into text and drops the `og:image` tag. That's partly right: the fetch tool does drop the page header, and also images held in `data-*` attributes and CSS backgrounds. But only 2 of the 17 show pages have an `og:image` at all. Nearly every reachable page has the artwork image in its raw HTML body. Full table in the Clean-up 1 PR (#8).
+
+**Build 4 (image finder + GitHub Action), in review on `build/image-finder`.** Dry run 2026-10-28 on a hand-made seed of show urls: found images for 13 of the 17 photography shows with none (2 blocked by bot challenges: MoMA, El Museo; Soho Photo and Deborah Bell have no page of their own and nothing usable on their listing pages), plus both unclassified shows (Pace, Penumbra). On 10 shows that already had an image, it picked the same image 9 times and the same artwork as a different image once (ICP). Live only once the PR is merged **and** the refresh writes `url`; until then the Action runs but finds nothing to do.
 
 Build 2 (cross-device state + "Not photography") merged 2026-10-25 as PR #3. As built:
 - `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
