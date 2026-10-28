@@ -1,0 +1,46 @@
+# Gallery Thing Build 4: fill missing show images after each refresh.
+# Runs gallery/scripts/find_images.py on GitHub's servers and commits any
+# images it finds to main. Its own push is made with GITHUB_TOKEN, which
+# doesn't start new workflow runs, so it can't trigger itself.
+
+name: Gallery images
+
+on:
+  push:
+    branches: [main]
+    paths: [gallery/data/shows.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gallery-images
+  cancel-in-progress: false
+
+jobs:
+  find-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Find images
+        run: python3 gallery/scripts/find_images.py
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet -- gallery/data/shows.json; then
+            echo "No new images; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gallery/data/shows.json
+          git commit -m "Gallery images $(TZ=America/New_York date +%F)"
+          # One rebase onto anything pushed meanwhile, then one push. If either
+          # fails, the step (and the run) fails; nothing is retried.
+          git pull --rebase origin main
+          git push origin HEAD:main
