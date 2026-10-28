@@ -2,3 +2,7 @@
 /Gallery_Brief       /gallery/  301
 /gallery_brief       /gallery/  301
 /gallery_brief.html  /gallery/  301
+
+# Project docs aren't public. Forced (!) because the file exists. Add a line for any new .md under gallery/.
+/gallery/PROJECT_BRIEF.md  /gallery/not-found  404!
+/gallery/project_brief.md  /gallery/not-found  404!
