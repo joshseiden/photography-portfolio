@@ -1,5 +1,5 @@
 # Gallery Thing (NYC Photo Shows) — Project Brief
-**Last updated:** 2026-10-27
+**Last updated:** 2026-10-28
 *A personal gallery planning tool for Josh Seiden. Lives in `gallery/` inside the `joshseiden/photography-portfolio` repo.*
 
 ---
@@ -154,7 +154,7 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
     "updatedAt": "<ISO timestamp>"
   }
   ```
-  `hidden` carries `gallery`/`title` (not just the key) so a hide survives the show rotating out of `shows.json` and so the weekend refresh can match it back up without rejoining against historical data.
+  `hidden` carries `gallery`/`title` (not just the key) so a hide survives the show rotating out of `shows.json` and so the weekly refresh can match it back up without rejoining against historical data.
 - **Local mirror:** the browser keeps the same shape in `localStorage['gallery-state']`, plus an ops queue in `localStorage['gallery-pending']` for whatever hasn't been confirmed by the server yet. The personal sync key lives in `localStorage['gallery-key']`.
 
 ---
@@ -164,8 +164,9 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
 - **Plain static files, no build step:** `gallery/index.html`, `gallery/app.js`, `gallery/style.css`. The page fetches `data/galleries.json` and `data/shows.json` at load. No framework. Leaflet and Google Fonts from CDN as before.
 - **No generator.** Retired 2026-10-24. The refresh edits data files only; it never touches page code.
 - **URL:** `joshuaseidenphotography.com/gallery/`. Root `_redirects` sends `/Gallery_Brief.html` (and Netlify's pretty-URL form `/Gallery_Brief`) to `/gallery/` with a 301.
+- **Project docs aren't public (Clean-up 1):** `_redirects` forces a 404 for `/gallery/PROJECT_BRIEF.md` (the `!` flag, since Netlify serves existing files before plain rules). Netlify rules can't wildcard a file extension, so **any new `.md` file under `gallery/` needs its own 404 rule**, or should stay out of the repo (handoffs live in Josh's Dropbox).
 - **Personal state (Build 1):** browser localStorage with keys `gallery-savedIds` and `gallery-seenIds`, gallery-id-keyed. Superseded by Build 2's show-keyed state; the old keys are left in place (unused after migration) rather than deleted, since deleting them would be a destructive step with no benefit.
-- **Personal state (Build 2, built):** saved / seen / hidden live in `localStorage['gallery-state']` (always, local-first) and, when a personal key is set, are kept in sync with a single Netlify Function (`netlify/functions/gallery-state.mjs`) backed by Netlify Blobs. See "Show keys and state document" above for the shapes, and "Shared Infrastructure" below for the new root files. The weekend refresh does **not** yet read hides back into the data files — see Decisions Log; that's a follow-up, not part of Build 2.
+- **Personal state (Build 2, built):** saved / seen / hidden live in `localStorage['gallery-state']` (always, local-first) and, when a personal key is set, are kept in sync with a single Netlify Function (`netlify/functions/gallery-state.mjs`) backed by Netlify Blobs. See "Show keys and state document" above for the shapes, and "Shared Infrastructure" below for the new root files. The weekly refresh does **not** yet read hides back into the data files — see Decisions Log; that's a follow-up, not part of Build 2.
 - **Map:** Esri World Dark Gray Base + Reference tile layers, `maxNativeZoom: 16`, `maxZoom: 19`, attribution "Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors".
 - **Scripts:** `gallery/scripts/hunt_images.py` fills/validates show images in `shows.json` (needs open network). Never clears an image on a network failure, only on a definitive 4xx/5xx.
 
@@ -174,7 +175,7 @@ Saved / seen / hidden are keyed **per show**, not per gallery, so a gallery's ne
 ## Workflow
 
 - **Builds: AI Workshop** (autonomous, branch-per-step, PRs, Netlify deploy previews, Josh merges by hand). **Planning and visual prototyping: Josh's laptop.** See `claude-context/dev-workflow-ai-workshop.md` in Josh's Dropbox.
-- **Weekly refresh:** a scheduled task (Fridays 5:47am ET since 2026-10-27; was Sat + Sun 8am) clones this repo, updates `gallery/data/shows.json`, commits to `main` and pushes. Netlify deploys. Its instructions are rewritten in Phase 3 to read `exhibitionsUrl`, classify shows, and handle multiple shows per venue.
+- **Weekly refresh:** the scheduled task "NYC gallery weekly refresh" (Fridays 5:47am ET since 2026-10-27; was Sat + Sun 8am) clones this repo, rewrites `gallery/data/shows.json`, commits to `main` and pushes; Netlify deploys. Its Phase 3 instructions are live: it reads each venue's `exhibitionsUrl` and writes **one show entry per current show** (several per venue where there are several), with ids `<galleryId>::<slug(title)>`, each classified with `isPhotography` + `photoNote`. Museums are listed photography shows only. It attaches the repo with `add_repo` before pushing. Its token can push but can't open PRs.
 
 ---
 
@@ -248,27 +249,32 @@ This repo, its Netlify site and the domain are shared with Josh's photography po
 | Oct 27 2026 | Build 3b: `isPhotography: false` shows hidden from All, Closing Soon and neighborhood chips; listed under a "Not photography (n)" chip after "Hidden (n)"; `photoNote` shown in the detail view | The refresh keeps non-photography shows (Josh finds them interesting) without making them the page's focus |
 | Oct 27 2026 | Build 3b: Josh's own hides win over `isPhotography` (a hidden show appears only under Hidden). My Visit and Walk mode show exactly what Josh saved, photography or not | Josh: in Walk mode he wants only the shows he added with the diamond |
 | Oct 27 2026 | Build 3b: one map marker per venue; when several saved shows share a venue, the pin shows the count and its popup lists each show (scrolls on a phone; each row opens the detail) | Shows at one gallery share coordinates, so separate markers would stack and hide each other |
+| Oct 28 2026 | Clean-up 1: `/gallery/*.md` files return a forced 404 on the live site; `HANDOFF-build-1.md` removed from the repo (copy in Josh's Dropbox archive) | The brief describes tokens, the sync key's env var name and the infrastructure; no reason for it to be public. Finished handoffs are history |
 
 ---
 
 ## Current State
 
-*Last updated: 2026-10-27 — Builds 1 and 2, Phases 1 and 2 merged and live; Build 3b (photography filter) in progress*
+*Last updated: 2026-10-28 — Builds 1, 2 and 3b and Phases 1–3 merged and live; Clean-up 1 in progress*
 
-Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site now fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
+Build 1 (the JSON migration) and the follow-up legacy-redirect fix are both merged to `main` and live. The site fetches `gallery/data/galleries.json` + `gallery/data/shows.json` at runtime; `Gallery_Brief.html` is gone (kept in git history), with 301s from all four casings of the old URL to `/gallery/`.
 
 **Phase 1 (registry audit), merged 2026-10-27 as PR #4:** filled `exhibitionsUrl` and `photoFocus` and corrected addresses and hours from each gallery's own site. Seven venues (Gagosian, Hauser & Wirth, MoMA, the Morgan, the Met, NY Historical, Brooklyn Museum) put a Cloudflare or Vercel bot challenge in front of plain HTTP clients, so a refresh run from the AI Workshop can't read them directly.
 
-**Phase 2 (add venues), merged 2026-10-27 as PR #5** (plus Josh's answers): 38 venues added, 84 in all.
+**Phase 2 (add venues), merged 2026-10-27 as PR #5** (plus Josh's answers): 38 venues added. The registry now has **85 venues, 76 open**.
 
-**Build 3b (photography filter + multi-show check), in progress:** branch `build/photo-filter`, PR open, not merged. Page code only (`app.js`, `style.css`); data files untouched. Readies the page for the Phase 3 refresh, which writes several shows per venue, new-style ids and `isPhotography`/`photoNote`. **Must merge before the new refresh instructions go in.** Verified in Chromium (Playwright) against a throwaway test `shows.json`, and live data renders identically to `main`.
+**Build 3b (photography filter + multi-show venues), merged 2026-10-27 as PR #7.** Page code only. Non-photography shows sit under the "Not photography (n)" chip, the detail view shows `photoNote`, and venues with several saved shows get one map marker with a list.
+
+**Phase 3 (refresh instructions), live.** See Workflow above. First test run 2026-10-27 (PR #6): **90% of shows on the page are photography** (target ≥90%: met) and **60% of photography shows have images** (target ≥90%: not met).
+
+**Image test (Clean-up 1, 2026-10-28):** checked the 17 photography shows with no image. The working idea was that the refresh's AI fetch tool turns pages into text and drops the `og:image` tag. That's partly right: the fetch tool does drop the page header, and also images held in `data-*` attributes and CSS backgrounds. But only 2 of the 17 show pages have an `og:image` at all. Nearly every reachable page has the artwork image in its raw HTML body. Next step: have the refresh read raw HTML and take the image from the page body, not just from `og:image`. Full table in the Clean-up 1 PR.
 
 Build 2 (cross-device state + "Not photography") merged 2026-10-25 as PR #3. As built:
 - `netlify/functions/gallery-state.mjs` implements the GET/POST sync endpoint exactly as specced in `HANDOFF-build-2.md` — key auth via `X-Gallery-Key` against the `GALLERY_KEY` env var (constant-time compare), op validation (100-op cap, 200-char string cap), and a read-modify-write against Netlify Blobs. `@netlify/blobs` v8.2.0 has no conditional-write (only-if-match) primitive on `set`/`setJSON` in this version — only conditional *reads* — so this is last-write-wins, which the handoff pre-approved given Josh's devices don't write in the same second.
 - `app.js` adds show-keyed saved/seen/hidden state, a local-storage-first sync layer (debounced flush, 30s retry fallback, `visibilitychange`/`online` triggers), a one-time migration off the Build 1 localStorage keys, a quiet Sync control with key-entry panel, and the "Not photography" hide/unhide flow (detail overlay button + "Hidden (n)" filter chip).
 - **Verified so far:** the function's op-application/validation logic has 19 passing unit tests against a mocked Blobs store (dependency injection on `handleRequest`, since this account has no live Netlify Blobs access); the show-key migration mapping was run against the real `gallery/data/*.json` files (no collisions, correct skip-on-missing-gallery behavior); and a Playwright smoke test drove the actual page in a real browser against a mock stand-in for the sync endpoint — save/seen/hide/unhide, the Hidden chip appearing and disappearing, key entry, wrong-key rejection, stop-syncing, and an actual cross-device save propagating between two separate browser sessions all passed with zero console errors.
 - **Still needs a human pass in the real deploy preview** (per the handoff): confirming `netlify dev`/production actually wires the function route and Blobs store correctly end-to-end, and the two-laptop/phone test with the real `GALLERY_KEY` Josh sets in the Netlify dashboard.
-- Reading hides back into `shows.json`/`galleries.json` on the weekend refresh is **not** part of Build 2 — hides just stay correct locally and server-side; wiring the refresh is a follow-up.
+- Reading hides back into `shows.json`/`galleries.json` on the weekly refresh is **not** part of Build 2 — hides just stay correct locally and server-side; wiring the refresh is a follow-up.
 
 ---
 Companion planning doc: `claude-context/projects/gallery-thing.md` (Josh's Dropbox)
