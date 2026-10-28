@@ -19,8 +19,12 @@ site):
   3. GET each candidate (up to 5): it must be a 200 jpeg/png/webp/gif at
      least 400 px on its longer side (read from the header bytes).
   4. Homepages and listing pages are never used, except when the url is a
-     listing page and it's the venue's only show: then the image nearest
-     the show's title in the HTML is taken and the pick is marked "listing".
+     listing page and it's the venue's only show: then an image in the same
+     block as the show's title is taken (marked "listing"); failing that, the
+     page's artwork, links to image files (slideshows) first (marked
+     "listing-fallback"). Josh, 2026-10-28: one plausible image beats none.
+     Images whose server mislabels them (binary/octet-stream) are accepted
+     only when their header bytes are a real jpeg/png/gif/webp.
   5. An existing image is never overwritten or cleared.
 
 Usage (run from anywhere):
@@ -61,6 +65,10 @@ MAX_IMAGE_HEADER_BYTES = 1_000_000
 MAX_CANDIDATES = 5
 MIN_LONG_SIDE = 400
 IMAGE_TYPES = {"image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"}
+# servers that mislabel images; accepted only when the bytes are a real image
+GENERIC_TYPES = {"binary/octet-stream", "application/octet-stream"}
+# a link straight to an image file (e.g. Soho Photo's slider: <a class="rsImg" href="....jpg">)
+IMAGE_LINK_RE = re.compile(r"\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$", re.I)
 
 META_KEYS = ("og:image", "og:image:url", "og:image:secure_url", "twitter:image")
 # body attributes, in order of preference
@@ -191,7 +199,9 @@ def check_image(url):
     if status != 200:
         return False, f"HTTP {status}"
     ctype = headers.get_content_type() if headers else ""
-    if ctype not in IMAGE_TYPES:
+    if ctype in GENERIC_TYPES and image_size(body):
+        ctype = f"{ctype}, image by its header bytes"   # e.g. S3 serving PNGs as binary/octet-stream
+    elif ctype not in IMAGE_TYPES:
         return False, f"type {ctype}"
     size = image_size(body)
     if not size:
@@ -311,11 +321,17 @@ class PageParser(HTMLParser):
                 url = val.strip()
             if not url:
                 continue
-            self.cands.append({
-                "url": htmllib.unescape(url.strip()), "attr": attr, "rank": rank,
-                "pos": self.pos, "chain": self._chain(self.n), "in_main": in_main, "alt": a.get("alt", ""),
-                "excluded": bool(chrome or tiny or has_bad_word(own) or has_bad_word(a.get("alt", ""))),
-            })
+            self._add(url, attr, rank, in_main, a, chrome, tiny, own)
+        href = a.get("href", "").strip()
+        if tag == "a" and href and IMAGE_LINK_RE.search(href):
+            self._add(href, "a href (image file)", len(BODY_ATTRS), in_main, a, chrome, tiny, own)
+
+    def _add(self, url, attr, rank, in_main, a, chrome, tiny, own):
+        self.cands.append({
+            "url": htmllib.unescape(url.strip()), "attr": attr, "rank": rank,
+            "pos": self.pos, "chain": self._chain(self.n), "in_main": in_main, "alt": a.get("alt", ""),
+            "excluded": bool(chrome or tiny or has_bad_word(own) or has_bad_word(a.get("alt", ""))),
+        })
 
 
 def largest_from_srcset(val):
@@ -471,11 +487,20 @@ def find_image(show, url, gallery, venue_show_count):
             d = [abs(c["pos"] - p) for p, ch in spots if levels_apart(ch, c["chain"]) <= LISTING_MAX_LEVELS]
             if d and not c["excluded"] and not is_venue_name(c, gallery):
                 near.append((min(d), c["rank"], c))
-        if not near:
-            res["why"] = "listing page: no image in the same block as the show's title"
-            return res
-        for _, _, c in sorted(near, key=lambda x: x[:2]):
-            add(c["url"], "listing")
+        if near:
+            for _, _, c in sorted(near, key=lambda x: x[:2]):
+                add(c["url"], "listing")
+        else:
+            # Josh (2026-10-28): for a venue's only show, one plausible image
+            # beats none. Fall back to the page's artwork, links to image files
+            # (slideshows) first, and tag the pick so it's visible in the report.
+            rest = [c for c in parser.cands if not c["excluded"] and not is_venue_name(c, gallery)]
+            rest.sort(key=lambda c: (c["attr"] != "a href (image file)", not c["in_main"], c["rank"], c["pos"]))
+            for c in rest:
+                add(c["url"], "listing-fallback")
+            if not rest:
+                res["why"] = "listing page: no image in the same block as the show's title, and no other artwork"
+                return res
     else:
         for key in META_KEYS:
             for v in parser.meta.get(key, []):
