@@ -127,12 +127,12 @@
     "address": "555 West 24th St, NY 10011",
     "hours": "Tue–Sat 10am–6pm",
     "website": "gagosian.com",
-    "notes": "Gallery · Also UES: 980 Madison Ave",
+    "notes": "Gallery · Also UES: 980 Madison Ave · NYC spaces: 555 W 24th St, 522 W 21st St, 980 Madison Ave, 821 Park Ave",
     "isMuseum": false,
     "lat": 40.749436,
     "lng": -74.005964,
-    "exhibitionsUrl": "https://gagosian.com/exhibitions",
-    "photoFocus": null
+    "exhibitionsUrl": "https://gagosian.com/exhibitions/",
+    "photoFocus": "occasional"
   },
   {
     "id": "hasted-kraeutler-gallery",
@@ -157,12 +157,12 @@
     "address": "542 West 22nd St, NY 10011",
     "hours": "Tue–Sat 10am–6pm",
     "website": "hauserwirth.com",
-    "notes": "Gallery · Multiple NYC locations",
+    "notes": "Gallery · Multiple NYC locations · NYC spaces: 542 W 22nd St, 443 W 18th St (editions), Wooster St (SoHo)",
     "isMuseum": false,
     "lat": 40.747759,
     "lng": -74.006643,
-    "exhibitionsUrl": "https://www.hauserwirth.com/hauser-wirth-exhibitions",
-    "photoFocus": null
+    "exhibitionsUrl": "https://www.hauserwirth.com/hauser-wirth-exhibitions/",
+    "photoFocus": "occasional"
   },
   {
     "id": "agora-gallery",
@@ -236,7 +236,7 @@
     "isMuseum": true,
     "lat": 40.749093,
     "lng": -73.981809,
-    "exhibitionsUrl": "https://www.themorgan.org/exhibitions/current",
+    "exhibitionsUrl": "https://www.themorgan.org/exhibitions",
     "photoFocus": "museum"
   },
   {
@@ -431,7 +431,7 @@
     "isMuseum": true,
     "lat": 40.779193,
     "lng": -73.974009,
-    "exhibitionsUrl": "https://www.nyhistory.org/exhibitions",
+    "exhibitionsUrl": "https://www.nyhistory.org/exhibitions/current",
     "photoFocus": "museum"
   },
   {
@@ -952,7 +952,7 @@
     "address": "476 Fifth Ave, NY 10018",
     "hours": null,
     "website": "nypl.org",
-    "notes": "Museum · New York Public Library; exhibitions page shared with the Schomburg Center · Address and exhibitions page unverified by the Workshop (site blocks automated readers)",
+    "notes": "Museum · New York Public Library; exhibitions page shared with the Schomburg Center · Address and exhibitions page confirmed 2026-10-28 from the venue's own site (it blocks automated readers)",
     "isMuseum": true,
     "lat": 40.753344,
     "lng": -73.982152,
@@ -967,7 +967,7 @@
     "address": "515 Malcolm X Blvd, NY 10037",
     "hours": null,
     "website": "nypl.org",
-    "notes": "Museum · New York Public Library; exhibitions page shared with the Schwarzman Building · Address and exhibitions page unverified by the Workshop (site blocks automated readers)",
+    "notes": "Museum · New York Public Library; exhibitions page shared with the Schwarzman Building · Address and exhibitions page confirmed 2026-10-28 from the venue's own site (it blocks automated readers)",
     "isMuseum": true,
     "lat": 40.814706,
     "lng": -73.940542,
@@ -1012,7 +1012,7 @@
     "address": "1230 Fifth Ave, NY 10029",
     "hours": null,
     "website": "elmuseo.org",
-    "notes": "Museum · Address and exhibitions page unverified by the Workshop (site blocks automated readers)",
+    "notes": "Museum · Address and exhibitions page confirmed 2026-10-28 from the venue's own site (it blocks automated readers)",
     "isMuseum": true,
     "lat": 40.793121,
     "lng": -73.951335,
@@ -1027,7 +1027,7 @@
     "address": "725 Park Ave, NY 10021",
     "hours": null,
     "website": "asiasociety.org",
-    "notes": "Museum · Address and exhibitions page unverified by the Workshop (site blocks automated readers)",
+    "notes": "Museum · Address and exhibitions page confirmed 2026-10-28 from the venue's own site (it blocks automated readers)",
     "isMuseum": true,
     "lat": 40.769839,
     "lng": -73.964291,
@@ -1237,7 +1237,7 @@
     "address": "36-01 35th Ave, Astoria, NY 11106",
     "hours": null,
     "website": "movingimage.org",
-    "notes": "Museum · Address and exhibitions page unverified by the Workshop (site blocks automated readers)",
+    "notes": "Museum · Address and exhibitions page confirmed 2026-10-28 from the venue's own site (it blocks automated readers)",
     "isMuseum": true,
     "lat": 40.756298,
     "lng": -73.923916,

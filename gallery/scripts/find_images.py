@@ -198,6 +198,9 @@ def check_image(url):
         return False, f"unreachable ({err})"
     if status != 200:
         return False, f"HTTP {status}"
+    corp = (headers.get("Cross-Origin-Resource-Policy") or "").strip().lower() if headers else ""
+    if corp in ("same-origin", "same-site"):
+        return False, f"server forbids embedding on other sites (Cross-Origin-Resource-Policy: {corp})"
     ctype = headers.get_content_type() if headers else ""
     if ctype in GENERIC_TYPES and image_size(body):
         ctype = f"{ctype}, image by its header bytes"   # e.g. S3 serving PNGs as binary/octet-stream
