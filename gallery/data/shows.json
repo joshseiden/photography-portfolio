@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27",
+  "updated": "2026-11-01",
   "shows": [
     {
       "id": "yancey-richardson-gallery::dark-waves-rising",
@@ -7,6 +7,7 @@
       "title": "Dark Waves Rising",
       "artists": "Karen Gunderson",
       "closes": "2026-12-19",
+      "url": "https://yanceyrichardson.com/exhibitions/karen-gunderson",
       "image": null,
       "isPhotography": false,
       "photoNote": "Oil on linen paintings"
@@ -17,69 +18,10 @@
       "title": "Flowering",
       "artists": "Sharon Core",
       "closes": "2026-12-19",
+      "url": "https://yanceyrichardson.com/exhibitions/sharon-core5",
       "image": null,
       "isPhotography": true,
       "photoNote": "Archival pigment prints"
-    },
-    {
-      "id": "bruce-silverstein-gallery::sarah-sense-land-line-blood-memory",
-      "galleryId": "bruce-silverstein-gallery",
-      "title": "Sarah Sense: Land, Line, Blood, Memory",
-      "artists": "Sarah Sense",
-      "closes": "2026-11-21",
-      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/241/sarah-sense_landlinebloodmemory_square-format-flyers-07.jpg",
-      "isPhotography": true,
-      "photoNote": "Photo-weavings from landscape photographs, archival documents, maps"
-    },
-    {
-      "id": "yossi-milo-gallery::shaping-time",
-      "galleryId": "yossi-milo-gallery",
-      "title": "Shaping Time",
-      "artists": "Ibrahim Said",
-      "closes": "2027-01-09",
-      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/201/ibrahim-5-piece-arrangement-new-edits-.jpg",
-      "isPhotography": false,
-      "photoNote": "White earthenware ceramics"
-    },
-    {
-      "id": "benrubi-gallery::love-after-love",
-      "galleryId": "benrubi-gallery",
-      "title": "Love After Love",
-      "artists": "Marta Soul",
-      "closes": "2026-11-25",
-      "image": "http://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/6aa1b3207da0e23c85cdfecb/1790194200405/Romance+at+golf+course.jpg?format=1500w",
-      "isPhotography": true,
-      "photoNote": "Staged photography and photographic installations"
-    },
-    {
-      "id": "soho-photo-gallery::members",
-      "galleryId": "soho-photo-gallery",
-      "title": "MEMBERS",
-      "artists": null,
-      "closes": "2026-11-01",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Members' group show at a photography gallery; medium not explicitly stated"
-    },
-    {
-      "id": "pace-gallery::portrait-of-david-byrne",
-      "galleryId": "pace-gallery",
-      "title": "Portrait of David Byrne",
-      "artists": "David Byrne",
-      "closes": "2026-12-31",
-      "image": null,
-      "isPhotography": false,
-      "photoNote": "Stairwell drawings; not photography"
-    },
-    {
-      "id": "pace-gallery::new-york-window-recent-work",
-      "galleryId": "pace-gallery",
-      "title": "New York Window (Recent Work)",
-      "artists": "Asher Liftin",
-      "closes": "2026-11-07",
-      "image": null,
-      "isPhotography": null,
-      "photoNote": "Medium not verified"
     },
     {
       "id": "gagosian-gallery::groomed",
@@ -87,9 +29,10 @@
       "title": "Groomed",
       "artists": "Bea Scaccia",
       "closes": "2026-12-23",
+      "url": "https://gagosian.com/exhibitions/2026/bea-scaccia-groomed/",
       "image": "https://gagosian.com/media/images/exhibitions/2026/bea-scaccia-groomed/u_NyDi70b98H_1200x1200.jpg",
-      "isPhotography": null,
-      "photoNote": "Medium not verified"
+      "isPhotography": false,
+      "photoNote": "Paintings (gesso, acrylic, airbrush, oil)"
     },
     {
       "id": "gagosian-gallery::i-am-plane-image",
@@ -97,69 +40,10 @@
       "title": "I Am Plane Image",
       "artists": "Brice Marden",
       "closes": "2026-12-12",
+      "url": "https://gagosian.com/exhibitions/2026/brice-marden-i-am-plane-image/",
       "image": null,
       "isPhotography": false,
-      "photoNote": "Paintings and works on paper"
-    },
-    {
-      "id": "hauser-wirth::anna-and-the-infinite-line",
-      "galleryId": "hauser-wirth",
-      "title": "ANNA—And the infinite line",
-      "artists": "Anna Maria Maiolino",
-      "closes": "2026-10-31",
-      "image": "https://media.hauserwirth.com/asset/54b4086f-ac1e-4c93-a0ab-fb8b077e852b/web-hires-jpg-72dpi/MAIOL60754-Det-GH.jpg",
-      "isPhotography": false,
-      "photoNote": "Survey of prints, works on paper, sculpture; photography only one chapter"
-    },
-    {
-      "id": "howard-greenberg-gallery::baldwin-lee-new-york-1975-1979",
-      "galleryId": "howard-greenberg-gallery",
-      "title": "Baldwin Lee: New York (1975–1979)",
-      "artists": "Baldwin Lee",
-      "closes": "2026-11-11",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Large-scale black-and-white photographs"
-    },
-    {
-      "id": "edwynn-houk-gallery::abelardo-morell-out-of-paper-in-dialogue-with-gene-davis-kenneth-noland-jules-olitski-larry-poons",
-      "galleryId": "edwynn-houk-gallery",
-      "title": "Abelardo Morell: Out of Paper / In Dialogue with Gene Davis, Kenneth Noland, Jules Olitski & Larry Poons",
-      "artists": "Abelardo Morell",
-      "closes": "2026-10-31",
-      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-houkgallery/usr/images/exhibitions/main_image_override/144/abelardo-morell-paper-cut-outs-3.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographer's paper cut-out works; medium not confirmed on page"
-    },
-    {
-      "id": "moma::taking-back-our-space-photographic-perspectives",
-      "galleryId": "moma",
-      "title": "Taking Back Our Space: Photographic Perspectives",
-      "artists": null,
-      "closes": "2027-05-02",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Gelatin silver, chromogenic and inkjet prints"
-    },
-    {
-      "id": "danziger-gallery::portraits",
-      "galleryId": "danziger-gallery",
-      "title": "Portraits",
-      "artists": "Oliver Wasow",
-      "closes": "2026-11-27",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Archival pigment prints"
-    },
-    {
-      "id": "gitterman-gallery::jean-pierre-sudre",
-      "galleryId": "gitterman-gallery",
-      "title": "Jean-Pierre Sudre",
-      "artists": "Jean-Pierre Sudre",
-      "closes": "2026-10-31",
-      "image": "https://gittermangallery.com/images/27002_h500w500gt.5.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographer's work (Matériographie, Diamantine series)"
+      "photoNote": "Paintings survey"
     },
     {
       "id": "metropolitan-museum-of-art::chasing-clouds",
@@ -167,299 +51,10 @@
       "title": "Chasing Clouds",
       "artists": null,
       "closes": "2027-02-28",
+      "url": "https://www.metmuseum.org/exhibitions/chasing-clouds",
       "image": "https://cdn.sanity.io/images/cctd4ker/production/18f96c20ef2c369072c289525228d05c18208b6c-5120x2880.jpg?w=600&q=75&auto=format",
       "isPhotography": true,
       "photoNote": "Paintings, drawings and photographs, ending with Stieglitz's Equivalents"
-    },
-    {
-      "id": "guggenheim-museum::taryn-simon-father-country-i-do-love-you",
-      "galleryId": "guggenheim-museum",
-      "title": "Taryn Simon: Father Country I Do Love You",
-      "artists": "Taryn Simon",
-      "closes": "2027-03-14",
-      "image": "https://www.guggenheim.org/wp-content/uploads/2025/10/TarynSimon_FatherCountry-exh_ph022-LARGE-JPG-scaled.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs, text, video and sculpture"
-    },
-    {
-      "id": "intl-center-of-photography::i-m-so-happy-you-are-here-japanese-women-photographers-from-the-1950s-to-now",
-      "galleryId": "intl-center-of-photography",
-      "title": "I'm So Happy You Are Here: Japanese Women Photographers from the 1950s to Now",
-      "artists": null,
-      "closes": "2027-01-11",
-      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-07/kawauchi-the-eyes-the-ears.jpg.webp?itok=z_n-KIXq",
-      "isPhotography": true,
-      "photoNote": "Photography by 28 Japanese women photographers"
-    },
-    {
-      "id": "intl-center-of-photography::laia-abril-on-rape-and-institutional-failure",
-      "galleryId": "intl-center-of-photography",
-      "title": "Laia Abril: On Rape and Institutional Failure",
-      "artists": "Laia Abril",
-      "closes": "2027-01-11",
-      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-07/Thmbnail.png.webp?itok=O8nuLzh_",
-      "isPhotography": true,
-      "photoNote": "Images, testimonies and archival materials by a photographer"
-    },
-    {
-      "id": "intl-center-of-photography::melissa-ann-pinney-what-s-ms-pinney-doing-here-icp-incubator-space",
-      "galleryId": "intl-center-of-photography",
-      "title": "Melissa Ann Pinney: What's Ms. Pinney Doing Here? (ICP Incubator Space)",
-      "artists": "Melissa Ann Pinney",
-      "closes": "2027-01-11",
-      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-10/Jenner%208th%20Recess%206%275%2719-137.jpg.webp?itok=FVsVEXXu",
-      "isPhotography": true,
-      "photoNote": "Photographic portraits of young people"
-    },
-    {
-      "id": "baxter-st-at-camera-club-ny::milk-teeth",
-      "galleryId": "baxter-st-at-camera-club-ny",
-      "title": "Milk Teeth",
-      "artists": "Allie Tsubota",
-      "closes": "2026-11-11",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Photographs, cast silver-teeth sculptures, screen prints"
-    },
-    {
-      "id": "baxter-st-at-camera-club-ny::where-to-from-here",
-      "galleryId": "baxter-st-at-camera-club-ny",
-      "title": "Where To, From Here",
-      "artists": "Azikiwe Mohammed",
-      "closes": "2026-11-11",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Polaroid photographs"
-    },
-    {
-      "id": "aperture-foundation::aperture-loves-new-york",
-      "galleryId": "aperture-foundation",
-      "title": "Aperture Loves New York",
-      "artists": null,
-      "closes": "2026-11-01",
-      "image": "https://aperture.org/wp-content/uploads/2026/08/Carrie-mae-weems-harlem-1978-copy.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs by 24 artists shown with Aperture books"
-    },
-    {
-      "id": "bronx-documentary-center::emerging-visions-photo-education-around-the-world",
-      "galleryId": "bronx-documentary-center",
-      "title": "Emerging Visions: Photo Education Around the World",
-      "artists": null,
-      "closes": "2026-10-30",
-      "image": "https://www.bronxdoc.org/wp-content/uploads/2026/09/Chinky_Shukla_VII.jpg",
-      "isPhotography": true,
-      "photoNote": "Student and program photography from photo-education organizations"
-    },
-    {
-      "id": "bronx-documentary-center::built-in-the-bronx-15-years-of-the-bronx-documentary-center",
-      "galleryId": "bronx-documentary-center",
-      "title": "Built in the Bronx: 15 Years of the Bronx Documentary Center",
-      "artists": null,
-      "closes": "2026-10-30",
-      "image": "https://www.bronxdoc.org/wp-content/uploads/2026/09/Zuleyka_Mendez_2017_001.jpg",
-      "isPhotography": true,
-      "photoNote": "Documentary photography"
-    },
-    {
-      "id": "clampart::vintage-underwater-nudes",
-      "galleryId": "clampart",
-      "title": "Vintage Underwater Nudes",
-      "artists": "Curtice Taylor",
-      "closes": "2026-10-31",
-      "image": "https://clampart.com/wp-content/uploads/2026/08/Taylor-Untitled-UnderwaterNude1-1-680x464.jpg",
-      "isPhotography": true,
-      "photoNote": "Hand-painted and toned gelatin silver prints"
-    },
-    {
-      "id": "clampart::nature-represented-and-reproduced",
-      "galleryId": "clampart",
-      "title": "Nature Represented and Reproduced",
-      "artists": null,
-      "closes": "2026-10-31",
-      "image": "https://clampart.com/wp-content/uploads/2026/08/Mehrfar_Road-Map-1200-413x550.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs, cyanotypes, photogram; one lithograph"
-    },
-    {
-      "id": "clampart::other-sides-of-andy",
-      "galleryId": "clampart",
-      "title": "Other Sides of Andy",
-      "artists": null,
-      "closes": "2026-11-07",
-      "image": "https://clampart.com/wp-content/uploads/2026/08/Makos_1-framed-1200-472x550.jpg",
-      "isPhotography": true,
-      "photoNote": "Polaroids and photographs"
-    },
-    {
-      "id": "clampart::mark-beard-sargeant-showroom-summer-autumn-2026",
-      "galleryId": "clampart",
-      "title": "Mark Beard | Sargeant Showroom - Summer/Autumn 2026",
-      "artists": "Mark Beard",
-      "closes": "ongoing",
-      "image": "https://clampart.com/wp-content/uploads/2026/05/Beard_Two-Men-with-Rope-and-a-Tree-Cropped-391x550.jpg",
-      "isPhotography": false,
-      "photoNote": "Framed paintings and a bronze bust"
-    },
-    {
-      "id": "rick-wester-fine-art::perchance-to-dream-royal-and-noble-bedchambers",
-      "galleryId": "rick-wester-fine-art",
-      "title": "Perchance to Dream: Royal and Noble Bedchambers",
-      "artists": "David Leventi",
-      "closes": "2026-12-30",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Digital chromogenic prints"
-    },
-    {
-      "id": "rick-wester-fine-art::looking-back-looking-forward-selected-works-2023-present",
-      "galleryId": "rick-wester-fine-art",
-      "title": "Looking Back; Looking Forward: Selected Works, 2023 - Present",
-      "artists": "Amanda Marchand, Leah Sobsey",
-      "closes": "2026-12-30",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Archival pigment prints, some collage"
-    },
-    {
-      "id": "gladstone-gallery::waterfall",
-      "galleryId": "gladstone-gallery",
-      "title": "waterfall",
-      "artists": "Ugo Rondinone",
-      "closes": "2026-10-31",
-      "image": "https://img.artrabbit.com/events/waterfall/images/2pEYWyumcbPC/368x460/image-1.jpg",
-      "isPhotography": false,
-      "photoNote": "Resin sculptures"
-    },
-    {
-      "id": "gladstone-gallery::joseph-yaeger-agita",
-      "galleryId": "gladstone-gallery",
-      "title": "Joseph Yaeger - Agita",
-      "artists": "Joseph Yaeger",
-      "closes": "2026-10-31",
-      "image": "https://img.artrabbit.com/events/joseph-yaeger-agita/images/3LWibVH3U7cg/690x460/image-1.jpg",
-      "isPhotography": false,
-      "photoNote": "Paintings"
-    },
-    {
-      "id": "jack-shainman-gallery::gordon-parks-voices-in-the-mirror",
-      "galleryId": "jack-shainman-gallery",
-      "title": "Gordon Parks: Voices in the Mirror",
-      "artists": "Gordon Parks",
-      "closes": "2026-11-06",
-      "image": "https://jackshainman.com/uploads/17100171/1789757244230/JSGTriBeCa_GP_2026_RUSH2_LR-800-0x0x2000x1500_q85.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs by Gordon Parks; medium not stated on page"
-    },
-    {
-      "id": "jack-shainman-gallery::becky-suss-night-house",
-      "galleryId": "jack-shainman-gallery",
-      "title": "Becky Suss: Night House",
-      "artists": "Becky Suss",
-      "closes": "2026-10-31",
-      "image": "https://jackshainman.com/uploads/17000170/1789141108415/JSGChelsea_BS_Night_House_2026_RUSH3_LR-800-0x48x2000x1335_q85.jpg",
-      "isPhotography": false,
-      "photoNote": "Paintings"
-    },
-    {
-      "id": "sean-kelly-gallery::luke-agada-when-the-center-holds",
-      "galleryId": "sean-kelly-gallery",
-      "title": "Luke Agada: When the Center Holds",
-      "artists": "Luke Agada",
-      "closes": "2026-10-31",
-      "image": "https://static-assets.artlogic.net/w_3600,h_3600,c_limit/exhibit-e/62f52bf90af321abff00fe82/2fac249f57f9ef7d1199b3c86a6ff375.jpeg",
-      "isPhotography": false,
-      "photoNote": "Oil and charcoal on canvas"
-    },
-    {
-      "id": "sean-kelly-gallery::anthony-mccall-solid-light-1973-2020-2026",
-      "galleryId": "sean-kelly-gallery",
-      "title": "Anthony McCall: Solid Light, 1973, 2020, 2026",
-      "artists": "Anthony McCall",
-      "closes": "2026-10-31",
-      "image": null,
-      "isPhotography": false,
-      "photoNote": "Projected light installations"
-    },
-    {
-      "id": "throckmorton-fine-art::lucien-clergue-a-life-through-the-lens",
-      "galleryId": "throckmorton-fine-art",
-      "title": "Lucien Clergue: A Life Through the Lens",
-      "artists": "Lucien Clergue",
-      "closes": "2027-01-16",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Vintage gelatin silver, fresson and cibachrome prints"
-    },
-    {
-      "id": "sous-les-etoiles-gallery::the-thread-between",
-      "galleryId": "sous-les-etoiles-gallery",
-      "title": "The Thread Between",
-      "artists": "Sophie Delaporte",
-      "closes": "2026-10-31",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Photography with thread, lace, mesh and pins on the print surface"
-    },
-    {
-      "id": "higher-pictures-generation::river-s-dream-2010-2020",
-      "galleryId": "higher-pictures-generation",
-      "title": "River's Dream, 2010-2020",
-      "artists": "Curran Hatleberg",
-      "closes": "2026-12-12",
-      "image": "https://higherpictures.com/wp-content/uploads/2026/10/RD_01.jpg",
-      "isPhotography": true,
-      "photoNote": "Pigment prints"
-    },
-    {
-      "id": "dashwood-projects::stefan-marx-pad-passengers-available-for-disembarkation",
-      "galleryId": "dashwood-projects",
-      "title": "Stefan Marx: PAD Passengers Available for Disembarkation",
-      "artists": "Stefan Marx",
-      "closes": "2026-11-07",
-      "image": null,
-      "isPhotography": false,
-      "photoNote": "About 30 ink drawings of airplanes"
-    },
-    {
-      "id": "penumbra-foundation::north-north-south",
-      "galleryId": "penumbra-foundation",
-      "title": "North North South",
-      "artists": "Ayda Gragossian",
-      "closes": "2026-11-24",
-      "image": null,
-      "isPhotography": null,
-      "photoNote": "Medium not stated on page"
-    },
-    {
-      "id": "keith-de-lellis-gallery::the-village-people",
-      "galleryId": "keith-de-lellis-gallery",
-      "title": "The Village People",
-      "artists": "Frank Meadow Sutcliffe",
-      "closes": "2026-12-01",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Vintage Victorian-era photographs"
-    },
-    {
-      "id": "hans-p-kraus-jr::photographs-from-the-collection-of-william-l-schaeffer",
-      "galleryId": "hans-p-kraus-jr",
-      "title": "Photographs from the Collection of William L. Schaeffer",
-      "artists": null,
-      "closes": "2026-11-25",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "19th-century photographs incl. albumen prints"
-    },
-    {
-      "id": "ubu-gallery::edmund-kesting-1892-1970",
-      "galleryId": "ubu-gallery",
-      "title": "Edmund Kesting (1892-1970)",
-      "artists": "Edmund Kesting",
-      "closes": "ongoing",
-      "image": "https://www.ubugallery.com/wp-content/uploads/2026/09/KEST_43_BANNER.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs incl. photograms, multiple exposures, photomontage"
     },
     {
       "id": "bienvenu-steinberg-c::higher-perplexity",
@@ -467,39 +62,10 @@
       "title": "Higher Perplexity",
       "artists": "Marco Maggi",
       "closes": "2026-11-14",
+      "url": "https://www.bsandcgallery.com/exhibitions/marco-maggi9",
       "image": null,
       "isPhotography": false,
       "photoNote": "Incised paper and drawing works"
-    },
-    {
-      "id": "sundaram-tagore-gallery::miya-ando-rain-drawings",
-      "galleryId": "sundaram-tagore-gallery",
-      "title": "Miya Ando: Rain Drawings",
-      "artists": "Miya Ando",
-      "closes": "2026-11-14",
-      "image": null,
-      "isPhotography": false,
-      "photoNote": "Drawings on kozo paper with indigo, silver powder, graphite"
-    },
-    {
-      "id": "hannah-traore-gallery::nonsites-revisited",
-      "galleryId": "hannah-traore-gallery",
-      "title": "Nonsites Revisited",
-      "artists": "James Perkins",
-      "closes": "2026-11-14",
-      "image": "https://hannahtraoregallery.com/wp-content/uploads/2026/09/asnd-1024x550.png",
-      "isPhotography": false,
-      "photoNote": "Weathered silk paintings, sculpture, video, installation"
-    },
-    {
-      "id": "sva-chelsea-gallery::a-vivid-blur",
-      "galleryId": "sva-chelsea-gallery",
-      "title": "A Vivid Blur",
-      "artists": null,
-      "closes": "2026-10-30",
-      "image": "https://assets.sva.edu/cardThumbnail/celestevoce-diffuseform-300dpi-1785180648-1785180684-1785180707.jpg",
-      "isPhotography": false,
-      "photoNote": "Mostly light-based works; photography a minor part"
     },
     {
       "id": "schomburg-center-for-research-in-black-culture::forging-ahead-recent-acquisitions-of-black-women-artists",
@@ -507,9 +73,43 @@
       "title": "Forging Ahead: Recent Acquisitions of Black Women Artists",
       "artists": "Nona Faustine, Kimberly Becoat, Simone Leigh",
       "closes": "2027-03-27",
+      "url": "https://www.nypl.org/events/exhibitions/forging-ahead",
       "image": "https://www.nypl.org/sites-drupal/default/files/styles/2_1_2400/public/2026-08/ForgingAhead_web7%20%281%29.png?h=e1582095&itok=CRh6MP3B",
       "isPhotography": true,
       "photoNote": "Pigment prints by Nona Faustine plus collage and porcelain"
+    },
+    {
+      "id": "bruce-silverstein-gallery::sarah-sense-land-line-blood-memory",
+      "galleryId": "bruce-silverstein-gallery",
+      "title": "Sarah Sense: Land, Line, Blood, Memory",
+      "artists": "Sarah Sense",
+      "closes": "2026-11-21",
+      "url": "https://brucesilverstein.com/exhibitions/241-sarah-sense-land-line-blood-memory/overview/",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite1113/usr/images/exhibitions/main_image_override/241/sarah-sense_landlinebloodmemory_square-format-flyers-07.jpg",
+      "isPhotography": true,
+      "photoNote": "Photo-weavings from landscape photographs, archival documents, maps"
+    },
+    {
+      "id": "guggenheim-museum::taryn-simon-father-country-i-do-love-you",
+      "galleryId": "guggenheim-museum",
+      "title": "Taryn Simon: Father Country I Do Love You",
+      "artists": "Taryn Simon",
+      "closes": "2027-03-14",
+      "url": "https://www.guggenheim.org/exhibition/taryn-simon",
+      "image": "https://www.guggenheim.org/wp-content/uploads/2025/10/TarynSimon_FatherCountry-exh_ph022-LARGE-JPG-scaled.jpg",
+      "isPhotography": true,
+      "photoNote": "Photographs, text, video and sculpture"
+    },
+    {
+      "id": "ryan-lee-gallery::cin-matique",
+      "galleryId": "ryan-lee-gallery",
+      "title": "Cinématique",
+      "artists": "Gideon Rubin, Luis Baylón, Martine Gutierrez",
+      "closes": "2026-12-23",
+      "url": "https://ryanleegallery.com/exhibitions/cinematique/",
+      "image": "https://ryanleegallery.com/wp-content/uploads/2026/10/Rubin-Yellow-Kimono.jpg",
+      "isPhotography": true,
+      "photoNote": "Rubin paintings paired with B&W photographs by Baylón (gelatin silver) and Gutierrez (inkjet/C-prints)"
     },
     {
       "id": "jewish-museum::focus-gallery-hannah-altman-not-a-circle-but-a-spiral",
@@ -517,9 +117,65 @@
       "title": "Focus Gallery: Hannah Altman: Not a Circle but a Spiral",
       "artists": "Hannah Altman",
       "closes": "2027-02-07",
+      "url": "https://thejewishmuseum.org/exhibitions/focus-gallery-hannah-altman-not-a-circle-but-a-spiral/",
       "image": "https://thejewishmuseum.org/wp-content/uploads/2026/09/6_Shofar-To-Catch-Ones-Breath-Website-Hero-700px-H-72dpi-jpg.jpg",
       "isPhotography": true,
-      "photoNote": "Photographs"
+      "photoNote": "Photographs, with ceremonial objects"
+    },
+    {
+      "id": "museum-of-the-moving-image::seeing-the-cinema-photographic-visions-of-movie-theaters",
+      "galleryId": "museum-of-the-moving-image",
+      "title": "Seeing the Cinema: Photographic Visions of Movie Theaters",
+      "artists": null,
+      "closes": "2027-03-21",
+      "url": "https://movingimage.org/event/seeing-the-cinema/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Group show of movie-theater photographs (Sugimoto, Margolies, Schiff, Holmes)"
+    },
+    {
+      "id": "robert-mann-gallery::jeff-brouws-silent-monoliths",
+      "galleryId": "robert-mann-gallery",
+      "title": "Jeff Brouws: Silent Monoliths",
+      "artists": "Jeff Brouws",
+      "closes": "2026-12-12",
+      "url": "https://robertmann.com/jeff-brouws",
+      "image": "https://images.squarespace-cdn.com/content/v1/51009644e4b0aea0734361ca/1793126841779-XJ4OK4VSP7BL5963RJMH/w-Coaling+tower+%2367+%28looking+west%29+Vickers%2C+Virginia+2014.jpg",
+      "isPhotography": true,
+      "photoNote": "Large black-and-white photographs of coal towers, plus color grid"
+    },
+    {
+      "id": "howard-greenberg-gallery::baldwin-lee-new-york-1975-1979",
+      "galleryId": "howard-greenberg-gallery",
+      "title": "Baldwin Lee: New York (1975–1979)",
+      "artists": "Baldwin Lee",
+      "closes": "2026-11-11",
+      "url": "https://www.howardgreenberg.com/exhibitions/199-baldwin-lee-new-york-1975-1979/",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/199/pf156214.jpg",
+      "isPhotography": true,
+      "photoNote": "Large-scale black-and-white photographs"
+    },
+    {
+      "id": "leica-gallery-new-york::les-fincher-behind-the-scenes-of-laurie-anderson-s-home-of-the-brave",
+      "galleryId": "leica-gallery-new-york",
+      "title": "Les Fincher: Behind the Scenes of Laurie Anderson's Home of the Brave",
+      "artists": "Les Fincher",
+      "closes": "2026-12-06",
+      "url": "https://leicacamerausa.com/leica-gallery-new-york/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Vintage and modern photographic prints shot on Leica film cameras"
+    },
+    {
+      "id": "sundaram-tagore-gallery::miya-ando-rain-drawings",
+      "galleryId": "sundaram-tagore-gallery",
+      "title": "Miya Ando: Rain Drawings",
+      "artists": "Miya Ando",
+      "closes": "2026-11-14",
+      "url": "https://www.sundaramtagore.com/exhibitions/miya-ando-rain-drawings",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Drawings on kozo paper with indigo, silver powder, graphite"
     },
     {
       "id": "studio-museum-in-harlem::tone",
@@ -527,9 +183,10 @@
       "title": "Tone",
       "artists": null,
       "closes": "2027-01-03",
+      "url": "https://www.studiomuseum.org/exhibitions/tone",
       "image": "https://studiomuseum.imgix.net/images/20260928_Tone_KrisGraves_1_2026-09-30-121915_svvf.jpg",
       "isPhotography": true,
-      "photoNote": "Group show of drawings, paintings, photographs, sculpture; many photographers"
+      "photoNote": "Group show of drawings, paintings, photographs, sculpture; many photographers (DeCarava, Parks, Muholi, Ming Smith)"
     },
     {
       "id": "studio-museum-in-harlem::through-motion-and-repose-expanding-the-walls-2026",
@@ -537,39 +194,10 @@
       "title": "Through Motion and Repose: Expanding the Walls 2026",
       "artists": "17 teen participants",
       "closes": "2027-01-31",
+      "url": "https://www.studiomuseum.org/exhibitions/through-motion-and-repose-expanding-the-walls-2026",
       "image": "https://studiomuseum.imgix.net/images/20260720_ThroughMotionandReposeExpandingtheWalls2026_KrisGraves_005.jpg",
       "isPhotography": true,
       "photoNote": "Digital chromogenic prints by teen photographers"
-    },
-    {
-      "id": "el-museo-del-barrio::teddy-sandoval-and-the-butch-gardens-school-of-art",
-      "galleryId": "el-museo-del-barrio",
-      "title": "Teddy Sandoval and the Butch Gardens School of Art",
-      "artists": "Teddy Sandoval, with Yolanda Andrade, Joey Terrill, Martin Wong, Ester Hernández, others",
-      "closes": "2027-01-10",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Photography, painting, drawing, collage; mixed-media show"
-    },
-    {
-      "id": "queens-museum::about-us-the-american-imaginary",
-      "galleryId": "queens-museum",
-      "title": "About Us: The American Imaginary",
-      "artists": null,
-      "closes": "2027-02-07",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Albumen and vintage gelatin silver prints"
-    },
-    {
-      "id": "queens-museum::new-york-proud-a-portrait-of-new-york-city-photoville",
-      "galleryId": "queens-museum",
-      "title": "New York Proud: A Portrait of New York City (Photoville)",
-      "artists": "Oscar B. Castillo",
-      "closes": "2026-11-02",
-      "image": null,
-      "isPhotography": true,
-      "photoNote": "Portrait project by a documentary photographer"
     },
     {
       "id": "pioneer-works::there-s-no-me-without-you",
@@ -577,6 +205,7 @@
       "title": "There's no me without you",
       "artists": "Finnegan Shannon, with Joselia Rebekah Hughes, Ariana Martinez, Alex Dolores Salerno",
       "closes": "2026-12-20",
+      "url": "https://pioneerworks.org/exhibitions/finnegan-shannon-there-is-no-me-without-you",
       "image": "https://cdn.sanity.io/images/vgvol637/production/9757139189a1694c52ee7d64dc13e6ede59a91a2-3000x2250.jpg?w=800",
       "isPhotography": false,
       "photoNote": "Installation, sound, video, found objects"
@@ -587,6 +216,7 @@
       "title": "Siphon",
       "artists": "Tuomas A. Laitinen",
       "closes": "2026-11-22",
+      "url": "https://pioneerworks.org/exhibitions/tuomas-a-laitinen-siphon",
       "image": "https://cdn.sanity.io/images/vgvol637/production/b2fa60e22f887b1b4410931bb96439cfe4a69570-3000x2250.jpg?w=800",
       "isPhotography": false,
       "photoNote": "Multichannel video, blown glass, spatial audio"
@@ -597,6 +227,7 @@
       "title": "Child/ren of the Bloom",
       "artists": "LaJuné McMillian",
       "closes": "2026-12-20",
+      "url": "https://pioneerworks.org/exhibitions/lajune-mcmillian-child-ren-of-the-bloom",
       "image": "https://cdn.sanity.io/images/vgvol637/production/7cc6fc92a80a8fc656208c0c2fd17f851b8ae085-3000x2250.jpg?w=800",
       "isPhotography": false,
       "photoNote": "Interactive video installation, holographic displays, beaded embroidery"
@@ -607,39 +238,10 @@
       "title": "Dead Gods",
       "artists": "Jemila MacEwan",
       "closes": "2027-02-28",
+      "url": "https://pioneerworks.org/on-view/jemila-macewan-dead-gods",
       "image": "https://cdn.sanity.io/images/vgvol637/production/75af262ba9e45d646053cc848ccdf38c5cfd324d-2250x3000.jpg?w=800",
       "isPhotography": false,
       "photoNote": "Fungi mycelium sculptures"
-    },
-    {
-      "id": "bric-house::johan-orellana-remnants-of-forking-paths",
-      "galleryId": "bric-house",
-      "title": "Johan Orellana: Remnants of Forking Paths",
-      "artists": "Johan Orellana",
-      "closes": "2026-12-12",
-      "image": "https://bricartsmedia.org/wp-content/uploads/2026/09/JVO5187-V1-1024x1024.jpg",
-      "isPhotography": true,
-      "photoNote": "Photography and mixed-media collage with family snapshots"
-    },
-    {
-      "id": "bric-house::from-the-briclab-works-from-the-2025-26-artist-residencies",
-      "galleryId": "bric-house",
-      "title": "From the BRIClab: Works from the 2025-26 Artist Residencies",
-      "artists": "Amadi Williams, Aika Akhmetova, Brandon Follick, Camila Galaz, Dr. Evilletown, Ghazal Ghazi, Juan \"Wamoo\" Alvarez, Leo Pontius, Mauricio Delfin, Nate Dorr, Yolanda Hoskey",
-      "closes": "2026-12-12",
-      "image": null,
-      "isPhotography": false,
-      "photoNote": "Mixed group show; photography a minor part"
-    },
-    {
-      "id": "en-foco::archives-of-the-image-becoming-the-2026-en-foco-fellowship-exhibition",
-      "galleryId": "en-foco",
-      "title": "Archives of the Image Becoming: The 2026 En Foco Fellowship Exhibition",
-      "artists": "Tyler DeHaarte, George \"GNP\" Grullon, Damien Jackson, Jeffrey Jin, Morrison Gong, Omar Soto, Kanishka Puri, Duane Bailey-Castro, Antonia Kuo, Sibyl Montoya, Vasudev Vashisht, Johnny Ramos, Horatio Nguyen, Katherine Miranda, Michael Young",
-      "closes": "2026-11-21",
-      "image": "https://enfoco.org/wp-content/uploads/2026/09/Updated-Fellowship-Graphics-2025-IG-SIZE-2-scaled.png",
-      "isPhotography": true,
-      "photoNote": "Fellowship exhibition of photographic practices"
     },
     {
       "id": "alice-austen-house::andrea-modica-italian-story",
@@ -647,6 +249,7 @@
       "title": "Andrea Modica: Italian Story",
       "artists": "Andrea Modica",
       "closes": "2027-02-20",
+      "url": "https://aliceausten.org/italian_story/",
       "image": "https://i0.wp.com/aliceausten.org/wp-content/uploads/2026/07/070-bad-jpeg.jpg?fit=945%2C1200&ssl=1",
       "isPhotography": true,
       "photoNote": "8x10 Tri-X negatives, platinum-palladium prints"
@@ -657,6 +260,7 @@
       "title": "Lost Body",
       "artists": "Shaun Krupa",
       "closes": "ongoing",
+      "url": "https://aliceausten.org/shaun-krupas-lost-body/",
       "image": "https://i0.wp.com/aliceausten.org/wp-content/uploads/2025/09/rain-1.jpg?fit=750%2C1189&ssl=1",
       "isPhotography": false,
       "photoNote": "Outdoor soil-cement cast of the artist's torso"
@@ -667,29 +271,417 @@
       "title": "New Eyes on Alice Austen",
       "artists": null,
       "closes": "ongoing",
+      "url": "https://aliceausten.org/permanent-exhibition/",
       "image": "https://i0.wp.com/aliceausten.org/wp-content/uploads/2019/03/bagwlngwrfbk9xztmyguxw_austenphotodarnedclub50.015.5564_with_id-e1613584952893.jpg?fit=1200%2C621&ssl=1",
       "isPhotography": true,
       "photoNote": "Permanent exhibition on Alice Austen's photographs"
     },
     {
-      "id": "new-york-historical-society::you-should-be-dancing-new-york-1976-and-beyond",
-      "galleryId": "new-york-historical-society",
-      "title": "You Should Be Dancing: New York, 1976 and Beyond",
-      "artists": "Group Exhibition",
-      "closes": "2027-04-04",
-      "image": "https://images.prismic.io/nyhs-prod/TCWn2cMo1YLXUu1h_BillBernstein_Reflections_NYC_1979.jpg?auto=format%2Ccompress&rect=0%2C1708%2C3751%2C2343&w=1066&h=666",
-      "isPhotography": null,
-      "photoNote": "Kept from previous run; venue unreadable, not reclassified"
+      "id": "yossi-milo-gallery::shaping-time",
+      "galleryId": "yossi-milo-gallery",
+      "title": "Shaping Time",
+      "artists": "Ibrahim Said",
+      "closes": "2027-01-09",
+      "url": "https://yossimilo.com/exhibitions/201-ibrahim-said-shaping-time-artist-s-reception-october-22-6-8-pm/overview/",
+      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite0091/usr/images/exhibitions/main_image_override/201/ibrahim-5-piece-arrangement-new-edits-.jpg",
+      "isPhotography": false,
+      "photoNote": "White earthenware ceramics"
     },
     {
-      "id": "brooklyn-museum::iris-van-herpen-sculpting-the-senses",
-      "galleryId": "brooklyn-museum",
-      "title": "Iris van Herpen: Sculpting the Senses",
-      "artists": "Iris van Herpen",
-      "closes": "2026-12-06",
-      "image": "https://cms-images.brooklynmuseum.org/ae2f18de163422a4dc9c8be883a0425021e899c1-3687x3602.jpg",
+      "id": "intl-center-of-photography::i-m-so-happy-you-are-here-japanese-women-photographers-from-the-1950s-to-now",
+      "galleryId": "intl-center-of-photography",
+      "title": "I'm So Happy You Are Here: Japanese Women Photographers from the 1950s to Now",
+      "artists": null,
+      "closes": "2027-01-11",
+      "url": "https://www.icp.org/exhibitions/im-so-happy-you-are-here-japanese-women-photographers-1950s-now",
+      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-07/kawauchi-the-eyes-the-ears.jpg.webp?itok=z_n-KIXq",
+      "isPhotography": true,
+      "photoNote": "Photography by 28 Japanese women photographers"
+    },
+    {
+      "id": "intl-center-of-photography::laia-abril-on-rape-and-institutional-failure",
+      "galleryId": "intl-center-of-photography",
+      "title": "Laia Abril: On Rape and Institutional Failure",
+      "artists": "Laia Abril",
+      "closes": "2027-01-11",
+      "url": "https://www.icp.org/exhibitions/laia-abril-rape-and-institutional-failure",
+      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-07/Thmbnail.png.webp?itok=O8nuLzh_",
+      "isPhotography": true,
+      "photoNote": "Images, testimonies and archival materials by a photographer"
+    },
+    {
+      "id": "intl-center-of-photography::melissa-ann-pinney-what-s-ms-pinney-doing-here-icp-incubator-space",
+      "galleryId": "intl-center-of-photography",
+      "title": "Melissa Ann Pinney: What's Ms. Pinney Doing Here? (ICP Incubator Space)",
+      "artists": "Melissa Ann Pinney",
+      "closes": "2027-01-11",
+      "url": "https://www.icp.org/exhibitions/icp-incubator-space-melissa-ann-pinney-what%E2%80%99s-ms-pinney-doing-here",
+      "image": "https://www.icp.org/sites/default/files/styles/cards/public/2026-10/Jenner%208th%20Recess%206%275%2719-137.jpg.webp?itok=FVsVEXXu",
+      "isPhotography": true,
+      "photoNote": "Photographic portraits of young people"
+    },
+    {
+      "id": "aperture-foundation::aperture-loves-new-york",
+      "galleryId": "aperture-foundation",
+      "title": "Aperture Loves New York",
+      "artists": null,
+      "closes": "2026-11-01",
+      "url": "https://aperture.org/exhibitions/aperture-loves-new-york/",
+      "image": "https://aperture.org/wp-content/uploads/2026/08/Carrie-mae-weems-harlem-1978-copy.jpg",
+      "isPhotography": true,
+      "photoNote": "Photographs by 24 artists shown with Aperture books"
+    },
+    {
+      "id": "jack-shainman-gallery::gordon-parks-voices-in-the-mirror",
+      "galleryId": "jack-shainman-gallery",
+      "title": "Gordon Parks: Voices in the Mirror",
+      "artists": "Gordon Parks",
+      "closes": "2026-11-06",
+      "url": "https://jackshainman.com/exhibitions/gordon_parks_voices_in_the_mirror",
+      "image": "https://jackshainman.com/uploads/17100171/1789757244230/JSGTriBeCa_GP_2026_RUSH2_LR-800-0x0x2000x1500_q85.jpg",
+      "isPhotography": true,
+      "photoNote": "Photographs by Gordon Parks; medium not stated on page"
+    },
+    {
+      "id": "dashwood-projects::stefan-marx-pad-passengers-available-for-disembarkation",
+      "galleryId": "dashwood-projects",
+      "title": "Stefan Marx: PAD Passengers Available for Disembarkation",
+      "artists": "Stefan Marx",
+      "closes": "2026-11-07",
+      "url": "https://dashwoodprojects.com/stefan-marx",
+      "image": "https://freight.cargo.site/w/1200/i/R2989544291955700865814004760918/LastCall_003.jpg",
       "isPhotography": false,
-      "photoNote": "Fashion exhibition"
+      "photoNote": "About 30 ink drawings of airplanes"
+    },
+    {
+      "id": "hannah-traore-gallery::nonsites-revisited",
+      "galleryId": "hannah-traore-gallery",
+      "title": "Nonsites Revisited",
+      "artists": "James Perkins",
+      "closes": "2026-11-14",
+      "url": "https://hannahtraoregallery.com/exhibition/nonsites-revisited/",
+      "image": "https://hannahtraoregallery.com/wp-content/uploads/2026/09/asnd-1024x550.png",
+      "isPhotography": false,
+      "photoNote": "Weathered silk paintings, sculpture, video, installation"
+    },
+    {
+      "id": "el-museo-del-barrio::teddy-sandoval-and-the-butch-gardens-school-of-art",
+      "galleryId": "el-museo-del-barrio",
+      "title": "Teddy Sandoval and the Butch Gardens School of Art",
+      "artists": "Teddy Sandoval, with Yolanda Andrade, Joey Terrill, Martin Wong, Ester Hernández, others",
+      "closes": "2027-01-10",
+      "url": "https://elmuseo.org/exhibition/teddy-sandoval-and-the-butch-gardens-school-of-art/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Photography, painting, drawing, collage; mixed-media show"
+    },
+    {
+      "id": "bric-house::johan-orellana-remnants-of-forking-paths",
+      "galleryId": "bric-house",
+      "title": "Johan Orellana: Remnants of Forking Paths",
+      "artists": "Johan Orellana",
+      "closes": "2026-12-12",
+      "url": "https://bricartsmedia.org/exhibition/johan-orellana-remnants-of-forking-paths/",
+      "image": "https://bricartsmedia.org/wp-content/uploads/2026/09/JVO5187-V1-1024x1024.jpg",
+      "isPhotography": true,
+      "photoNote": "Photography and mixed-media collage with family snapshots"
+    },
+    {
+      "id": "bric-house::from-the-briclab-works-from-the-2025-26-artist-residencies",
+      "galleryId": "bric-house",
+      "title": "From the BRIClab: Works from the 2025-26 Artist Residencies",
+      "artists": "Amadi Williams, Aika Akhmetova, Brandon Follick, Camila Galaz, Dr. Evilletown, Ghazal Ghazi, Juan \"Wamoo\" Alvarez, Leo Pontius, Mauricio Delfín, Nate Dorr, Yolanda Hoskey",
+      "closes": "2026-12-12",
+      "url": "https://bricartsmedia.org/exhibition/from-the-briclab-works-from-the-2025-26-artist-residencies/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Mixed group show; photography a minor part"
+    },
+    {
+      "id": "sva-flatiron-project-space::cybernetic-gems",
+      "galleryId": "sva-flatiron-project-space",
+      "title": "Cybernetic Gems",
+      "artists": null,
+      "closes": "2026-11-23",
+      "url": "https://sva.edu/events/mfa-computer-arts-exhibition-fall-2026",
+      "image": "https://assets.sva.edu/heroImage/la-farge-antoinette-pandemic-portrait-3a-antoinette-la-farge-1792589013-1792589052.jpg",
+      "isPhotography": false,
+      "photoNote": "MFA Computer Arts alumni group show; digital works"
+    },
+    {
+      "id": "benrubi-gallery::love-after-love",
+      "galleryId": "benrubi-gallery",
+      "title": "Love After Love",
+      "artists": "Marta Soul",
+      "closes": "2026-11-25",
+      "url": "https://www.benrubigallery.com/exhibitions/marta-soul-love-after-love",
+      "image": "http://static1.squarespace.com/static/65d4a908ad207c44f92d3c28/65d5b579d528e87f610253e1/6aa1b3207da0e23c85cdfecb/1790194200405/Romance+at+golf+course.jpg?format=1500w",
+      "isPhotography": true,
+      "photoNote": "Staged photography and photographic installations"
+    },
+    {
+      "id": "moma::taking-back-our-space-photographic-perspectives",
+      "galleryId": "moma",
+      "title": "Taking Back Our Space: Photographic Perspectives",
+      "artists": null,
+      "closes": "2027-05-02",
+      "url": "https://moma.org/calendar/exhibitions/5678",
+      "image": "https://press.moma.org/wp-content/uploads/2025/09/Wex_Sitting-Arms-Panel-381x480.jpg",
+      "isPhotography": true,
+      "photoNote": "Gelatin silver, chromogenic and inkjet prints"
+    },
+    {
+      "id": "baxter-st-at-camera-club-ny::milk-teeth",
+      "galleryId": "baxter-st-at-camera-club-ny",
+      "title": "Milk Teeth",
+      "artists": "Allie Tsubota",
+      "closes": "2026-11-10",
+      "url": "https://www.baxterst.org/events/milk-teeth/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Photographs, cast silver-teeth sculptures, screen prints"
+    },
+    {
+      "id": "baxter-st-at-camera-club-ny::where-to-from-here",
+      "galleryId": "baxter-st-at-camera-club-ny",
+      "title": "Where To, From Here",
+      "artists": "Azikiwe Mohammed",
+      "closes": "2026-11-10",
+      "url": "https://www.baxterst.org/events/where-to-from-here/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Polaroid photographs"
+    },
+    {
+      "id": "penumbra-foundation::north-north-south",
+      "galleryId": "penumbra-foundation",
+      "title": "North North South",
+      "artists": "Ayda Gragossian",
+      "closes": "2026-11-24",
+      "url": "https://www.penumbrafoundation.org/upcoming-exhibitions",
+      "image": "https://images.squarespace-cdn.com/content/v1/55d61c1be4b0cafd401171f5/8f0c1113-dfb1-434f-b5e8-6c30988dbd3c/AydaGragossian_029+Large.jpeg",
+      "isPhotography": true,
+      "photoNote": "Documentary photographs of Los Angeles, from her 2025 photobook"
+    },
+    {
+      "id": "penumbra-foundation::the-eriskay-connection",
+      "galleryId": "penumbra-foundation",
+      "title": "The Eriskay Connection",
+      "artists": null,
+      "closes": "ongoing",
+      "url": "https://www.penumbrafoundation.org/project-gallery-current",
+      "image": "https://images.squarespace-cdn.com/content/v1/55d61c1be4b0cafd401171f5/6c435a1d-8af3-4893-b6eb-79d39777ab36/TEC154_C02.jpg",
+      "isPhotography": true,
+      "photoNote": "Photobooks by the Dutch publisher, shown in a reading room"
+    },
+    {
+      "id": "soho-photo-gallery::members",
+      "galleryId": "soho-photo-gallery",
+      "title": "MEMBERS",
+      "artists": "Linda Jacobs, Leslie Hanes, Piper Smith, Audrey Bernstein, Gordon Saperia, Ronaldo Aguiar, Margery Schab",
+      "closes": "2026-11-01",
+      "url": "https://www.sohophoto.com/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Members' photography group show (seven individual photo projects)"
+    },
+    {
+      "id": "clampart::other-sides-of-andy",
+      "galleryId": "clampart",
+      "title": "Other Sides of Andy",
+      "artists": null,
+      "closes": "2026-11-07",
+      "url": "https://clampart.com/2026/08/other-sides-of-andy/",
+      "image": "https://clampart.com/wp-content/uploads/2026/08/Makos_1-framed-1200-472x550.jpg",
+      "isPhotography": true,
+      "photoNote": "Polaroids and photographs"
+    },
+    {
+      "id": "clampart::mark-beard-sargeant-showroom-summer-autumn-2026",
+      "galleryId": "clampart",
+      "title": "Mark Beard | Sargeant Showroom - Summer/Autumn 2026",
+      "artists": "Mark Beard",
+      "closes": "ongoing",
+      "url": "https://clampart.com/2026/05/mark-beard-sargeant-showroom-summer-2026/",
+      "image": "https://clampart.com/wp-content/uploads/2026/05/Beard_Two-Men-with-Rope-and-a-Tree-Cropped-391x550.jpg",
+      "isPhotography": false,
+      "photoNote": "Framed paintings and a bronze bust"
+    },
+    {
+      "id": "throckmorton-fine-art::lucien-clergue-a-life-through-the-lens",
+      "galleryId": "throckmorton-fine-art",
+      "title": "Lucien Clergue: A Life Through the Lens",
+      "artists": "Lucien Clergue",
+      "closes": "2027-01-16",
+      "url": "https://throckmorton-nyc.com/project/lucien-clergue-exhibit-a-life-through-the-lens/",
+      "image": "https://throckmorton-nyc.com/wp-content/fine-art-gallery/2026/10/lucien_clergue_lc-55776_throckmorton_nyc.jpg",
+      "isPhotography": true,
+      "photoNote": "Vintage gelatin silver, fresson and cibachrome prints"
+    },
+    {
+      "id": "keith-de-lellis-gallery::the-village-people",
+      "galleryId": "keith-de-lellis-gallery",
+      "title": "The Village People",
+      "artists": "Frank Meadow Sutcliffe",
+      "closes": "2026-12-01",
+      "url": "https://www.keithdelellisgallery.com/exhibitions/frank-meadow-sutcliffe",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Original albumen prints, one carbon print"
+    },
+    {
+      "id": "nyu-gallatin-galleries::ain-t-no-grave-gonna-hold-my-body-down",
+      "galleryId": "nyu-gallatin-galleries",
+      "title": "Ain't No Grave Gonna Hold My Body Down",
+      "artists": "Stacy Kranitz",
+      "closes": "2026-12-15",
+      "url": "https://wp.nyu.edu/gallatingalleries/stacy-kranitz-aint-no-grave-gonna-hold-my-body-down/",
+      "image": "https://wp.nyu.edu/gallatingalleries/files/2026/07/SK-ANBGHMBD_01-1024x667.png",
+      "isPhotography": true,
+      "photoNote": "Photographs (Kranitz's and historical) with texts and an essay film"
+    },
+    {
+      "id": "en-foco::archives-of-the-image-becoming-the-2026-en-foco-fellowship-exhibition",
+      "galleryId": "en-foco",
+      "title": "Archives of the Image Becoming: The 2026 En Foco Fellowship Exhibition",
+      "artists": "Tyler DeHaarte, George \"GNP\" Grullon, Damien Jackson, Jeffrey Jin, Morrison Gong, Omar Soto, Kanishka Puri, Duane Bailey-Castro, Antonia Kuo, Sibyl Montoya, Vasudev Vashisht, Johnny Ramos, Horatio Nguyen, Katherine Miranda, Michael Young",
+      "closes": "2026-11-21",
+      "url": "https://enfoco.org/archives-of-the-image-becoming-the-2026-fellowship-exhibition/",
+      "image": "https://enfoco.org/wp-content/uploads/2026/09/Updated-Fellowship-Graphics-2025-IG-SIZE-2-scaled.png",
+      "isPhotography": true,
+      "photoNote": "Fellowship exhibition of photographic practices"
+    },
+    {
+      "id": "pace-gallery::portrait-of-david-byrne",
+      "galleryId": "pace-gallery",
+      "title": "Portrait of David Byrne",
+      "artists": "David Byrne",
+      "closes": "2026-12-31",
+      "url": "https://www.pacegallery.com/exhibitions/david-byrne-stairwell-drawings/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Stairwell wall drawings; not photography"
+    },
+    {
+      "id": "pace-gallery::new-york-window-recent-work",
+      "galleryId": "pace-gallery",
+      "title": "New York Window (Recent Work)",
+      "artists": "Asher Liftin",
+      "closes": "2026-11-07",
+      "url": "https://www.pacegallery.com/exhibitions/asher-liftin-recent-work/",
+      "image": "https://www.pacegallery.com/media/images/Unknown.2e16d0ba.fill-1200x630.webp",
+      "isPhotography": false,
+      "photoNote": "Acrylic paintings on linen and colored pencil drawings"
+    },
+    {
+      "id": "danziger-gallery::portraits",
+      "galleryId": "danziger-gallery",
+      "title": "Portraits",
+      "artists": "Oliver Wasow",
+      "closes": "2026-11-27",
+      "url": "https://danzigergallery.com/exhibitions/portraits",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Archival pigment prints"
+    },
+    {
+      "id": "rick-wester-fine-art::perchance-to-dream-royal-and-noble-bedchambers",
+      "galleryId": "rick-wester-fine-art",
+      "title": "Perchance to Dream: Royal and Noble Bedchambers",
+      "artists": "David Leventi",
+      "closes": "2026-12-30",
+      "url": "https://www.rickwesterfineart.com/perchance-to-dream",
+      "image": "https://images.squarespace-cdn.com/content/v1/608c30fb855c215eaae3f215/15de45bc-8f90-4480-91e9-8f94af01a874/DL_VersaillesKing%288x10%29.jpg",
+      "isPhotography": true,
+      "photoNote": "Digital chromogenic prints"
+    },
+    {
+      "id": "rick-wester-fine-art::looking-back-looking-forward-selected-works-2023-present",
+      "galleryId": "rick-wester-fine-art",
+      "title": "Looking Back; Looking Forward: Selected Works, 2023 - Present",
+      "artists": "Amanda Marchand, Leah Sobsey",
+      "closes": "2026-12-30",
+      "url": "https://www.rickwesterfineart.com/looking-back-looking-forward",
+      "image": "https://images.squarespace-cdn.com/content/v1/608c30fb855c215eaae3f215/0fb304a9-66a5-4c23-af9c-ee1e0108094e/0b13e4a8-8174-4a14-8ba8-7a0b861edd1f.jpg",
+      "isPhotography": true,
+      "photoNote": "Archival pigment prints, some collage"
+    },
+    {
+      "id": "hans-p-kraus-jr::photographs-from-the-collection-of-william-l-schaeffer",
+      "galleryId": "hans-p-kraus-jr",
+      "title": "Photographs from the Collection of William L. Schaeffer",
+      "artists": null,
+      "closes": "2026-11-25",
+      "url": "https://www.sunpictures.com/exhibitions/photographs-from-the-collection-of-william-l-schaeffer",
+      "image": "https://static-assets.artlogic.net/w_1800,h_1000,c_limit/exhibit-e/5f32abc1c8aa2c09558b4567/522bf8fd4bc6812f1d4a39dfccb61174.jpeg",
+      "isPhotography": true,
+      "photoNote": "19th-century photographs incl. albumen prints"
+    },
+    {
+      "id": "sikkema-malloy-jenkins::ouroboros",
+      "galleryId": "sikkema-malloy-jenkins",
+      "title": "Ouroboros",
+      "artists": "Heidi Lau",
+      "closes": "2026-12-19",
+      "url": "https://www.smjny.com/ex20261030heidilau",
+      "image": "https://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/6ad3d00dc953f004c3ea51be/1789840973394/MP+23715+detail+1.jpg?format=1500w",
+      "isPhotography": false,
+      "photoNote": "Hand-built ceramic sculpture"
+    },
+    {
+      "id": "sikkema-malloy-jenkins::new-work",
+      "galleryId": "sikkema-malloy-jenkins",
+      "title": "New Work",
+      "artists": "Erin Shirreff",
+      "closes": "2026-12-19",
+      "url": "https://www.smjny.com/ex20261030erinshirreff",
+      "image": "https://static1.squarespace.com/static/677f394b27135f5effb7ee38/t/6ad7bcfa2f17d50e5a3c3589/1789840973394/MP+23715+detail+1.jpg?format=1500w",
+      "isPhotography": true,
+      "photoNote": "Cyanotype photograms and collaged archival pigment prints (back galleries)"
+    },
+    {
+      "id": "higher-pictures-generation::river-s-dream-2010-2020",
+      "galleryId": "higher-pictures-generation",
+      "title": "River's Dream, 2010-2020",
+      "artists": "Curran Hatleberg",
+      "closes": "2026-12-12",
+      "url": "https://higherpictures.com/exhibitions/curran-hatleberg-rivers-dream/",
+      "image": "https://higherpictures.com/wp-content/uploads/2026/10/RD_01.jpg",
+      "isPhotography": true,
+      "photoNote": "Pigment prints"
+    },
+    {
+      "id": "ubu-gallery::edmund-kesting-1892-1970",
+      "galleryId": "ubu-gallery",
+      "title": "Edmund Kesting (1892-1970)",
+      "artists": "Edmund Kesting",
+      "closes": "ongoing",
+      "url": "https://www.ubugallery.com/exhibition/edmund-kesting-1892-1970/",
+      "image": "https://www.ubugallery.com/wp-content/uploads/2026/09/KEST_43_BANNER.jpg",
+      "isPhotography": true,
+      "photoNote": "Photographs incl. photograms, multiple exposures, photomontage"
+    },
+    {
+      "id": "queens-museum::about-us-the-american-imaginary",
+      "galleryId": "queens-museum",
+      "title": "About Us: The American Imaginary",
+      "artists": null,
+      "closes": "2027-02-07",
+      "url": "https://queensmuseum.org/exhibition/about-us-the-american-imaginary-terra-foundation-fellows/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Albumen and vintage gelatin silver prints"
+    },
+    {
+      "id": "queens-museum::new-york-proud-a-portrait-of-new-york-city-photoville",
+      "galleryId": "queens-museum",
+      "title": "New York Proud: A Portrait of New York City (Photoville)",
+      "artists": "Oscar B. Castillo",
+      "closes": "2026-11-02",
+      "url": "https://queensmuseum.org/exhibition/new-york-proud-a-portrait-of-new-york-city-photoville/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Portrait project by a documentary photographer"
     }
   ]
 }
