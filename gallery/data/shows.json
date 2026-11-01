@@ -8,7 +8,7 @@
       "artists": "Karen Gunderson",
       "closes": "2026-12-19",
       "url": "https://yanceyrichardson.com/exhibitions/karen-gunderson",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_3600,h_3600,c_limit/exhibit-e/55f7ef8984184eba568b4568/a7b3308051b8e21f12d6f10d77967fea.jpeg",
       "isPhotography": false,
       "photoNote": "Oil on linen paintings"
     },
@@ -19,7 +19,7 @@
       "artists": "Sharon Core",
       "closes": "2026-12-19",
       "url": "https://yanceyrichardson.com/exhibitions/sharon-core5",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_3600,h_3600,c_limit/exhibit-e/55f7ef8984184eba568b4568/f7a7e9ef096ca3fafd6c5f7812fba097.jpeg",
       "isPhotography": true,
       "photoNote": "Archival pigment prints"
     },
@@ -63,7 +63,7 @@
       "artists": "Marco Maggi",
       "closes": "2026-11-14",
       "url": "https://www.bsandcgallery.com/exhibitions/marco-maggi9",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_1800,h_1800,c_limit/exhibit-e/53c468fda9aa2c93028b4568/20d20dfa375592d7e33e3f39f3c8ebe6.jpeg",
       "isPhotography": false,
       "photoNote": "Incised paper and drawing works"
     },
@@ -173,7 +173,7 @@
       "artists": "Miya Ando",
       "closes": "2026-11-14",
       "url": "https://www.sundaramtagore.com/exhibitions/miya-ando-rain-drawings",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_472,h_472,c_limit/exhibit-e/575562f5cfaf34762c8b4568/14e8fb60a9d20f71b5c169ebce9a4382.jpeg",
       "isPhotography": false,
       "photoNote": "Drawings on kozo paper with indigo, silver powder, graphite"
     },
@@ -437,7 +437,7 @@
       "artists": "Allie Tsubota",
       "closes": "2026-11-10",
       "url": "https://www.baxterst.org/events/milk-teeth/",
-      "image": null,
+      "image": "https://www.baxterst.org/wp-content/uploads/2026/08/Milk-Teeth_1.jpg",
       "isPhotography": true,
       "photoNote": "Photographs, cast silver-teeth sculptures, screen prints"
     },
@@ -448,7 +448,7 @@
       "artists": "Azikiwe Mohammed",
       "closes": "2026-11-10",
       "url": "https://www.baxterst.org/events/where-to-from-here/",
-      "image": null,
+      "image": "https://www.baxterst.org/wp-content/uploads/2026/08/outside_re_do-_0256web.jpg",
       "isPhotography": true,
       "photoNote": "Polaroid photographs"
     },
@@ -481,7 +481,7 @@
       "artists": "Linda Jacobs, Leslie Hanes, Piper Smith, Audrey Bernstein, Gordon Saperia, Ronaldo Aguiar, Margery Schab",
       "closes": "2026-11-01",
       "url": "https://www.sohophoto.com/",
-      "image": null,
+      "image": "https://www.sohophoto.com/wp-content/uploads/2026/09/Jacobs_01_From-the-Highline.jpg",
       "isPhotography": true,
       "photoNote": "Members' photography group show (seven individual photo projects)"
     },
@@ -525,7 +525,7 @@
       "artists": "Frank Meadow Sutcliffe",
       "closes": "2026-12-01",
       "url": "https://www.keithdelellisgallery.com/exhibitions/frank-meadow-sutcliffe",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_960,h_960,c_limit/exhibit-e/5d3084d1a5aa2c507b8b4567/6753ea5e31a6d77707fcaa155907602a.jpeg",
       "isPhotography": true,
       "photoNote": "Original albumen prints, one carbon print"
     },
@@ -558,7 +558,7 @@
       "artists": "David Byrne",
       "closes": "2026-12-31",
       "url": "https://www.pacegallery.com/exhibitions/david-byrne-stairwell-drawings/",
-      "image": null,
+      "image": "https://www.pacegallery.com/media/images/PXL_20250407_160501404.PORTRAIT.EDIT.width-2000.webp",
       "isPhotography": false,
       "photoNote": "Stairwell wall drawings; not photography"
     },
@@ -580,7 +580,7 @@
       "artists": "Oliver Wasow",
       "closes": "2026-11-27",
       "url": "https://danzigergallery.com/exhibitions/portraits",
-      "image": null,
+      "image": "https://static-assets.artlogic.net/w_3600,h_3600,c_limit/exhibit-e/5abb9910a09a728e158b4568/529cbd27d5e455115f17f51febf70efe.jpeg",
       "isPhotography": true,
       "photoNote": "Archival pigment prints"
     },
@@ -668,7 +668,7 @@
       "artists": null,
       "closes": "2027-02-07",
       "url": "https://queensmuseum.org/exhibition/about-us-the-american-imaginary-terra-foundation-fellows/",
-      "image": null,
+      "image": "https://queensmuseum.org/wp-content/uploads/2026/04/about_us0329_at_5.09.53pm-scaled.jpg",
       "isPhotography": true,
       "photoNote": "Albumen and vintage gelatin silver prints"
     },
@@ -679,7 +679,7 @@
       "artists": "Oscar B. Castillo",
       "closes": "2026-11-02",
       "url": "https://queensmuseum.org/exhibition/new-york-proud-a-portrait-of-new-york-city-photoville/",
-      "image": null,
+      "image": "https://queensmuseum.org/wp-content/uploads/2026/09/WRITERS_GROUP_NYIC_0010-1-scaled.jpg",
       "isPhotography": true,
       "photoNote": "Portrait project by a documentary photographer"
     }
