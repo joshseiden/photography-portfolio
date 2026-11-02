@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "shows": [
     {
       "id": "yancey-richardson-gallery::dark-waves-rising",
@@ -321,17 +321,6 @@
       "photoNote": "Photographic portraits of young people"
     },
     {
-      "id": "aperture-foundation::aperture-loves-new-york",
-      "galleryId": "aperture-foundation",
-      "title": "Aperture Loves New York",
-      "artists": null,
-      "closes": "2026-11-01",
-      "url": "https://aperture.org/exhibitions/aperture-loves-new-york/",
-      "image": "https://aperture.org/wp-content/uploads/2026/08/Carrie-mae-weems-harlem-1978-copy.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs by 24 artists shown with Aperture books"
-    },
-    {
       "id": "jack-shainman-gallery::gordon-parks-voices-in-the-mirror",
       "galleryId": "jack-shainman-gallery",
       "title": "Gordon Parks: Voices in the Mirror",
@@ -473,17 +462,6 @@
       "image": "https://images.squarespace-cdn.com/content/v1/55d61c1be4b0cafd401171f5/6c435a1d-8af3-4893-b6eb-79d39777ab36/TEC154_C02.jpg",
       "isPhotography": true,
       "photoNote": "Photobooks by the Dutch publisher, shown in a reading room"
-    },
-    {
-      "id": "soho-photo-gallery::members",
-      "galleryId": "soho-photo-gallery",
-      "title": "MEMBERS",
-      "artists": "Linda Jacobs, Leslie Hanes, Piper Smith, Audrey Bernstein, Gordon Saperia, Ronaldo Aguiar, Margery Schab",
-      "closes": "2026-11-01",
-      "url": "https://www.sohophoto.com/",
-      "image": "https://www.sohophoto.com/wp-content/uploads/2026/09/Jacobs_01_From-the-Highline.jpg",
-      "isPhotography": true,
-      "photoNote": "Members' photography group show (seven individual photo projects)"
     },
     {
       "id": "clampart::other-sides-of-andy",
@@ -682,6 +660,39 @@
       "image": "https://queensmuseum.org/wp-content/uploads/2026/09/WRITERS_GROUP_NYIC_0010-1-scaled.jpg",
       "isPhotography": true,
       "photoNote": "Portrait project by a documentary photographer"
+    },
+    {
+      "id": "moma::photography-and-language",
+      "galleryId": "moma",
+      "title": "Photography and Language",
+      "artists": null,
+      "closes": "ongoing",
+      "url": "https://www.moma.org/calendar/galleries/5642",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Collection gallery of 1970s photo-and-text works"
+    },
+    {
+      "id": "brooklyn-museum::mika-ninagawa-feel-the-flow-ers",
+      "galleryId": "brooklyn-museum",
+      "title": "Mika Ninagawa: Feel the Flow(ers)",
+      "artists": "Mika Ninagawa",
+      "closes": "2027-04-30",
+      "url": "https://www.brooklynmuseum.org/exhibitions/mika-ninagawa",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Immersive installation of photographic prints and photocollage"
+    },
+    {
+      "id": "deborah-bell-photographs::mexico-1994-the-cibachromes",
+      "galleryId": "deborah-bell-photographs",
+      "title": "Mexico 1994: The Cibachromes",
+      "artists": "Wijnanda Deroo",
+      "closes": "2026-11-21",
+      "url": "https://www.deborahbellphotographs.com/",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Vintage Cibachrome prints"
     }
   ]
 }
