@@ -1020,6 +1020,21 @@
     "photoFocus": "museum"
   },
   {
+    "id": "museum-of-the-city-of-new-york",
+    "name": "Museum of the City of New York",
+    "neighborhood": "East Harlem",
+    "status": "open",
+    "address": "1220 Fifth Ave at 103rd St, NY 10029",
+    "hours": "Mon–Fri 10am–5pm (Wed until 9pm); Sat–Sun 10am–6pm",
+    "website": "mcny.org",
+    "notes": "Museum · NYC residents pay what you can; free Wednesdays · Photography Triennial \"After Dark\" opens Nov 20, 2026 · Photography exhibitions listed at mcny.org/exhibitions/photography",
+    "isMuseum": true,
+    "lat": 40.792459,
+    "lng": -73.951838,
+    "exhibitionsUrl": "https://www.mcny.org/exhibitions",
+    "photoFocus": "museum"
+  },
+  {
     "id": "asia-society-museum",
     "name": "Asia Society Museum",
     "neighborhood": "Upper East Side",
