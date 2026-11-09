@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02",
+  "updated": "2026-11-09",
   "shows": [
     {
       "id": "yancey-richardson-gallery::dark-waves-rising",
@@ -143,17 +143,6 @@
       "image": "https://images.squarespace-cdn.com/content/v1/51009644e4b0aea0734361ca/1793126841779-XJ4OK4VSP7BL5963RJMH/w-Coaling+tower+%2367+%28looking+west%29+Vickers%2C+Virginia+2014.jpg",
       "isPhotography": true,
       "photoNote": "Large black-and-white photographs of coal towers, plus color grid"
-    },
-    {
-      "id": "howard-greenberg-gallery::baldwin-lee-new-york-1975-1979",
-      "galleryId": "howard-greenberg-gallery",
-      "title": "Baldwin Lee: New York (1975–1979)",
-      "artists": "Baldwin Lee",
-      "closes": "2026-11-11",
-      "url": "https://www.howardgreenberg.com/exhibitions/199-baldwin-lee-new-york-1975-1979/",
-      "image": "https://static-assets.artlogic.net/w_1200,h_630,c_fill,f_auto,fl_lossy,q_auto/ws-artlogicwebsite2559/usr/images/exhibitions/main_image_override/199/pf156214.jpg",
-      "isPhotography": true,
-      "photoNote": "Large-scale black-and-white photographs"
     },
     {
       "id": "leica-gallery-new-york::les-fincher-behind-the-scenes-of-laurie-anderson-s-home-of-the-brave",
@@ -321,28 +310,6 @@
       "photoNote": "Photographic portraits of young people"
     },
     {
-      "id": "jack-shainman-gallery::gordon-parks-voices-in-the-mirror",
-      "galleryId": "jack-shainman-gallery",
-      "title": "Gordon Parks: Voices in the Mirror",
-      "artists": "Gordon Parks",
-      "closes": "2026-11-06",
-      "url": "https://jackshainman.com/exhibitions/gordon_parks_voices_in_the_mirror",
-      "image": "https://jackshainman.com/uploads/17100171/1789757244230/JSGTriBeCa_GP_2026_RUSH2_LR-800-0x0x2000x1500_q85.jpg",
-      "isPhotography": true,
-      "photoNote": "Photographs by Gordon Parks; medium not stated on page"
-    },
-    {
-      "id": "dashwood-projects::stefan-marx-pad-passengers-available-for-disembarkation",
-      "galleryId": "dashwood-projects",
-      "title": "Stefan Marx: PAD Passengers Available for Disembarkation",
-      "artists": "Stefan Marx",
-      "closes": "2026-11-07",
-      "url": "https://dashwoodprojects.com/stefan-marx",
-      "image": "https://freight.cargo.site/w/1200/i/R2989544291955700865814004760918/LastCall_003.jpg",
-      "isPhotography": false,
-      "photoNote": "About 30 ink drawings of airplanes"
-    },
-    {
       "id": "hannah-traore-gallery::nonsites-revisited",
       "galleryId": "hannah-traore-gallery",
       "title": "Nonsites Revisited",
@@ -446,8 +413,8 @@
       "galleryId": "penumbra-foundation",
       "title": "North North South",
       "artists": "Ayda Gragossian",
-      "closes": "2026-11-24",
-      "url": "https://www.penumbrafoundation.org/upcoming-exhibitions",
+      "closes": "2026-11-20",
+      "url": "https://www.penumbrafoundation.org/exhibition-space-current",
       "image": "https://images.squarespace-cdn.com/content/v1/55d61c1be4b0cafd401171f5/8f0c1113-dfb1-434f-b5e8-6c30988dbd3c/AydaGragossian_029+Large.jpeg",
       "isPhotography": true,
       "photoNote": "Documentary photographs of Los Angeles, from her 2025 photobook"
@@ -462,17 +429,6 @@
       "image": "https://images.squarespace-cdn.com/content/v1/55d61c1be4b0cafd401171f5/6c435a1d-8af3-4893-b6eb-79d39777ab36/TEC154_C02.jpg",
       "isPhotography": true,
       "photoNote": "Photobooks by the Dutch publisher, shown in a reading room"
-    },
-    {
-      "id": "clampart::other-sides-of-andy",
-      "galleryId": "clampart",
-      "title": "Other Sides of Andy",
-      "artists": null,
-      "closes": "2026-11-07",
-      "url": "https://clampart.com/2026/08/other-sides-of-andy/",
-      "image": "https://clampart.com/wp-content/uploads/2026/08/Makos_1-framed-1200-472x550.jpg",
-      "isPhotography": true,
-      "photoNote": "Polaroids and photographs"
     },
     {
       "id": "clampart::mark-beard-sargeant-showroom-summer-autumn-2026",
@@ -539,17 +495,6 @@
       "image": "https://www.pacegallery.com/media/images/PXL_20250407_160501404.PORTRAIT.EDIT.width-2000.webp",
       "isPhotography": false,
       "photoNote": "Stairwell wall drawings; not photography"
-    },
-    {
-      "id": "pace-gallery::new-york-window-recent-work",
-      "galleryId": "pace-gallery",
-      "title": "New York Window (Recent Work)",
-      "artists": "Asher Liftin",
-      "closes": "2026-11-07",
-      "url": "https://www.pacegallery.com/exhibitions/asher-liftin-recent-work/",
-      "image": "https://www.pacegallery.com/media/images/Unknown.2e16d0ba.fill-1200x630.webp",
-      "isPhotography": false,
-      "photoNote": "Acrylic paintings on linen and colored pencil drawings"
     },
     {
       "id": "danziger-gallery::portraits",
@@ -651,17 +596,6 @@
       "photoNote": "Albumen and vintage gelatin silver prints"
     },
     {
-      "id": "queens-museum::new-york-proud-a-portrait-of-new-york-city-photoville",
-      "galleryId": "queens-museum",
-      "title": "New York Proud: A Portrait of New York City (Photoville)",
-      "artists": "Oscar B. Castillo",
-      "closes": "2026-11-02",
-      "url": "https://queensmuseum.org/exhibition/new-york-proud-a-portrait-of-new-york-city-photoville/",
-      "image": "https://queensmuseum.org/wp-content/uploads/2026/09/WRITERS_GROUP_NYIC_0010-1-scaled.jpg",
-      "isPhotography": true,
-      "photoNote": "Portrait project by a documentary photographer"
-    },
-    {
       "id": "moma::photography-and-language",
       "galleryId": "moma",
       "title": "Photography and Language",
@@ -684,15 +618,301 @@
       "photoNote": "Immersive installation of photographic prints and photocollage"
     },
     {
-      "id": "deborah-bell-photographs::mexico-1994-the-cibachromes",
-      "galleryId": "deborah-bell-photographs",
-      "title": "Mexico 1994: The Cibachromes",
-      "artists": "Wijnanda Deroo",
-      "closes": "2026-11-21",
-      "url": "https://www.deborahbellphotographs.com/",
+      "id": "soho-photo-gallery::member-pop-up-catching-the-light",
+      "galleryId": "soho-photo-gallery",
+      "title": "Member Pop-Up: Catching the Light",
+      "artists": "Richard Alan Cohen, Joan Lemler, Margaret Fox, Michael Schenker, Viktor Koen, Jorge Monteagudo",
+      "closes": "2026-11-29",
+      "url": "https://www.sohophoto.com/2026/11/01/member-pop-up-catching-the-light/",
       "image": null,
       "isPhotography": true,
-      "photoNote": "Vintage Cibachrome prints"
+      "photoNote": "Members group show of photographs"
+    },
+    {
+      "id": "pace-gallery::the-year-of-mud-a-kiss-from-the-butterfly",
+      "galleryId": "pace-gallery",
+      "title": "the year of mud (a kiss from the butterfly)",
+      "artists": "Li Hei Di",
+      "closes": "2026-12-19",
+      "url": "https://www.pacegallery.com/exhibitions/li-hei-di-the-year-of-mud/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings"
+    },
+    {
+      "id": "pace-gallery::boxes-and-reconstructions",
+      "galleryId": "pace-gallery",
+      "title": "Boxes and Reconstructions",
+      "artists": "Lucas Samaras",
+      "closes": "2027-01-23",
+      "url": "https://www.pacegallery.com/exhibitions/lucas-samaras-boxes-reconstructions/",
+      "image": "https://www.pacegallery.com/media/images/588488keyYV8_qZnm0MUgtkuHpCMSRA.2e16d0ba.fill-1200x630.webp",
+      "isPhotography": false,
+      "photoNote": "Box sculptures and sewn-fabric Reconstructions"
+    },
+    {
+      "id": "pace-gallery::transition",
+      "galleryId": "pace-gallery",
+      "title": "TRANSITION",
+      "artists": "Elmgreen & Dragset",
+      "closes": "2027-01-16",
+      "url": "https://www.pacegallery.com/exhibitions/elmgreen-dragset-transition/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Sculpture and installation"
+    },
+    {
+      "id": "hauser-wirth::zeng-fanzhi",
+      "galleryId": "hauser-wirth",
+      "title": "Zeng Fanzhi",
+      "artists": "Zeng Fanzhi",
+      "closes": "2027-01-16",
+      "url": "https://www.hauserwirth.com/hauser-wirth-exhibitions/zeng-fanzhi-new-york/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings"
+    },
+    {
+      "id": "hauser-wirth::possible-matter",
+      "galleryId": "hauser-wirth",
+      "title": "Possible Matter",
+      "artists": "Cristina Iglesias",
+      "closes": "2027-01-16",
+      "url": "https://www.hauserwirth.com/hauser-wirth-exhibitions/cristina-iglesias-possible-matter/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Sculpture"
+    },
+    {
+      "id": "hauser-wirth::birthday-boys",
+      "galleryId": "hauser-wirth",
+      "title": "Birthday Boys",
+      "artists": "Rashid Johnson",
+      "closes": "2027-01-16",
+      "url": "https://www.hauserwirth.com/hauser-wirth-exhibitions/rashid-johnson-birthday-boys/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Mosaics, suspended sculptures and a film"
+    },
+    {
+      "id": "white-columns::satellites-are-out-tonight",
+      "galleryId": "white-columns",
+      "title": "SATELLITES ARE OUT TONIGHT",
+      "artists": "Marc Hundley",
+      "closes": "2026-12-19",
+      "url": "https://whitecolumns.org/exhibitions/marc-hundley/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Printed text works and T-shirts"
+    },
+    {
+      "id": "white-columns::re-assembled",
+      "galleryId": "white-columns",
+      "title": "Re-Assembled",
+      "artists": "Claire Watson",
+      "closes": "2026-12-19",
+      "url": "https://whitecolumns.org/exhibitions/claire-watson/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings"
+    },
+    {
+      "id": "white-columns::shop-artists-who-do-shirts",
+      "galleryId": "white-columns",
+      "title": "SHOP: Artists Who Do Shirts",
+      "artists": null,
+      "closes": "2026-12-19",
+      "url": "https://whitecolumns.org/exhibitions/shop-artists-who-do-shirts/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Artist-designed shirts"
+    },
+    {
+      "id": "aperture-foundation::splendido-as-seen-by-chris-rhodes",
+      "galleryId": "aperture-foundation",
+      "title": "Splendido, As Seen by Chris Rhodes",
+      "artists": "Chris Rhodes",
+      "closes": "2026-11-15",
+      "url": "https://aperture.org/exhibitions/splendido-as-seen-by-chris-rhodes/",
+      "image": "https://aperture.org/wp-content/uploads/2026/10/Rhodes_601890260008_C-scaled.jpg",
+      "isPhotography": true,
+      "photoNote": "27 photographs"
+    },
+    {
+      "id": "aperture-foundation::dashwood-books-at-aperture",
+      "galleryId": "aperture-foundation",
+      "title": "Dashwood Books at Aperture",
+      "artists": null,
+      "closes": "ongoing",
+      "url": "https://aperture.org/exhibitions/dashwood-books-at-aperture/",
+      "image": "https://aperture.org/wp-content/uploads/2026/09/Aperture_091526_041-scaled.jpg",
+      "isPhotography": true,
+      "photoNote": "Display of photobooks"
+    },
+    {
+      "id": "clampart::sin-pena",
+      "galleryId": "clampart",
+      "title": "Sin pena",
+      "artists": "Jean Paul Mallozzi-Diaz",
+      "closes": "2026-12-23",
+      "url": "https://clampart.com/2026/10/sin-pena/",
+      "image": "https://clampart.com/wp-content/uploads/2026/10/Mallozzi_TheHours-1200-441x550.jpg",
+      "isPhotography": false,
+      "photoNote": "Paintings and ceramics"
+    },
+    {
+      "id": "clampart::studio-nudes",
+      "galleryId": "clampart",
+      "title": "Studio Nudes",
+      "artists": null,
+      "closes": "2026-12-23",
+      "url": "https://clampart.com/2026/10/studio-nudes/",
+      "image": "https://clampart.com/wp-content/uploads/2026/10/Platt-Lynes_Tex-Smutley-and-Buddy-Stanley1-680x540.jpg",
+      "isPhotography": true,
+      "photoNote": "Group show; about 60% photographs"
+    },
+    {
+      "id": "sva-flatiron-project-space::anywhere-everywhere-selections-from-the-peter-j-cohen-collection-of-vernacular-photography",
+      "galleryId": "sva-flatiron-project-space",
+      "title": "Anywhere–Everywhere: Selections from the Peter J. Cohen Collection of Vernacular Photography",
+      "artists": null,
+      "closes": "2026-11-12",
+      "url": "https://sva.edu/events/anywhere-everywhere",
+      "image": "https://assets.sva.edu/cardThumbnail/img-5006-1782133688-1782133753-1782134092.jpg",
+      "isPhotography": true,
+      "photoNote": "Vernacular snapshots and found photographs"
+    },
+    {
+      "id": "leslie-lohman-museum-of-art::props-from-barakei-eikoh-hosoe-and-jason-wee",
+      "galleryId": "leslie-lohman-museum-of-art",
+      "title": "PROPS from Barakei: Eikoh Hosoe and Jason Wee",
+      "artists": "Eikoh Hosoe, Jason Wee",
+      "closes": "2027-03-14",
+      "url": "https://leslielohman.org/exhibitions/props-two-works-with-jason-wee-and-eikoh-hosoe",
+      "image": null,
+      "isPhotography": true,
+      "photoNote": "Two works around Hosoe's Barakei photographs (medium not confirmed on page)"
+    },
+    {
+      "id": "jenkins-johnson-projects::wake-up-everybody",
+      "galleryId": "jenkins-johnson-projects",
+      "title": "Wake Up Everybody",
+      "artists": "David C. Driskell",
+      "closes": "2026-12-19",
+      "url": "https://www.jenkinsjohnsongallery.com/exhibitions/100-david-driskell-wake-up-everybody/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings and works on paper"
+    },
+    {
+      "id": "moma-ps1::masao-gozu-windows-and-bars",
+      "galleryId": "moma-ps1",
+      "title": "Masao Gozu: Windows and Bars",
+      "artists": "Masao Gozu",
+      "closes": "2027-03-15",
+      "url": "https://www.momaps1.org/en/programs/799-masao-gozu-windows-and-bars",
+      "image": "https://www.filepicker.io/api/file/IQiDehd3SCiFzzIYVccp",
+      "isPhotography": true,
+      "photoNote": "Gelatin silver and digital photographs"
+    },
+    {
+      "id": "david-zwirner::yoshitomo-nara",
+      "galleryId": "david-zwirner",
+      "title": "Yoshitomo Nara",
+      "artists": "Yoshitomo Nara",
+      "closes": "2026-12-12",
+      "url": "https://www.davidzwirner.com/exhibitions/2026/yoshitomo-nara",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings and works on paper"
+    },
+    {
+      "id": "david-zwirner::sospiro",
+      "galleryId": "david-zwirner",
+      "title": "Sospiro",
+      "artists": "Jem Perucchini",
+      "closes": "2026-12-19",
+      "url": "https://www.davidzwirner.com/exhibitions/2026/jem-perucchini",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings"
+    },
+    {
+      "id": "matthew-marks-gallery::sculpture",
+      "galleryId": "matthew-marks-gallery",
+      "title": "Sculpture",
+      "artists": "Wade Guyton",
+      "closes": "2027-01-23",
+      "url": "https://matthewmarks.com/exhibitions/wade-guyton-sculpture-10-26",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Sculpture"
+    },
+    {
+      "id": "matthew-marks-gallery::101-drawings",
+      "galleryId": "matthew-marks-gallery",
+      "title": "101 Drawings",
+      "artists": "Wade Guyton",
+      "closes": "2027-01-23",
+      "url": "https://matthewmarks.com/exhibitions/101-drawings-11-2026",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Drawings"
+    },
+    {
+      "id": "matthew-marks-gallery::recent-drawings",
+      "galleryId": "matthew-marks-gallery",
+      "title": "Recent Drawings",
+      "artists": "Jasper Johns",
+      "closes": "2027-01-23",
+      "url": "https://matthewmarks.com/exhibitions/jasper-johns-recent-drawings-11-2026",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Drawings"
+    },
+    {
+      "id": "luhring-augustine::stacks",
+      "galleryId": "luhring-augustine",
+      "title": "STACKS",
+      "artists": "Jason Moran",
+      "closes": "2026-12-19",
+      "url": "https://luhringaugustine.com/exhibitions/jason-moran3",
+      "image": "https://static-assets.artlogic.net/w_1000,h_1000,c_limit/exhibit-e/556d89b2cfaf3421548b4568/de29fd011acc7c16b88c1d655ebe6f12.jpeg",
+      "isPhotography": false,
+      "photoNote": "Works on paper, sculpture and video"
+    },
+    {
+      "id": "gladstone-gallery::cairo",
+      "galleryId": "gladstone-gallery",
+      "title": "Cairo",
+      "artists": "Robert H. Colescott",
+      "closes": "2026-12-19",
+      "url": "https://gladstonegallery.com/exhibitions/",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings"
+    },
+    {
+      "id": "jack-shainman-gallery::by-the-time-the-rain-comes-we-will-be-home",
+      "galleryId": "jack-shainman-gallery",
+      "title": "By the time the rain comes, we will be home",
+      "artists": "Donyel Ivy-Royal",
+      "closes": "2026-12-19",
+      "url": "https://jackshainman.com/exhibitions/donyel_ivyroyal_by_the_time_the_rain_comes_we_will_be_home",
+      "image": "https://jackshainman.com/uploads/17400174/1793895457761/261105_JSHA_001_RUSH_crop_LR-800-0x61x2000x1335_q85.jpg",
+      "isPhotography": false,
+      "photoNote": "Oil paintings, ink drawings and an installation"
+    },
+    {
+      "id": "sean-kelly-gallery::what-the-light-becomes",
+      "galleryId": "sean-kelly-gallery",
+      "title": "What the Light Becomes",
+      "artists": "Kehinde Wiley",
+      "closes": "2026-12-23",
+      "url": "https://www.skny.com/exhibitions/kehinde-wiley3",
+      "image": null,
+      "isPhotography": false,
+      "photoNote": "Paintings, oil studies and a film"
     }
   ]
 }
